@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cómo contratar legalmente en Colombia sin abrir una empresa | COCO EOR</title>
+  <meta name="description" content="Colombia permite contratar talento sin entidad local — pero tiene sus reglas. La UGPP audita con big data y aplica multas retroactivas. Lo que necesitás saber antes de contratar."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#0099FF; --blue-dark:#007ACC; --blue-light:#e8f2ff;
+      --bg:#f8f9fb; --bg-card:#ffffff; --text:#0a0a0a; --text2:#4a5568; --text3:#9aa5b0;
+      --border:#e2e8f0; --border2:#c8d8ea; --green:#00b341; --amber:#f59e0b; --red:#ef4444;
+      --sans:'Space Grotesk',sans-serif; --heading:'Plus Jakarta Sans',sans-serif;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.06); --shadow:0 4px 16px rgba(0,0,0,0.08);
+      --radius:12px; --radius-sm:8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(248,249,251,0.97); border-bottom: 1px solid var(--border); padding: 0 32px; height: 80px; display: flex; align-items: center; justify-content: space-between; transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px; border-radius: 8px; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text3); text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .article-back:hover { color: var(--blue); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: var(--blue-light); color: var(--blue-dark); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+    .article-titulo { font-family: var(--heading); font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.025em; color: var(--text); line-height: 1.15; margin-bottom: 16px; }
+    .article-bajada { font-size: 18px; color: var(--text2); line-height: 1.6; margin-bottom: 24px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text3); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .article-meta strong { color: var(--text2); }
+    .article-body h2 { font-family: var(--heading); font-size: 22px; font-weight: 800; color: var(--text); margin: 40px 0 14px; }
+    .article-body h3 { font-family: var(--heading); font-size: 17px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+    .article-body p { margin-bottom: 18px; color: var(--text2); line-height: 1.75; }
+    .article-body strong { color: var(--text); }
+    .article-body ul { margin: 0 0 18px 20px; }
+    .article-body ul li { margin-bottom: 8px; color: var(--text2); line-height: 1.6; }
+
+    .tabla-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 24px 0; border-radius: var(--radius); border: 1px solid var(--border); }
+    .tabla-comp { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .tabla-comp th { background: var(--bg); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .tabla-comp td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+    .tabla-comp tr:last-child td { border-bottom: none; }
+    .tabla-comp .td-concepto { font-weight: 600; color: var(--text); }
+    .tabla-comp .td-pct { font-family: var(--heading); font-weight: 700; color: #d97706; text-align: right; white-space: nowrap; }
+    .tabla-comp .td-total { font-family: var(--heading); font-weight: 800; color: var(--blue); font-size: 15px; text-align: right; }
+    .tabla-comp .row-total { border-top: 2px solid var(--text) !important; }
+    .tabla-comp .row-total td { padding-top: 14px; }
+    .badge-var { display: inline-flex; background: rgba(245,158,11,0.12); color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; margin-left: 5px; text-transform: uppercase; vertical-align: middle; }
+
+    .callout { padding: 18px 20px; border-radius: var(--radius); margin: 24px 0; font-size: 14px; line-height: 1.6; }
+    .callout.blue  { background: var(--blue-light); border-left: 3px solid var(--blue); color: #1e3a5f; }
+    .callout.amber { background: #fffbeb; border-left: 3px solid var(--amber); color: #78350f; }
+    .callout.red   { background: #fff1f1; border-left: 3px solid var(--red); color: #7f1d1d; }
+    .callout.green { background: #f0fdf4; border-left: 3px solid var(--green); color: #14532d; }
+
+    /* Opciones grid */
+    .opciones { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .opcion {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start;
+    }
+    .opcion.recomendada { border-color: var(--green); }
+    .opcion.riesgo { border-color: var(--amber); }
+    .opcion.no { border-color: #fca5a5; opacity: 0.75; }
+    .opcion-icon { font-size: 24px; }
+    .opcion-titulo { font-family: var(--heading); font-weight: 800; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+    .opcion-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+    .opcion-badge { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 100px; white-space: nowrap; }
+    .badge-ok { background: #f0fdf4; color: #166534; }
+    .badge-cuidado { background: #fffbeb; color: #92400e; }
+    .badge-no { background: #fff1f1; color: #7f1d1d; }
+
+    .fuente { font-size: 11px; color: var(--text3); margin-top: -12px; margin-bottom: 18px; font-style: italic; }
+
+    .article-cta { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
+    .article-cta h3 { font-family: var(--heading); font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .article-cta p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+    .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: #fff; color: var(--blue); border-radius: var(--radius-sm); font-weight: 700; font-size: 15px; text-decoration: none; }
+    .article-cta a:hover { opacity: 0.9; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    footer { background: #0a0f1a; color: #8a9ab0; padding: 40px 24px 28px; }
+    .footer-simple { max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-simple p { font-size: 12px; color: #4a5a6a; }
+    .footer-simple a { font-size: 13px; color: #8a9ab0; text-decoration: none; }
+    .footer-simple a:hover { color: var(--blue); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .article-wrap { padding: 32px 16px 60px; }
+      .opcion { grid-template-columns: auto 1fr; }
+      .opcion-badge { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<div class="article-wrap">
+
+  <a href="blog.html" class="article-back">← Volver al blog</a>
+  <span class="article-cat">Descubrimiento</span>
+  <h1 class="article-titulo">Cómo contratar legalmente en Colombia sin abrir una empresa</h1>
+  <p class="article-bajada">Colombia es uno de los destinos nearshore más activos para empresas de EE.UU. y Europa. Pero la UGPP audita con big data y aplica multas retroactivas con intereses. Lo que necesitás saber antes de contratar.</p>
+  <div class="article-meta">
+    <span>📅 17 de mayo de 2026</span>
+    <span>·</span>
+    <span>⏱ 7 min de lectura</span>
+    <span>·</span>
+    <span>Fuentes: CST, Ministerio del Trabajo, UGPP, Estatuto Tributario</span>
+  </div>
+
+  <div class="article-body reveal">
+
+    <p>Colombia combina calidad técnica, huso horario alineado con EE.UU. y un mercado nearshore en crecimiento. Para muchas empresas extranjeras, es el primer país de LATAM donde contratan talento remoto. Y también es el primero donde reciben una carta de la UGPP.</p>
+
+    <p>La buena noticia: sí se puede contratar en Colombia sin abrir una entidad local. La condición: que la relación sea genuinamente independiente. Acá explicamos la diferencia, los costos reales y las opciones disponibles.</p>
+
+    <h2>Las cargas patronales en Colombia (2026)</h2>
+
+    <p>El sistema de costos laborales en Colombia se divide en tres bloques: seguridad social, aportes parafiscales y prestaciones sociales. Para 2026, los porcentajes confirmados por el Ministerio del Trabajo y la UGPP son:</p>
+
+    <div class="tabla-wrap">
+      <table class="tabla-comp">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th>Naturaleza</th>
+            <th>% patronal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-concepto">Pensión (AFP)</td>
+            <td>Seguridad social</td>
+            <td class="td-pct">12.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Salud (EPS)</td>
+            <td>Seguridad social</td>
+            <td class="td-pct">8.50%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Riesgos laborales (ARL)</td>
+            <td>Nivel I — desarrollo software</td>
+            <td class="td-pct">0.52%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Caja de Compensación <span class="badge-var">variable</span></td>
+            <td>Parafiscal obligatorio</td>
+            <td class="td-pct">4.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">SENA</td>
+            <td>Parafiscal</td>
+            <td class="td-pct">2.00%*</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">ICBF</td>
+            <td>Parafiscal</td>
+            <td class="td-pct">3.00%*</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Prima de servicios</td>
+            <td>Prestación social (provisión mensual)</td>
+            <td class="td-pct">8.33%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Cesantías</td>
+            <td>Prestación social (provisión mensual)</td>
+            <td class="td-pct">8.33%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Intereses sobre cesantías</td>
+            <td>12% anual sobre saldo (pagadero enero)</td>
+            <td class="td-pct">1.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Vacaciones</td>
+            <td>15 días hábiles por año (provisión mensual)</td>
+            <td class="td-pct">4.17%</td>
+          </tr>
+          <tr class="row-total">
+            <td class="td-concepto">Total con exención Art. 114-1</td>
+            <td>Empresa constituida en COL, empleado &lt;10 SMMLV</td>
+            <td class="td-total">~38.35%</td>
+          </tr>
+          <tr class="row-total">
+            <td class="td-concepto">Total sin exención</td>
+            <td>Empresa extranjera sin entidad local</td>
+            <td class="td-total">~51.85%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fuente">* SENA e ICBF pueden estar exonerados para empresas con entidad en Colombia cuyos empleados ganen menos de 10 SMMLV (Art. 114-1 Estatuto Tributario). Fuente: Ministerio del Trabajo, UGPP. Verificado mayo 2026.</p>
+
+    <div class="callout amber">
+      <strong>La Caja de Compensación Familiar:</strong> el empleador aporta el 4% obligatoriamente. El subsidio familiar que recibe el trabajador depende de si tiene hijos a cargo — pero el costo patronal del 4% es fijo e ineludible independientemente de esa situación.
+    </div>
+
+    <h2>El "Contrato Realidad" según el CST (Arts. 22–24)</h2>
+
+    <p>El Código Sustantivo del Trabajo (CST) define el contrato de trabajo por tres elementos concurrentes: <strong>prestación personal del servicio, subordinación o dependencia, y remuneración</strong>. Cuando estos tres elementos existen en los hechos, hay contrato de trabajo — independientemente de cómo lo llamen las partes.</p>
+
+    <p>El principio de <strong>primacía de la realidad</strong> (Art. 53 de la Constitución colombiana) establece que en caso de conflicto entre lo que dice el contrato y lo que ocurre en la práctica, prevalece la realidad. Un contrato de prestación de servicios con subordinación de hecho es, legalmente, un contrato de trabajo.</p>
+
+    <h2>La UGPP: la auditoría más agresiva de LATAM</h2>
+
+    <p>La Unidad de Gestión Pensional y Parafiscales (UGPP) es la entidad adscrita al Ministerio de Hacienda que audita el correcto pago de aportes al sistema de protección social. Su capacidad de detección no depende de inspecciones físicas — opera con cruce de big data.</p>
+
+    <p>La UGPP cruza anualmente:</p>
+
+    <ul>
+      <li>Declaraciones de renta e información exógena de la DIAN</li>
+      <li>Facturación electrónica y pagos de la PILA</li>
+      <li>Registro mercantil (RUES)</li>
+      <li>Afiliaciones a EPS y AFP</li>
+    </ul>
+
+    <p>El algoritmo detecta la señal más común de contrato realidad: un contratista independiente que recibe pagos <strong>fijos, recurrentes y de un único pagador</strong> durante meses o años. Eso es un patrón de nómina, no de prestación de servicios independiente.</p>
+
+    <div class="callout red">
+      <strong>Régimen sancionatorio UGPP:</strong> cuando declara un Contrato Realidad, la empresa debe abonar el 100% de los aportes omitidos (pensión, salud, parafiscales y prestaciones) con intereses de mora desde la fecha en que debieron pagarse. Adicionalmente, multas por evasión que pueden alcanzar el <strong>5% mensual</strong> sobre el monto omitido. El plazo de retroactividad es de 3 años para los aportes en general y 5 años para deudas previsionales.
+    </div>
+
+    <h2>Las opciones reales para contratar en Colombia sin entidad local</h2>
+
+    <div class="opciones">
+      <div class="opcion recomendada">
+        <div class="opcion-icon">✅</div>
+        <div>
+          <div class="opcion-titulo">EOR (Employer of Record)</div>
+          <div class="opcion-desc">Una plataforma EOR contrata al desarrollador bajo el CST en su nombre. Paga todos los aportes, gestiona prestaciones y asume la responsabilidad legal. La empresa extranjera dirige el trabajo. Es la única opción que elimina completamente el riesgo de Contrato Realidad.</div>
+        </div>
+        <span class="opcion-badge badge-ok">Recomendado</span>
+      </div>
+
+      <div class="opcion riesgo">
+        <div class="opcion-icon">⚠️</div>
+        <div>
+          <div class="opcion-titulo">Contractor genuino (Prestación de Servicios)</div>
+          <div class="opcion-desc">Válido cuando existe autonomía real: el contratista tiene múltiples clientes, define su metodología, no hay horarios fijos ni exclusividad, y asume el riesgo de su actividad. El contratista debe aportar al sistema de seguridad social por su cuenta (pensión + salud como independiente). La UGPP puede auditar si detecta pagos fijos y recurrentes de un solo pagador.</div>
+        </div>
+        <span class="opcion-badge badge-cuidado">Con condiciones</span>
+      </div>
+
+      <div class="callout red" style="margin:0;">
+        <strong>La distinción entre "contractor genuino" y "relación laboral encubierta" la define la UGPP, no el contrato.</strong> Aunque la autonomía sea real, si la UGPP detecta el patrón de pagos fijos y recurrentes de un único pagador, puede iniciar una auditoría. El costo de demostrar que la relación es genuinamente independiente — en tiempo, asesoría legal y riesgo — suele superar el fee de un EOR. Un EOR elimina esa incertidumbre completamente desde el primer día.
+      </div>
+
+      <div class="opcion riesgo">
+        <div class="opcion-icon">⚠️</div>
+        <div>
+          <div class="opcion-titulo">Agencia de empleo temporal (temporal laboral)</div>
+          <div class="opcion-desc">Una empresa de servicios temporales contrata al trabajador y lo cede a la empresa usuaria. Legal para necesidades transitorias (reemplazos, picos de trabajo). No aplica para relaciones continuas de largo plazo — la ley limita la temporalidad a necesidades específicas.</div>
+        </div>
+        <span class="opcion-badge badge-cuidado">Solo temporalmente</span>
+      </div>
+
+      <div class="opcion no">
+        <div class="opcion-icon">❌</div>
+        <div>
+          <div class="opcion-titulo">Cooperativas de trabajo asociado (CTA)</div>
+          <div class="opcion-desc">Las CTA fueron históricamente usadas para evadir cargas laborales. La legislación actual prohíbe expresamente que una CTA preste servicios de intermediación que configuren subordinación a una empresa usuaria. Riesgo legal muy alto.</div>
+        </div>
+        <span class="opcion-badge badge-no">Evitar</span>
+      </div>
+    </div>
+
+    <h2>El costo real para $1.200 USD/mes en Colombia</h2>
+
+    <p>Con un salario de $1.200 USD/mes y los porcentajes aplicables a una empresa extranjera sin entidad en Colombia (sin exención Art. 114-1):</p>
+
+    <div class="tabla-wrap">
+      <table class="tabla-comp">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th>% aplicado</th>
+            <th>Monto mensual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-concepto">Salario acordado</td>
+            <td>—</td>
+            <td style="text-align:right;font-weight:600;color:var(--text2);">$1.200</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Pensión + Salud + ARL</td>
+            <td class="td-pct">21.02%</td>
+            <td style="text-align:right;font-weight:700;color:#d97706;">+$252</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Parafiscales (Caja + SENA + ICBF)</td>
+            <td class="td-pct">9.00%</td>
+            <td style="text-align:right;font-weight:700;color:#d97706;">+$108</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Prestaciones (Prima + Cesantías + Int. + Vac.)</td>
+            <td class="td-pct">21.83%</td>
+            <td style="text-align:right;font-weight:700;color:#d97706;">+$262</td>
+          </tr>
+          <tr class="row-total">
+            <td class="td-concepto">Costo laboral total</td>
+            <td class="td-total">~51.85%</td>
+            <td class="td-total">$1.822</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <strong>Con EOR y exención Art. 114-1:</strong> si la plataforma EOR tiene entidad constituida en Colombia (como Deel, Remote o Multiplier), aplica la exención del Art. 114-1 para empleados que ganen menos de 10 SMMLV. El sobrecosto baja al 38.35% — un ahorro de 13.5 puntos porcentuales. Para $1.200/mes, la diferencia es $162 menos por empleado por mes.
+    </div>
+
+    <h2>El SMMLV en mayo 2026</h2>
+
+    <p>El Salario Mínimo Mensual Legal Vigente (SMMLV) para 2026 fue fijado mediante los Decretos Ejecutivos 1469 y 1470 de finales de 2025. El valor vigente al 15/05/2026 es de <strong>$1.423.500 COP</strong>. Al tipo de cambio de referencia del Banco de la República (~$4.200 COP/USD al 15/05/2026), el equivalente es aproximadamente <strong>$339 USD</strong>.</p>
+
+    <p>El límite de 10 SMMLV para la exención de SENA e ICBF equivale a $14.235.000 COP (~$3.390 USD/mes) — la mayoría de los desarrolladores senior en el mercado tech colombiano están por debajo de ese umbral en salario base, lo que hace aplicable la exención si la empresa usa un EOR con entidad local.</p>
+
+    <h2>Colombia vs. Brasil y Argentina: el cuadro comparativo</h2>
+
+    <p>Colombia tiene complejidad media-alta, pero su ecosistema nearshore está mucho más desarrollado que el promedio de LATAM. Las plataformas EOR tienen entidad constituida localmente, los tiempos de onboarding son razonables (3–7 días hábiles), y la disponibilidad de talento senior en desarrollo de software es alta — especialmente en Bogotá, Medellín y Cali.</p>
+
+    <p>El riesgo de reclasificación laboral es <strong>alto</strong> — la UGPP es más activa y sistemática que sus equivalentes en otros países del listado. Pero a diferencia de Brasil (donde el "Custo Brasil" hace que el sobrecosto supere el 60%), Colombia con EOR y exención se mantiene en un rango del 38–52%, más manejable para equipos de tamaño medio.</p>
+
+  </div>
+
+  <div class="article-cta reveal">
+    <h3>Calculá el costo real para Colombia</h3>
+    <p>Salario + cargas + fee de la plataforma EOR — comparado con los otros 11 países del listado.</p>
+    <a href="comparador.html?pais=colombia">Ver plataformas EOR para Colombia →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <p>© 2026 COCO Labs · Fuentes: CST, Ministerio del Trabajo, UGPP, Art. 114-1 ET · Verificado 15/05/2026</p>
+    <div style="display:flex;gap:16px;">
+      <a href="blog.html">← Blog</a>
+      <a href="guias.html#colombia">Guía Colombia</a>
+      <a href="comparador.html">Comparador EOR</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12); });
+  document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobileMenu').classList.toggle('open'); });
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

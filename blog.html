@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Contratar en LATAM sin errores | COCO EOR</title>
+  <meta name="description" content="Guías, comparativas y análisis para contratar talento en LATAM de forma legal y eficiente. Sin letra chica."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0099FF;
+      --blue-dark:  #007ACC;
+      --blue-light: #e8f2ff;
+      --bg:         #f8f9fb;
+      --bg-card:    #ffffff;
+      --text:       #0a0a0a;
+      --text2:      #4a5568;
+      --text3:      #9aa5b0;
+      --border:     #e2e8f0;
+      --border2:    #c8d8ea;
+      --green:      #00b341;
+      --amber:      #f59e0b;
+      --red:        #ef4444;
+      --sans:       'Space Grotesk', sans-serif;
+      --heading:    'Plus Jakarta Sans', sans-serif;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow:     0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg:  0 12px 40px rgba(0,153,255,0.12);
+      --radius:     12px;
+      --radius-sm:  8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,249,251,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-links a.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 18px; height: 2.5px; background: var(--blue); border-radius: 2px; }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px rgba(0,153,255,0.35) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); animation: slideDown 0.25s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero-comp {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,153,255,0.08) 0%, transparent 70%), var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 48px; text-align: center;
+    }
+
+    .hero-comp .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); color: var(--blue-dark);
+      font-size: 13px; font-weight: 600; padding: 6px 16px;
+      border-radius: 100px; margin-bottom: 20px;
+      border: 1px solid var(--border2); box-shadow: var(--shadow-sm);
+    }
+
+    .hero-comp h1 {
+      font-family: var(--heading); font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800; letter-spacing: -0.025em;
+      color: var(--text); margin-bottom: 12px; line-height: 1.1;
+    }
+
+    .hero-comp h1 span { color: var(--blue); }
+
+    .hero-comp p {
+      font-size: 16px; color: var(--text2);
+      max-width: 480px; margin: 0 auto; line-height: 1.6;
+    }
+
+    /* ─── FILTROS ─────────────────────────────────── */
+    .filtros {
+      max-width: 960px; margin: 32px auto 0; padding: 0 24px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+
+    .filtro-btn {
+      padding: 7px 16px; font-family: var(--sans);
+      font-size: 13px; font-weight: 600;
+      border: 1.5px solid var(--border); border-radius: 100px;
+      background: var(--bg-card); color: var(--text2);
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .filtro-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filtro-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* ─── GRID BLOG ───────────────────────────────── */
+    .blog-grid {
+      max-width: 960px; margin: 28px auto 0;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ─── CARD ENTRADA ────────────────────────────── */
+    .entrada-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.25s, transform 0.2s, border-color 0.2s;
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+    }
+
+    .entrada-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      border-color: var(--blue-mid);
+    }
+
+    /* Imagen/emoji header de la card */
+    .entrada-visual {
+      height: 120px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Barra de color top según categoría */
+    .entrada-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .cat-descubrimiento .entrada-visual { background: linear-gradient(135deg, #e8f2ff, #d0e8ff); }
+    .cat-evaluacion     .entrada-visual { background: linear-gradient(135deg, #f0fdf4, #d1fae5); }
+    .cat-decision       .entrada-visual { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+
+    .cat-descubrimiento::before { background: var(--blue); }
+    .cat-evaluacion::before     { background: var(--green); }
+    .cat-decision::before       { background: var(--amber); }
+
+    .entrada-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .entrada-meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .entrada-cat {
+      font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .cat-tag-descubrimiento { background: var(--blue-light); color: var(--blue-dark); }
+    .cat-tag-evaluacion     { background: #f0fdf4; color: #166534; }
+    .cat-tag-decision       { background: #fffbeb; color: #92400e; }
+
+    .entrada-fecha { font-size: 12px; color: var(--text3); }
+
+    .entrada-card h2 {
+      font-family: var(--heading);
+      font-size: 17px; font-weight: 700;
+      color: var(--text); line-height: 1.3;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .entrada-card:hover h2 { color: var(--blue); }
+
+    .entrada-bajada {
+      font-size: 14px; color: var(--text2);
+      line-height: 1.6; flex: 1; margin-bottom: 16px;
+    }
+
+    .entrada-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--border);
+      font-size: 13px; font-weight: 700; color: var(--blue);
+    }
+
+    .entrada-cta-arrow {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .entrada-card:hover .entrada-cta-arrow {
+      background: var(--blue); color: #fff;
+      transform: translateX(2px);
+    }
+
+    /* Card de próxima entrada (placeholder) */
+    .entrada-card.proximamente {
+      opacity: 0.65; pointer-events: none; filter: grayscale(0.3);
+    }
+
+    .proximamente-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(0,0,0,0.5); color: #fff;
+      font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: 6px; letter-spacing: 0.06em;
+    }
+
+    /* ─── NEWSLETTER ──────────────────────────────── */
+    .newsletter-strip {
+      max-width: 960px; margin: 0 auto 0;
+      padding: 0 24px;
+    }
+
+    .newsletter-card {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      border-radius: 16px; padding: 32px 36px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+
+    .newsletter-text h3 {
+      font-family: var(--heading); font-size: 20px;
+      font-weight: 800; color: #fff; margin-bottom: 6px;
+    }
+
+    .newsletter-text p { font-size: 14px; color: rgba(255,255,255,0.8); }
+
+    .newsletter-form {
+      display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+      padding: 11px 16px; font-size: 14px; font-family: var(--sans);
+      border: none; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.15); color: #fff;
+      min-width: 220px; transition: background 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.55); }
+    .newsletter-input:focus { outline: none; background: rgba(255,255,255,0.25); }
+
+    .newsletter-btn {
+      padding: 11px 20px; font-family: var(--sans);
+      font-size: 14px; font-weight: 700;
+      background: #fff; color: var(--blue);
+      border: none; border-radius: var(--radius-sm);
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .newsletter-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ─── REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer { background: #0a0f1a; color: #8a9ab0; padding: 48px 24px 32px; margin-top: 64px; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 40px; margin-bottom: 32px; flex-wrap: wrap;
+    }
+
+    .footer-brand p { font-size: 13px; line-height: 1.6; color: #6a7a8a; margin-top: 12px; max-width: 300px; }
+
+    .footer-links-group { display: flex; gap: 48px; }
+
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #4a5a6a; margin-bottom: 14px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 14px; color: #8a9ab0; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--blue); }
+
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; }
+
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 8px;
+      border: 1px solid #1e2a3a; color: #6a7a8a;
+      transition: all 0.2s; text-decoration: none;
+    }
+
+    .footer-social a:hover { border-color: var(--blue); color: var(--blue); }
+
+    .footer-bottom {
+      border-top: 1px solid #1e2a3a; padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+
+    .footer-bottom p { font-size: 12px; color: #4a5a6a; line-height: 1.6; max-width: 600px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links, .nav-social { display: none; }
+      .hamburger { display: flex; }
+      .hero-comp { padding: 40px 16px 36px; }
+      .filtros { padding: 0 16px; }
+      .blog-grid { padding: 0 16px 60px; grid-template-columns: 1fr; }
+      .newsletter-strip { padding: 0 16px; }
+      .newsletter-card { padding: 24px 20px; flex-direction: column; }
+      .newsletter-input { min-width: 0; width: 100%; }
+      .newsletter-form { width: 100%; }
+      .newsletter-btn { width: 100%; }
+      .footer-top { flex-direction: column; gap: 28px; }
+      .footer-links-group { flex-wrap: wrap; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<!-- ─── HERO ────────────────────────────────────────── -->
+<div class="hero-comp reveal">
+  <div class="badge">Blog · Contratación internacional sin letra chica</div>
+  <h1>Contratar en <span>LATAM</span><br/>sin errores ni sorpresas</h1>
+  <p>Guías, comparativas y análisis para founders, COOs y heads of people que contratan talento remoto.</p>
+</div>
+
+<!-- ─── FILTROS ───────────────────────────────────────── -->
+<div class="filtros reveal" style="margin-top:32px;">
+  <button class="filtro-btn active" onclick="filtrar('todos', this)">Todos</button>
+  <button class="filtro-btn" onclick="filtrar('descubrimiento', this)">Descubrimiento</button>
+  <button class="filtro-btn" onclick="filtrar('evaluacion', this)">Evaluación</button>
+  <button class="filtro-btn" onclick="filtrar('decision', this)">Decisión</button>
+</div>
+
+<!-- ─── GRID ──────────────────────────────────────────── -->
+<div class="blog-grid" id="blog-grid"></div>
+
+<!-- ─── NEWSLETTER ───────────────────────────────────── -->
+<div class="newsletter-strip reveal" style="margin-bottom:64px;">
+  <div class="newsletter-card">
+    <div class="newsletter-text">
+      <h3>Actualizaciones cada 60 días</h3>
+      <p>Cuando actualizamos datos de cargas, nuevas plataformas o cambios legales — te avisamos primero.</p>
+    </div>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="tu@empresa.com" id="nl-email"/>
+      <button class="newsletter-btn" onclick="suscribir()">Avisame →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="52" style="display:block;width:auto;">
+            <g transform="translate(30, 24)">
+              <rect x="0" y="0" width="42" height="42" rx="9" fill="#2a2a2a" stroke="#484848" stroke-width="1.5"/>
+              <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+            </g>
+          </svg>
+        </a>
+        <p>Blog sobre contratación internacional y plataformas EOR para LATAM. Simple y claro.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="index.html#calculadora">Calculadora EOR</a></li>
+            <li><a href="comparador.html">Comparador EOR</a></li>
+            <li><a href="guias.html">Guías por país</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Entradas</h4>
+          <ul>
+            <li><a href="entrada-02.html">Deel vs Remote vs Remofirst</a></li>
+            <li><a href="entrada-05.html">5 países más baratos</a></li>
+            <li><a href="entrada-06.html">EOR para startups</a></li>
+            <li><a href="entrada-01.html">Argentina 2026</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 COCO Labs. Contenido informativo. No constituye asesoramiento legal ni laboral.</p>
+      <p style="color:#4a5a6a;font-size:11px;">Datos: 15/05/2026 · Revisión: 14/07/2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────────── -->
+<script>
+const ENTRADAS = [
+  {
+    num: "02",
+    titulo: "Deel vs Remote vs Remofirst para equipos en LATAM: comparativa honesta",
+    bajada: "Tres plataformas, tres filosofías. Analizamos precios reales, soporte en español, velocidad de onboarding y cobertura en los países donde más contratan los equipos latinoamericanos.",
+    emoji: "⚖️",
+    categoria: "evaluacion",
+    fecha: "15 mayo 2026",
+    url: "entrada-02.html",
+    disponible: true
+  },
+  {
+    num: "05",
+    titulo: "Los 5 países más baratos para contratar talento remoto en 2026",
+    bajada: "Chile lidera con solo +22.4% en cargas. Paraguay y Uruguay completan el podio. Analizamos costo real, complejidad legal y riesgo de reclasificación para ayudarte a elegir bien.",
+    emoji: "💰",
+    categoria: "descubrimiento",
+    fecha: "15 mayo 2026",
+    url: "entrada-05.html",
+    disponible: true
+  },
+  {
+    num: "06",
+    titulo: "EOR para startups: cuándo vale la pena y cuándo no",
+    bajada: "Un EOR cuesta entre $89 y $649 por empleado por mes. ¿Cuándo tiene sentido pagar ese fee? ¿Y cuándo es mejor esperar o buscar otra solución? La guía sin rodeos.",
+    emoji: "🚀",
+    categoria: "evaluacion",
+    fecha: "15 mayo 2026",
+    url: "entrada-06.html",
+    disponible: true
+  },
+  {
+    num: "01",
+    titulo: "Cuánto cuesta realmente contratar un desarrollador en Argentina en 2026",
+    bajada: "El salario es solo el comienzo. ANSES, Obra Social, ART, SAC, vacaciones — todo suma. Calculamos el costo real mensual para diferentes rangos salariales con datos de fuentes oficiales.",
+    emoji: "🇦🇷",
+    categoria: "descubrimiento",
+    fecha: "17 mayo 2026",
+    url: "entrada-01.html",
+    disponible: true
+  },
+  {
+    num: "03",
+    titulo: "Contractor vs EOR en Brasil: lo que dice la CLT y cuánto cuesta el error",
+    bajada: "Brasil tiene la ley laboral más protectora de LATAM. Contratar como contractor sin cumplir la CLT puede generar deuda retroactiva de hasta 5 años. Lo que necesitás saber antes de contratar.",
+    emoji: "🇧🇷",
+    categoria: "decision",
+    fecha: "17 mayo 2026",
+    url: "entrada-03.html",
+    disponible: true
+  },
+  {
+    num: "04",
+    titulo: "Cómo contratar legalmente en Colombia sin abrir una empresa",
+    bajada: "Colombia permite contratar talento sin entidad local — pero tiene sus reglas. Analizamos las opciones legales disponibles, los riesgos de cada una y cuándo un EOR es la única respuesta correcta.",
+    emoji: "🇨🇴",
+    categoria: "descubrimiento",
+    fecha: "17 mayo 2026",
+    url: "entrada-04.html",
+    disponible: true
+  }
+];
+
+let filtroActivo = 'todos';
+
+function filtrar(cat, btn) {
+  filtroActivo = cat;
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('blog-grid');
+  const lista = filtroActivo === 'todos'
+    ? ENTRADAS
+    : ENTRADAS.filter(e => e.categoria === filtroActivo);
+
+  grid.innerHTML = lista.map(e => {
+    const catTagClass = { descubrimiento: 'cat-tag-descubrimiento', evaluacion: 'cat-tag-evaluacion', decision: 'cat-tag-decision' }[e.categoria];
+    const catLabel = { descubrimiento: 'Descubrimiento', evaluacion: 'Evaluación', decision: 'Decisión' }[e.categoria];
+    const cardClass = `entrada-card cat-${e.categoria}${!e.disponible ? ' proximamente' : ''}`;
+
+    return `<a href="${e.disponible ? e.url : '#'}" class="${cardClass}">
+      <div class="entrada-visual" style="position:relative;">
+        ${!e.disponible ? '<span class="proximamente-badge">PRÓXIMAMENTE</span>' : ''}
+        ${e.emoji}
+      </div>
+      <div class="entrada-body">
+        <div class="entrada-meta">
+          <span class="entrada-cat ${catTagClass}">${catLabel}</span>
+          <span class="entrada-fecha">${e.fecha}</span>
+        </div>
+        <h2>${e.titulo}</h2>
+        <p class="entrada-bajada">${e.bajada}</p>
+        <div class="entrada-cta">
+          <span>${e.disponible ? 'Leer entrada' : 'Próximamente'}</span>
+          <span class="entrada-cta-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+
+  // Reveal
+  document.querySelectorAll('.entrada-card').forEach(el => {
+    el.classList.add('reveal');
+    revealObs.observe(el);
+  });
+}
+
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.06 });
+
+function suscribir() {
+  const email = document.getElementById('nl-email').value.trim();
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+
+  if (!email || !emailRegex.test(email)) {
+    document.getElementById('nl-email').placeholder = 'Email inválido — ingresá uno real';
+    document.getElementById('nl-email').value = '';
+    return;
+  }
+
+  fetch('https://hook.us2.make.com/vmilsqejfvv4niejrqs2lawyu382mhr3', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email, fuente: 'newsletter_blog',
+      sitio: 'cocoeor.com',
+      timestamp: new Date().toISOString()
+    })
+  }).catch(() => {});
+
+  document.getElementById('nl-email').value = '';
+  document.getElementById('nl-email').placeholder = '¡Listo! Te avisamos cuando haya novedades ✓';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderGrid();
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
+  // Reveal estático
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>

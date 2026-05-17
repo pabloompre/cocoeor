@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EOR para startups: cuándo vale la pena y cuándo no | COCO EOR</title>
+  <meta name="description" content="Un EOR cuesta entre $89 y $649 por empleado por mes. ¿Cuándo tiene sentido pagar ese fee? La guía sin rodeos para founders y COOs."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#0099FF; --blue-dark:#007ACC; --blue-light:#e8f2ff;
+      --bg:#f8f9fb; --bg-card:#ffffff; --text:#0a0a0a; --text2:#4a5568; --text3:#9aa5b0;
+      --border:#e2e8f0; --border2:#c8d8ea; --green:#00b341; --amber:#f59e0b; --red:#ef4444;
+      --sans:'Space Grotesk',sans-serif; --heading:'Plus Jakarta Sans',sans-serif;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.06); --shadow:0 4px 16px rgba(0,0,0,0.08);
+      --radius:12px; --radius-sm:8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(248,249,251,0.97); border-bottom: 1px solid var(--border); padding: 0 32px; height: 80px; display: flex; align-items: center; justify-content: space-between; transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px; border-radius: 8px; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text3); text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .article-back:hover { color: var(--blue); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: #f0fdf4; color: #166534; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+    .article-titulo { font-family: var(--heading); font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.025em; color: var(--text); line-height: 1.15; margin-bottom: 16px; }
+    .article-bajada { font-size: 18px; color: var(--text2); line-height: 1.6; margin-bottom: 24px; }
+    .article-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text3); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .article-meta strong { color: var(--text2); }
+    .article-body h2 { font-family: var(--heading); font-size: 22px; font-weight: 800; color: var(--text); margin: 40px 0 14px; letter-spacing: -0.01em; }
+    .article-body p { margin-bottom: 18px; color: var(--text2); line-height: 1.75; }
+    .article-body strong { color: var(--text); }
+    .article-body ul { margin: 0 0 18px 20px; }
+    .article-body ul li { margin-bottom: 8px; color: var(--text2); line-height: 1.6; }
+
+    .callout { padding: 18px 20px; border-radius: var(--radius); margin: 24px 0; font-size: 14px; line-height: 1.6; }
+    .callout.blue  { background: var(--blue-light); border-left: 3px solid var(--blue); color: #1e3a5f; }
+    .callout.amber { background: #fffbeb; border-left: 3px solid var(--amber); color: #78350f; }
+    .callout.green { background: #f0fdf4; border-left: 3px solid var(--green); color: #14532d; }
+    .callout.red   { background: #fff1f1; border-left: 3px solid var(--red); color: #7f1d1d; }
+
+    /* Decision cards */
+    .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+
+    .decision-card { border-radius: var(--radius); padding: 22px; }
+    .decision-card.si { background: #f0fdf4; border: 1.5px solid #86efac; }
+    .decision-card.no { background: #fff1f1; border: 1.5px solid #fca5a5; }
+
+    .decision-title { font-family: var(--heading); font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .decision-card.si .decision-title { color: #166534; }
+    .decision-card.no .decision-title { color: #7f1d1d; }
+
+    .decision-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .decision-list li { font-size: 13px; line-height: 1.5; display: flex; gap: 8px; }
+    .decision-card.si .decision-list li { color: #14532d; }
+    .decision-card.no .decision-list li { color: #991b1b; }
+
+    .decision-list li::before { flex-shrink: 0; margin-top: 1px; }
+    .decision-card.si .decision-list li::before { content: "✓"; font-weight: 700; color: var(--green); }
+    .decision-card.no .decision-list li::before { content: "✕"; font-weight: 700; color: var(--red); }
+
+    /* Costo breakdown */
+    .costo-example {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 22px; margin: 24px 0;
+    }
+
+    .costo-example-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); margin-bottom: 14px; }
+
+    .costo-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .costo-row:last-child { border-bottom: none; }
+    .costo-row-label { color: var(--text2); }
+    .costo-row-value { font-weight: 700; }
+    .costo-row-value.sal { color: var(--text2); }
+    .costo-row-value.car { color: #d97706; }
+    .costo-row-value.fee { color: var(--blue); }
+    .costo-row-value.tot { color: var(--blue); font-family: var(--heading); font-size: 18px; }
+
+    .article-cta { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
+    .article-cta h3 { font-family: var(--heading); font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .article-cta p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+    .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: #fff; color: var(--blue); border-radius: var(--radius-sm); font-weight: 700; font-size: 15px; text-decoration: none; }
+    .article-cta a:hover { opacity: 0.9; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    footer { background: #0a0f1a; color: #8a9ab0; padding: 40px 24px 28px; }
+    .footer-simple { max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-simple p { font-size: 12px; color: #4a5a6a; }
+    .footer-simple a { font-size: 13px; color: #8a9ab0; text-decoration: none; }
+    .footer-simple a:hover { color: var(--blue); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .article-wrap { padding: 32px 16px 60px; }
+      .decision-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<div class="article-wrap">
+
+  <a href="blog.html" class="article-back">← Volver al blog</a>
+
+  <span class="article-cat">Evaluación</span>
+
+  <h1 class="article-titulo">EOR para startups: cuándo vale la pena y cuándo no</h1>
+
+  <p class="article-bajada">Un EOR cuesta entre $89 y $649 por empleado por mes. ¿Cuándo tiene sentido pagar ese fee? ¿Y cuándo es mejor esperar o buscar otra solución? La guía sin rodeos.</p>
+
+  <div class="article-meta">
+    <span>📅 15 de mayo de 2026</span>
+    <span>·</span>
+    <span>⏱ 6 min de lectura</span>
+    <span>·</span>
+    <span>Datos verificados al <strong>15/05/2026</strong></span>
+  </div>
+
+  <div class="article-body reveal">
+
+    <p>Un EOR (Employer of Record) es una empresa que contrata legalmente a tu empleado en su nombre, en el país donde ese empleado vive. Vos seguís dirigiendo el trabajo — el EOR figura como empleador legal, paga las cargas, gestiona los beneficios y asume la responsabilidad de cumplimiento.</p>
+
+    <p>La pregunta que más nos hacen founders y COOs es simple: ¿vale la pena pagar $199–$649 por mes por empleado cuando el salario ya es el gasto principal? La respuesta depende de tu situación. Acá la desglosamos.</p>
+
+    <h2>El costo real de un EOR vs. la alternativa</h2>
+
+    <p>La alternativa principal a un EOR es contratar como contractor (facturas independientes). En papel, es más barato — no pagás el fee. En la práctica, el ahorro es ilusorio si existe subordinación de hecho.</p>
+
+    <div class="callout red">
+      <strong>Reclasificación laboral:</strong> si un inspector laboral determina que tu "contractor" tiene subordinación de hecho (horarios fijos, exclusividad, dirección cotidiana), la relación se reclasifica como relación de dependencia. Resultado: deuda retroactiva de cargas no pagadas con intereses, que puede cubrir hasta 5 años hacia atrás. El costo de ese escenario supera años de fees EOR.
+    </div>
+
+    <p>Veamos los números concretos. Para un empleado en Chile con salario de $1.500 USD/mes:</p>
+
+    <div class="costo-example">
+      <div class="costo-example-title">Costo mensual real — Chile · $1.500 USD/mes</div>
+      <div class="costo-row">
+        <span class="costo-row-label">Salario acordado</span>
+        <span class="costo-row-value sal">$1.500</span>
+      </div>
+      <div class="costo-row">
+        <span class="costo-row-label">Cargas patronales Chile (+22.4%)</span>
+        <span class="costo-row-value car">+$336</span>
+      </div>
+      <div class="costo-row">
+        <span class="costo-row-label">Fee EOR (Remofirst, opción más económica)</span>
+        <span class="costo-row-value fee">+$199</span>
+      </div>
+      <div class="costo-row" style="border-top:2px solid var(--text);margin-top:4px;padding-top:12px;">
+        <span class="costo-row-label" style="font-weight:700;color:var(--text);">Total mensual</span>
+        <span class="costo-row-value tot">$2.035</span>
+      </div>
+    </div>
+
+    <p>El fee de $199 representa un 13.3% del costo total. En contexto: es lo que pagás para no tener que entender la legislación laboral chilena, no gestionar pagos en pesos chilenos, no manejar liquidaciones y no asumir el riesgo de una reclasificación.</p>
+
+    <h2>Cuándo sí vale la pena</h2>
+
+    <div class="decision-grid">
+      <div class="decision-card si">
+        <div class="decision-title">✓ Usá un EOR cuando...</div>
+        <ul class="decision-list">
+          <li>Tu primer empleado en ese país — el costo de aprender la legislación local supera el fee</li>
+          <li>Contratás en países con alta complejidad legal (Brasil, Argentina, Ecuador)</li>
+          <li>Necesitás onboarding rápido — días, no meses</li>
+          <li>Tu equipo legal/RRHH no tiene capacidad para gestionar compliance internacional</li>
+          <li>Querés proteger la IP de la empresa correctamente</li>
+          <li>El empleado necesita beneficios locales competitivos para aceptar la oferta</li>
+        </ul>
+      </div>
+      <div class="decision-card no">
+        <div class="decision-title">✕ Las únicas excepciones reales</div>
+        <ul class="decision-list">
+          <li>Ya tenés entidad legal en ese país y tiene capacidad operativa real — usarla es más barato</li>
+          <li>La relación es genuinamente autónoma: múltiples clientes, sin horarios, sin exclusividad, sin subordinación de hecho</li>
+          <li>Contratás por menos de 3 meses para un proyecto puntual y sin subordinación</li>
+          <li>Tenés más de 10–12 empleados en el mismo país — en ese punto abrí entidad (ver tabla abajo)</li>
+        </ul>
+        <p style="font-size:12px;color:#991b1b;margin-top:10px;line-height:1.5;">⚠ Ninguna de estas excepciones elimina el riesgo legal si existe subordinación de hecho. La distinción la determina el inspector, no el contrato.</p>
+      </div>
+    </div>
+
+    <h2>El punto de inflexión: ¿cuándo conviene abrir entidad?</h2>
+
+    <p>Un EOR no es para siempre. A medida que tu equipo crece en un país específico, el fee acumulado empieza a superar el costo de constituir una entidad legal local.</p>
+
+    <p>La regla general del mercado es <strong>entre 8 y 12 empleados en el mismo país</strong>. A partir de ese volumen, el costo de constitución y mantenimiento de una entidad local empieza a amortizarse frente al fee mensual del EOR.</p>
+
+    <div class="callout blue">
+      <strong>Ejemplo:</strong> con 10 empleados en México usando Remofirst ($199/mes), el fee mensual es $1.990. En 18 meses, eso son $35.820 en fees. El costo de constituir una S. de R.L. en México está en torno a $2.000–$4.000 más $800/mes en administración contable — que en 18 meses suma aproximadamente $18.400. A partir del mes 10–12, la entidad propia empieza a ganar.
+    </div>
+
+    <h3>Costos de constitución y mantenimiento por país</h3>
+
+    <p>Los rangos a continuación son estimaciones de mercado para 2026 basadas en datos de BizLatinHub, Easyco y PIL Services. Varían según el tipo societario, el proveedor y si incluís asesoría legal local:</p>
+
+    <div class="costo-example" style="padding:0;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:var(--bg);">
+            <th style="padding:12px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);border-bottom:1px solid var(--border);">País</th>
+            <th style="padding:12px 16px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);border-bottom:1px solid var(--border);">Constitución (one-time)</th>
+            <th style="padding:12px 16px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);border-bottom:1px solid var(--border);">Mantenimiento / mes</th>
+            <th style="padding:12px 16px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);border-bottom:1px solid var(--border);">Empl. para superar EOR*</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇨🇱 Chile (SpA)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$1.500–$3.000</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$400–$700</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">4–6 empl.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇲🇽 México (S. de R.L.)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$2.000–$4.000</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$600–$900</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">5–8 empl.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇨🇴 Colombia (SAS)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$1.500–$3.500</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$500–$800</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">4–7 empl.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇦🇷 Argentina (SAS/SRL)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$2.500–$6.000</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$800–$1.500</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">8–12 empl.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇧🇷 Brasil (LTDA)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$4.000–$9.000</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$1.200–$2.500</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">10–15 empl.</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 16px;font-weight:600;color:var(--text);">🇺🇾 Uruguay (SAS)</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--text2);">$2.000–$4.500</td>
+            <td style="padding:11px 16px;text-align:right;color:#d97706;font-weight:600;">$600–$1.000</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--blue);font-weight:700;">6–9 empl.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--text3);font-style:italic;margin-top:8px;">* Estimado usando Remofirst ($199/mes) como referencia de EOR más económico. Fuentes: BizLatinHub, Easyco, PIL Services. Verificado mayo 2026.</p>
+
+    <div class="callout amber">
+      <strong>Argentina y Brasil tienen el mayor costo de constitución y mantenimiento.</strong> La inestabilidad regulatoria argentina y la burocracia del "Custo Brasil" hacen que el punto de equilibrio entre EOR y entidad propia se alcance más tarde — necesitás un equipo más grande para que valga la pena la inversión. Chile y Colombia son los más accesibles para dar ese paso.
+    </div>
+
+    <div class="callout blue">
+      <strong>Antes de ese umbral, el EOR casi siempre gana.</strong> Los números de la tabla muestran el costo nominal de una entidad — pero no incluyen el tiempo operativo real: registrar empleados, gestionar payroll en moneda local, presentar declaraciones mensuales, actualizar beneficios ante cambios normativos. Ese costo operativo invisible empuja el punto de equilibrio más arriba de lo que parece en papel. Para la mayoría de los equipos de menos de 10 personas en LATAM, el EOR sigue siendo la opción más barata cuando se mide el costo total.
+    </div>
+
+    <h2>La pregunta que nadie hace: ¿qué EOR para qué startup?</h2>
+
+    <p>No todas las startups tienen las mismas necesidades. Una startup en seed con 2 empleados remotos en LATAM necesita algo diferente a una serie B con 20 personas en 5 países.</p>
+
+    <p><strong>Seed / Pre-seed (1–3 empleados):</strong> Remofirst o Native Teams. El fee bajo ($89–$199/mes) es lo que importa. No necesitás las integraciones premium ni el soporte 24/7 que justifican el precio de Deel.</p>
+
+    <p><strong>Serie A (4–10 empleados, 2–3 países):</strong> Multiplier o Remofirst. Soporte en español disponible, cobertura LATAM sólida, precio razonable. Multiplier tiene el mejor soporte en español del mercado si eso es prioritario.</p>
+
+    <p><strong>Serie B+ (10+ empleados, múltiples países):</strong> Deel o Remote. Las integraciones con Workday, Greenhouse, Rippling y la gestión de equity justifican el precio premium. También tienen SLAs más fuertes y equipos de soporte dedicados.</p>
+
+    <h2>Lo que un EOR no resuelve</h2>
+
+    <p>Un EOR no es un atajo para todo. No resuelve problemas de gestión de personas — si el empleado no funciona, el EOR no lo sabe y no puede ayudar. No reemplaza tener una cultura de empresa clara para equipos remotos. Y no es necesariamente más barato que una entidad local a escala.</p>
+
+    <div class="callout green">
+      <strong>La respuesta corta:</strong> si contratás tu primer empleado en un país de LATAM y no tenés entidad legal ahí, un EOR es casi siempre la respuesta correcta. El costo del fee es menor que el costo del riesgo legal, el tiempo de aprendizaje de la legislación local y la complejidad operativa de gestionar payroll internacional manualmente.
+    </div>
+
+  </div>
+
+  <div class="article-cta reveal">
+    <h3>Calculá cuánto cuesta para tu caso</h3>
+    <p>Elegí el país y el salario para ver el costo total con las 7 plataformas EOR disponibles.</p>
+    <a href="comparador.html">Ir al Comparador EOR →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <p>© 2026 COCO Labs · Datos verificados al 15/05/2026</p>
+    <div style="display:flex;gap:16px;">
+      <a href="blog.html">← Blog</a>
+      <a href="comparador.html">Comparador EOR</a>
+      <a href="guias.html">Guías por país</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12); });
+  document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobileMenu').classList.toggle('open'); });
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

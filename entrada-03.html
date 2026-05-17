@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contractor vs EOR en Brasil: lo que dice la CLT y cuánto cuesta el error | COCO EOR</title>
+  <meta name="description" content="Brasil tiene la ley laboral más protectora de LATAM. Contratar como contractor sin cumplir la CLT puede generar deuda retroactiva de hasta 5 años. Todo lo que necesitás saber."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#0099FF; --blue-dark:#007ACC; --blue-light:#e8f2ff;
+      --bg:#f8f9fb; --bg-card:#ffffff; --text:#0a0a0a; --text2:#4a5568; --text3:#9aa5b0;
+      --border:#e2e8f0; --border2:#c8d8ea; --green:#00b341; --amber:#f59e0b; --red:#ef4444;
+      --sans:'Space Grotesk',sans-serif; --heading:'Plus Jakarta Sans',sans-serif;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.06); --shadow:0 4px 16px rgba(0,0,0,0.08);
+      --radius:12px; --radius-sm:8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(248,249,251,0.97); border-bottom: 1px solid var(--border); padding: 0 32px; height: 80px; display: flex; align-items: center; justify-content: space-between; transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px; border-radius: 8px; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text3); text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .article-back:hover { color: var(--blue); }
+    .article-cat { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: #fffbeb; color: #92400e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+    .article-titulo { font-family: var(--heading); font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.025em; color: var(--text); line-height: 1.15; margin-bottom: 16px; }
+    .article-bajada { font-size: 18px; color: var(--text2); line-height: 1.6; margin-bottom: 24px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text3); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .article-meta strong { color: var(--text2); }
+    .article-body h2 { font-family: var(--heading); font-size: 22px; font-weight: 800; color: var(--text); margin: 40px 0 14px; }
+    .article-body h3 { font-family: var(--heading); font-size: 17px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+    .article-body p { margin-bottom: 18px; color: var(--text2); line-height: 1.75; }
+    .article-body strong { color: var(--text); }
+    .article-body ul { margin: 0 0 18px 20px; }
+    .article-body ul li { margin-bottom: 8px; color: var(--text2); line-height: 1.6; }
+
+    .tabla-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 24px 0; border-radius: var(--radius); border: 1px solid var(--border); }
+    .tabla-comp { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .tabla-comp th { background: var(--bg); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .tabla-comp td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text2); }
+    .tabla-comp tr:last-child td { border-bottom: none; }
+    .tabla-comp .td-concepto { font-weight: 600; color: var(--text); }
+    .tabla-comp .td-pct { font-family: var(--heading); font-weight: 700; color: #d97706; text-align: right; white-space: nowrap; }
+    .tabla-comp .td-total { font-family: var(--heading); font-weight: 800; color: var(--blue); font-size: 15px; text-align: right; }
+    .tabla-comp .row-total { border-top: 2px solid var(--text) !important; }
+    .tabla-comp .row-total td { padding-top: 14px; }
+
+    .callout { padding: 18px 20px; border-radius: var(--radius); margin: 24px 0; font-size: 14px; line-height: 1.6; }
+    .callout.blue  { background: var(--blue-light); border-left: 3px solid var(--blue); color: #1e3a5f; }
+    .callout.amber { background: #fffbeb; border-left: 3px solid var(--amber); color: #78350f; }
+    .callout.red   { background: #fff1f1; border-left: 3px solid var(--red); color: #7f1d1d; }
+    .callout.green { background: #f0fdf4; border-left: 3px solid var(--green); color: #14532d; }
+
+    /* Test 5 pilares */
+    .pilares { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .pilar {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 16px;
+    }
+    .pilar-num {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: var(--red); color: #fff;
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-weight: 800; font-size: 13px;
+      font-family: var(--heading);
+    }
+    .pilar-body { flex: 1; }
+    .pilar-titulo { font-weight: 700; color: var(--text); font-size: 14px; margin-bottom: 3px; }
+    .pilar-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+    /* Pejotização warning */
+    .pejot-box {
+      background: #fff1f1; border: 1.5px solid #fca5a5;
+      border-radius: var(--radius); padding: 20px 22px; margin: 24px 0;
+    }
+    .pejot-title { font-family: var(--heading); font-size: 16px; font-weight: 800; color: #7f1d1d; margin-bottom: 10px; }
+    .pejot-body { font-size: 14px; color: #991b1b; line-height: 1.6; }
+
+    .fuente { font-size: 11px; color: var(--text3); margin-top: -12px; margin-bottom: 18px; font-style: italic; }
+
+    .article-cta { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
+    .article-cta h3 { font-family: var(--heading); font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .article-cta p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+    .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: #fff; color: var(--blue); border-radius: var(--radius-sm); font-weight: 700; font-size: 15px; text-decoration: none; }
+    .article-cta a:hover { opacity: 0.9; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    footer { background: #0a0f1a; color: #8a9ab0; padding: 40px 24px 28px; }
+    .footer-simple { max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-simple p { font-size: 12px; color: #4a5a6a; }
+    .footer-simple a { font-size: 13px; color: #8a9ab0; text-decoration: none; }
+    .footer-simple a:hover { color: var(--blue); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .article-wrap { padding: 32px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<div class="article-wrap">
+
+  <a href="blog.html" class="article-back">← Volver al blog</a>
+  <span class="article-cat">Decisión</span>
+  <h1 class="article-titulo">Contractor vs EOR en Brasil: lo que dice la CLT y cuánto cuesta el error</h1>
+  <p class="article-bajada">Brasil tiene la legislación laboral más protectora de LATAM. Contratar como contractor sin estructurarlo bien puede generar deuda retroactiva de cargas, FGTS y beneficios de hasta 5 años hacia atrás.</p>
+  <div class="article-meta">
+    <span>📅 17 de mayo de 2026</span>
+    <span>·</span>
+    <span>⏱ 8 min de lectura</span>
+    <span>·</span>
+    <span>Fuentes: CLT, Receita Federal, SRTE, Lei 13.467/2017</span>
+  </div>
+
+  <div class="article-body reveal">
+
+    <p>Brasil es el mercado de talento tecnológico más grande de LATAM. También es el que tiene la carga patronal más alta del listado (+62.2% sobre el salario) y la ley laboral más protectora de la región: la Consolidação das Leis do Trabalho (CLT). Entender la diferencia entre un contractor genuino y un empleado encubierto en Brasil no es una cuestión académica — es lo que separa una operación normal de una deuda retroactiva que puede destruir el balance de una empresa.</p>
+
+    <h2>Las cargas patronales CLT en 2026</h2>
+
+    <p>Contratar a un desarrollador bajo el régimen CLT desencadena una serie de obligaciones mensuales y provisiones diferidas. Los porcentajes confirmados por la Receita Federal y el Ministério do Trabalho e Emprego (MTE) para 2026:</p>
+
+    <div class="tabla-wrap">
+      <table class="tabla-comp">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th>Descripción</th>
+            <th>% sobre salario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-concepto">INSS patronal (CPP)</td>
+            <td>Contribuição Previdenciária Patronal</td>
+            <td class="td-pct">20.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">FGTS</td>
+            <td>Fundo de Garantia do Tempo de Serviço</td>
+            <td class="td-pct">8.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">RAT/SAT</td>
+            <td>Risco Ambiental do Trabalho (sector IT: ~2%)</td>
+            <td class="td-pct">~2.00%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Sistema S (Terceiros)</td>
+            <td>SENAI, SESC, SEBRAE y otros entes</td>
+            <td class="td-pct">~5.80%</td>
+          </tr>
+          <tr class="row-total">
+            <td class="td-concepto">Subtotal cargas directas</td>
+            <td></td>
+            <td class="td-total">~35.80%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">13º salário (aguinaldo)</td>
+            <td>Provisión mensual 1/12 del salario bruto</td>
+            <td class="td-pct">8.33%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Férias + 1/3 constitucional</td>
+            <td>30 días + tercio adicional obligatorio</td>
+            <td class="td-pct">~11.10%</td>
+          </tr>
+          <tr>
+            <td class="td-concepto">Provisión multa rescisoria</td>
+            <td>40% sobre saldo FGTS en despido sin justa causa</td>
+            <td class="td-pct">~3.20%</td>
+          </tr>
+          <tr class="row-total">
+            <td class="td-concepto">Costo total sobre salario</td>
+            <td></td>
+            <td class="td-total">~58–62%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fuente">Fuente: Receita Federal, Ministério do Trabalho e Emprego (MTE). Verificado mayo 2026.</p>
+
+    <div class="callout amber">
+      <strong>El "Custo Brasil":</strong> la expresión describe la suma de cargas patronales, burocracia y rigidez del sistema CLT que encarece la contratación formal. Para un salario de $2.000 USD/mes, el costo real mensual para el empleador ronda los $3.240 USD antes del fee del EOR. Es el sobrecosto más alto de los 12 países que cubre COCO EOR.
+    </div>
+
+    <h2>El "vínculo de emprego" según el Art. 3º CLT</h2>
+
+    <p>La CLT define el vínculo laboral en su Artigo 3º. La jurisprudencia desglosa esa definición en cinco requisitos que, cuando se cumplen simultáneamente, configuran una relación de dependencia independientemente de la forma del contrato:</p>
+
+    <div class="pilares">
+      <div class="pilar">
+        <div class="pilar-num">1</div>
+        <div class="pilar-body">
+          <div class="pilar-titulo">Habitualidad (Habitualidade)</div>
+          <div class="pilar-desc">Los servicios se prestan de forma regular y continua, no esporádica ni puntual.</div>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-num">2</div>
+        <div class="pilar-body">
+          <div class="pilar-titulo">Subordinación jurídica (Subordinação)</div>
+          <div class="pilar-desc">El prestador sigue órdenes, directivas y lineamientos del contratante sobre cómo ejecutar el trabajo.</div>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-num">3</div>
+        <div class="pilar-body">
+          <div class="pilar-titulo">Onerosidad (Onerosidade)</div>
+          <div class="pilar-desc">Existe contraprestación económica por el trabajo realizado.</div>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-num">4</div>
+        <div class="pilar-body">
+          <div class="pilar-titulo">Personalidad (Pessoalidade)</div>
+          <div class="pilar-desc">Los servicios son prestados personalmente, sin posibilidad de delegarlos en un tercero.</div>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-num">5</div>
+        <div class="pilar-body">
+          <div class="pilar-titulo">Ajenidad (Alteridade)</div>
+          <div class="pilar-desc">El riesgo económico de la actividad recae en el contratante, no en el prestador.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Si los cinco pilares están presentes, el Art. 9º de la CLT sanciona con nulidad de pleno derecho todo acto que intente desvirtuar esa relación — incluyendo un contrato mercantil formalmente redactado o la existencia de un CNPJ (persona jurídica) del prestador.</p>
+
+    <h2>Pejotização: el riesgo que muchas empresas subestiman</h2>
+
+    <div class="pejot-box">
+      <div class="pejot-title">⚠ ¿Qué es la Pejotização?</div>
+      <div class="pejot-body">Es la práctica de obligar (o sugerir) a un trabajador que constituya una pessoa jurídica (PJ/CNPJ) para prestar servicios, evitando así el registro bajo la CLT y el pago de las cargas patronales. Es el equivalente brasileño del monotributo en Argentina — y tiene el mismo riesgo legal. El nombre viene de "PJ" (Pessoa Jurídica).</div>
+    </div>
+
+    <p>La Reforma Trabalhista de 2017 (Lei 13.467) introdujo el Art. 442-B en la CLT, que permite contratar a un trabajador autónomo sin que eso genere automáticamente vínculo de empleo. Esto abrió espacio para la contratación B2B directa.</p>
+
+    <p>Sin embargo, hay una brecha crítica entre lo que dice la ley y lo que fiscaliza el Estado. En 2026, la tensión institucional es real:</p>
+
+    <ul>
+      <li><strong>El STF</strong> (Supremo Tribunal Federal) ha validado la pejotização para perfiles altamente calificados bajo el principio de libertad contractual, reconociendo que un desarrollador senior no es un trabajador hiposuficiente.</li>
+      <li><strong>La SRTE</strong> (Superintendência Regional do Trabalho) y el Ministério Público do Trabalho persisten en fiscalizar y sancionar casos donde la pejotização encubre subordinación real.</li>
+    </ul>
+
+    <p>El punto de riesgo está en los hechos, no en el papel. Si el "contractor" tiene horarios fijos, exclusividad de hecho, asiste a reuniones de equipo como empleado y recibe direction cotidiana del trabajo, la SRTE puede — y lo hace — reclasificar la relación.</p>
+
+    <h2>Las sanciones y la retroactividad (Art. 11 CLT)</h2>
+
+    <p>Cuando un Auditor Fiscal do Trabalho detecta una pejotização ilícita, la empresa debe abonar con mora:</p>
+
+    <ul>
+      <li>Totalidad de aportes de <strong>INSS y FGTS</strong> no pagados desde el inicio de la relación</li>
+      <li><strong>13º salário</strong>, férias y 1/3 constitucional no pagados</li>
+      <li>Horas extras y adicionales que correspondieran</li>
+      <li>Multa del <strong>40% sobre el saldo del FGTS</strong> acumulado</li>
+      <li>Juros de mora (intereses de mora) sobre cada concepto</li>
+    </ul>
+
+    <p>El plazo de prescripción está fijado en el Art. 11 CLT con el régimen dual introducido por la Lei 13.467/2017: <strong>2 años desde la extinción del contrato para reclamar</strong>, pero con retroactividad de hasta <strong>5 años hacia atrás</strong> desde la fecha del reclamo.</p>
+
+    <div class="callout red">
+      <strong>Ejemplo concreto:</strong> un desarrollador contratado como PJ durante 3 años con salario de $2.000 USD/mes. Si la SRTE determina vínculo de empleo, la deuda retroactiva incluye 36 meses de INSS (20%), FGTS (8%), Sistema S (5.8%), más 13º salário y férias no pagados. Solo esos conceptos suman aproximadamente <strong>$47.000 USD en pasivos laborales</strong> — antes de intereses y multas.
+    </div>
+
+    <h2>La escala del problema en Brasil</h2>
+
+    <p>No es un riesgo teórico. Datos del Cadastro Geral de Empregados e Desempregados (Caged) mostraron que de 5.5 millones de trabajadores desvinculados bajo CLT en años recientes, 4.4 millones migraron a la figura de Microempreendedor Individual (MEI). Un porcentaje relevante de esos "nuevos empresarios" continuó prestando servicios al mismo empleador, configurando pejotização en masa. El gobierno alertó en 2026 que esto genera un vaciamiento de la base previsional que impulsa una fiscalización más agresiva por parte de la SRTE.</p>
+
+    <h2>¿Cuándo un contractor sí es válido en Brasil?</h2>
+
+    <p>La contratación B2B es legítima cuando existe autonomía real. Los indicadores concretos de una relación genuinamente independiente son:</p>
+
+    <ul>
+      <li>El prestador tiene múltiples clientes simultáneos</li>
+      <li>No existe exclusividad ni de derecho ni de hecho</li>
+      <li>El prestador define sus propios horarios y metodología de trabajo</li>
+      <li>El prestador asume el riesgo económico de su actividad (equipo propio, gastos propios)</li>
+      <li>La relación es por proyecto o resultado, no por presencia y disponibilidad</li>
+    </ul>
+
+    <div class="callout green">
+      <strong>La regla práctica:</strong> si el desarrollador trabaja para vos como si fuera un empleado en todo excepto en el papel, la pejotização es un riesgo real en Brasil. Si trabaja con autonomía genuina, con múltiples clientes y sin subordinación estructural, el modelo B2B es legítimo. La diferencia la determinan los hechos, no el contrato.
+    </div>
+
+    <h2>El EOR como solución</h2>
+
+    <p>Un EOR (Employer of Record) es el único mecanismo que elimina completamente el riesgo de pejotização. El EOR contrata al desarrollador bajo la CLT en su nombre, paga todas las cargas, gestiona el FGTS y asume la responsabilidad de compliance laboral. La empresa extranjera sigue dirigiendo el trabajo sin asumir el riesgo legal.</p>
+
+    <p>El costo del EOR en Brasil — $89 a $649/mes por empleado dependiendo de la plataforma — es directamente comparable con el pasivo potencial de una reclasificación. Para la mayoría de los casos de contratación continua en Brasil, el EOR es la opción más barata cuando se considera el riesgo total.</p>
+
+  </div>
+
+  <div class="article-cta reveal">
+    <h3>Compará plataformas EOR para Brasil</h3>
+    <p>Calculá el costo total real: salario + cargas CLT + fee de la plataforma.</p>
+    <a href="comparador.html?pais=brasil">Ver plataformas EOR para Brasil →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <p>© 2026 COCO Labs · Fuentes: CLT, Receita Federal, SRTE, Lei 13.467/2017 · Verificado 15/05/2026</p>
+    <div style="display:flex;gap:16px;">
+      <a href="blog.html">← Blog</a>
+      <a href="guias.html#brasil">Guía Brasil</a>
+      <a href="comparador.html">Comparador EOR</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12); });
+  document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobileMenu').classList.toggle('open'); });
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparador EOR — 7 plataformas para contratar en LATAM | COCO EOR</title>
+  <meta name="description" content="Compará 7 plataformas EOR por precio real: salario + cargas + fee. Datos verificados para 12 países de LATAM. Sin letra chica."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0099FF;
+      --blue-dark:  #007ACC;
+      --blue-light: #e8f2ff;
+      --blue-mid:   #4da6ff;
+      --bg:         #f8f9fb;
+      --bg-card:    #ffffff;
+      --text:       #0a0a0a;
+      --text2:      #4a5568;
+      --text3:      #9aa5b0;
+      --border:     #e2e8f0;
+      --border2:    #c8d8ea;
+      --green:      #00b341;
+      --amber:      #f59e0b;
+      --red:        #ef4444;
+      --sans:       'Space Grotesk', sans-serif;
+      --heading:    'Plus Jakarta Sans', sans-serif;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow:     0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg:  0 12px 40px rgba(0,153,255,0.12);
+      --radius:     12px;
+      --radius-sm:  8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,249,251,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-links a.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 18px; height: 2.5px; background: var(--blue); border-radius: 2px; }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px rgba(0,153,255,0.35) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); animation: slideDown 0.25s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+
+
+    /* ─── HERO COMPACTO ───────────────────────────── */
+    .hero-comp {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,153,255,0.08) 0%, transparent 70%), var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-comp .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border2);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-comp h1 {
+      font-family: var(--heading);
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .hero-comp h1 span { color: var(--blue); }
+
+    .hero-comp p {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── CONTROLES STICKY ────────────────────────── */
+    .controls-sticky {
+      position: sticky;
+      top: 80px;
+      z-index: 90;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .controls-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mode-toggle {
+      display: flex;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .mode-btn {
+      padding: 7px 16px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      color: var(--text2);
+    }
+
+    .mode-btn.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,153,255,0.3);
+    }
+
+    .controls-selects {
+      display: flex;
+      gap: 10px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .ctrl-group label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ctrl-group select,
+    .ctrl-group input[type="number"] {
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: var(--sans);
+      border: 1.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .ctrl-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239aa5b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px;
+    }
+
+    .ctrl-group select:focus,
+    .ctrl-group input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.12);
+    }
+
+    .ctrl-salary-prefix {
+      position: relative;
+    }
+
+    .ctrl-salary-prefix .prefix {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text3);
+      pointer-events: none;
+      font-weight: 600;
+    }
+
+    .ctrl-salary-prefix input { padding-left: 24px !important; }
+
+    /* ─── CONTENEDOR PRINCIPAL ────────────────────── */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    /* ─── RESULTADOS HEADER ───────────────────────── */
+    .results-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .results-title {
+      font-family: var(--heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .results-sub {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    /* ─── EOR CARDS ───────────────────────────────── */
+    .eor-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .eor-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 52px 1fr auto auto;
+      align-items: center;
+      gap: 16px 20px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+      position: relative;
+    }
+
+    .eor-card:hover {
+      border-color: var(--blue);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .eor-card.cheapest {
+      border-color: var(--green);
+      box-shadow: 0 0 0 1px var(--green), var(--shadow-sm);
+    }
+
+    .eor-card.destacado {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px var(--blue), var(--shadow-sm);
+    }
+
+    /* Badge posicionado arriba a la derecha */
+    .card-top-badge {
+      position: absolute;
+      top: -11px;
+      right: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .badge-cheapest { background: var(--green); color: #fff; }
+    .badge-destacado { background: var(--blue); color: #fff; }
+
+    /* Iniciales avatar */
+    .eor-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-family: var(--heading);
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+
+    /* Info plataforma */
+    .eor-info { min-width: 0; }
+
+    .eor-name {
+      font-family: var(--heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .eor-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+
+    .eor-tier {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    .tier-economico { background: #f0fdf4; color: #166534; }
+    .tier-midmarket { background: var(--blue-light); color: var(--blue-dark); }
+    .tier-premium   { background: #fdf4ff; color: #7e22ce; }
+
+    /* Fee de la plataforma */
+    .eor-fee {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .eor-fee-amount {
+      font-family: var(--heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    .eor-fee-label {
+      font-size: 11px;
+      color: var(--text3);
+      white-space: nowrap;
+    }
+
+    /* Total con cargas */
+    .eor-total-block {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .eor-total {
+      font-family: var(--heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      justify-content: flex-end;
+    }
+
+    .eor-total .cur {
+      font-size: 14px;
+      color: var(--text2);
+      font-weight: 600;
+    }
+
+    .eor-total-sub {
+      font-size: 11px;
+      color: var(--text3);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .eor-cta-arrow {
+      font-size: 13px;
+      color: var(--blue);
+      font-weight: 600;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ─── MODAL ───────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,15,26,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+      animation: modalUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    @keyframes modalUp {
+      from { opacity:0; transform: translateY(20px) scale(0.97); }
+      to   { opacity:1; transform: none; }
+    }
+
+    .modal-header {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .modal-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-family: var(--heading);
+      font-weight: 800;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .modal-title-block { flex: 1; }
+
+    .modal-name {
+      font-family: var(--heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .modal-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text3);
+      font-size: 18px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover { background: var(--bg); color: var(--text); }
+
+    .modal-body { padding: 24px 28px 28px; }
+
+    /* Desglose en modal */
+    .modal-desglose {
+      margin-bottom: 24px;
+    }
+
+    .modal-desglose-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    .modal-row:last-child { border-bottom: none; }
+
+    .modal-row-label { color: var(--text2); font-weight: 500; }
+    .modal-row-label.main { color: var(--text); font-weight: 600; }
+
+    .modal-row-value {
+      font-family: var(--heading);
+      font-weight: 700;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .modal-row-value.salary { color: var(--text2); }
+    .modal-row-value.cargas { color: #d97706; }
+    .modal-row-value.fee    { color: var(--blue); }
+
+    .modal-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #e8f2ff 0%, #d4eaff 100%);
+      border: 1.5px solid rgba(0,153,255,0.25);
+      border-radius: var(--radius-sm);
+      margin-top: 16px;
+    }
+
+    .modal-total-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-total-value {
+      font-family: var(--heading);
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--blue);
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-total-value .cur {
+      font-size: 18px;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .modal-pct-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(245,158,11,0.12);
+      color: #b45309;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    /* Línea separadora antes del total */
+    .modal-sum-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 0 0;
+      margin-top: 4px;
+      border-top: 2px solid var(--border);
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* CTA modal */
+    .modal-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-modal-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-modal-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .modal-afil-note {
+      font-size: 11px;
+      color: var(--text3);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ─── MODO 3 PAÍSES ───────────────────────────── */
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .three-col-header {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 0;
+    }
+
+    .three-flag-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .three-flag { font-size: 22px; }
+
+    .three-country {
+      font-family: var(--heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .three-col-eor { display: flex; flex-direction: column; gap: 8px; }
+
+    .three-eor-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .three-eor-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 2px 12px rgba(0,153,255,0.12);
+    }
+
+    .three-eor-card.cheapest { border-color: var(--green); }
+
+    .three-eor-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .three-eor-total {
+      font-family: var(--heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .three-eor-total .cur { font-size: 12px; color: var(--text2); font-weight: 600; }
+
+    .three-eor-sub {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    /* ─── CONTRACTOR WARNING ──────────────────────── */
+    .contractor-section {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+
+    .contractor-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .contractor-icon {
+      width: 40px;
+      height: 40px;
+      background: #fef3c7;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .contractor-title {
+      font-family: var(--heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: #78350f;
+      margin-bottom: 4px;
+    }
+
+    .contractor-sub {
+      font-size: 13px;
+      color: #92400e;
+    }
+
+    .contractor-body p {
+      font-size: 14px;
+      color: #78350f;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .contractor-body p:last-child { margin-bottom: 0; }
+
+    .contractor-risk {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #92400e;
+      background: #fde68a;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    /* ─── NOTA METODOLÓGICA ───────────────────────── */
+    .metodologia {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+
+    .metodologia h3 {
+      font-family: var(--heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .metodologia p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .metodologia p:last-child { margin-bottom: 0; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: #0a0f1a;
+      color: #8a9ab0;
+      padding: 48px 24px 32px;
+    }
+
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #6a7a8a;
+      margin-top: 12px;
+      max-width: 300px;
+    }
+
+    .footer-links-group { display: flex; gap: 48px; }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4a5a6a;
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .footer-col a {
+      font-size: 14px;
+      color: #8a9ab0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--blue); }
+
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid #1e2a3a;
+      color: #6a7a8a;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover { border-color: var(--blue); color: var(--blue); }
+
+    .footer-bottom {
+      border-top: 1px solid #1e2a3a;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p { font-size: 12px; color: #4a5a6a; line-height: 1.6; max-width: 600px; }
+
+    /* ─── REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── EMPTY STATE ─────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text3);
+      font-size: 15px;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .nav-social { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-comp { padding: 40px 16px 36px; }
+
+      .controls-inner { padding: 12px 16px; gap: 10px; }
+      .controls-selects { flex-direction: column; }
+      .ctrl-group { min-width: 0; }
+
+      .main-content { padding: 24px 16px 48px; }
+
+      .eor-card {
+        grid-template-columns: 44px 1fr;
+        grid-template-rows: auto auto;
+        gap: 12px;
+      }
+
+      .eor-fee { display: none; }
+
+      .eor-total-block {
+        grid-column: 1 / -1;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .eor-total { font-size: 22px; }
+
+      .three-grid { grid-template-columns: 1fr; }
+
+      .contractor-section { padding: 20px 18px; }
+
+      .footer-top { flex-direction: column; gap: 28px; }
+      .footer-links-group { flex-wrap: wrap; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .mode-toggle { width: 100%; }
+      .mode-btn { flex: 1; text-align: center; }
+    }
+
+    /* ─── TARJETA DESGLOSE PREVIO ─────────────────── */
+    .desglose-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--blue);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 24px rgba(0,153,255,0.10);
+      display: none;
+    }
+    .desglose-card.visible { display: block; }
+    .desglose-card-title {
+      font-family: var(--heading); font-size: 15px; font-weight: 700;
+      color: var(--text); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .desglose-card-title span { color: var(--blue); }
+    .desglose-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .desglose-row:last-child { border-bottom: none; }
+    .desglose-row-label { color: var(--text2); font-weight: 500; }
+    .desglose-row-value { font-weight: 700; color: var(--text); }
+    .desglose-row-value.salary { color: var(--text2); font-weight: 600; }
+    .desglose-row-value.cargas { color: #d97706; }
+    .desglose-row-value.total  { color: var(--text); font-size: 18px; font-family: var(--heading); }
+    .desglose-row-value.total-eor { color: var(--blue); font-size: 18px; font-family: var(--heading); }
+    .desglose-pct-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #fef3c7; color: #d97706; font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px; margin-left: 6px;
+    }
+
+    /* ─── BADGES ADICIONALES ───────────────────────── */
+    .badge-integraciones { background: #ede9fe; color: #7c3aed; }
+    .badge-onboarding    { background: #dcfce7; color: #15803d; }
+
+    /* ─── TIPOGRAFÍA FORMULARIOS ───────────────────── */
+    select, input[type="number"], input[type="text"], input[type="email"] {
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      color: var(--text) !important;
+    }
+    label {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--text2) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta active">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html" class="active">Comparador EOR →</a>
+</div>
+
+<!-- ─── HERO ────────────────────────────────────────── -->
+<div class="hero-comp reveal">
+  <div class="badge">Comparador EOR · 7 plataformas · 12 países</div>
+  <h1>¿Qué plataforma EOR conviene<br/>para <span id="hero-pais-label">tu país</span>?</h1>
+  <p>Costo total real: salario + cargas del país + fee de la plataforma. Ordenado por precio, sin letra chica.</p>
+</div>
+
+<!-- ─── CONTROLES STICKY ─────────────────────────────── -->
+<div class="controls-sticky">
+  <div class="controls-inner">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-mode-1" onclick="setMode(1)">1 país</button>
+      <button class="mode-btn" id="btn-mode-3" onclick="setMode(3)">3 países</button>
+    </div>
+
+    <div class="controls-selects" id="selects-container">
+      <!-- poblado por JS -->
+    </div>
+
+    <div class="ctrl-group" style="max-width:140px;flex-shrink:0;">
+      <label>Salario USD/mes</label>
+      <div class="ctrl-salary-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="ctrl-salario" value="1200" min="100" max="50000" step="100"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CONTENIDO PRINCIPAL ──────────────────────────── -->
+<div class="main-content">
+
+  <!-- Bloque modo 1 país -->
+  <div id="bloque-1">
+    <div class="results-header reveal">
+      <div>
+        <div class="results-title" id="results-title-1">Seleccioná un país para ver las plataformas</div>
+        <div class="results-sub" id="results-sub-1"></div>
+      </div>
+    </div>
+    <div class="desglose-card" id="desglose-previo"></div>
+    <div class="eor-grid reveal" id="eor-grid"></div>
+  </div>
+
+  <!-- Bloque modo 3 países -->
+  <div id="bloque-3" style="display:none;">
+    <div class="results-header reveal">
+      <div class="results-title">Comparativa por plataforma en 3 países</div>
+      <div class="results-sub" id="results-sub-3"></div>
+    </div>
+    <div class="three-grid reveal" id="three-grid"></div>
+  </div>
+
+  <!-- Advertencia contractor -->
+  <div class="contractor-section reveal" id="contractor-block" style="display:none;">
+    <div class="contractor-header">
+      <div class="contractor-icon">⚠️</div>
+      <div>
+        <div class="contractor-title">¿Por qué no comparamos la opción contractor?</div>
+        <div class="contractor-sub" id="contractor-sub">Porque en este país el riesgo legal es alto.</div>
+      </div>
+    </div>
+    <div class="contractor-body" id="contractor-body">
+      <p>Contratar como contractor (facturación independiente) puede parecer más barato, pero expone a la empresa a un riesgo legal concreto: la <strong>reclasificación laboral</strong>.</p>
+      <p>Si existe subordinación de hecho — horarios fijos, exclusividad, dirección cotidiana del trabajo — los inspectores laborales pueden determinar que la relación es en realidad una relación de dependencia. El resultado: deuda retroactiva de cargas no pagadas, intereses y multas que pueden cubrir hasta 5 años hacia atrás.</p>
+      <p>No comparamos esa opción porque presentarla como alternativa de precio sería irresponsable. El costo real de un contractor mal clasificado es órdenes de magnitud mayor que cualquier ahorro mensual.</p>
+    </div>
+  </div>
+
+  <!-- Cuándo conviene abrir entidad -->
+  <div class="metodologia reveal" style="margin-bottom:16px;border-left:3px solid var(--blue);">
+    <h3>¿Cuándo conviene abrir entidad en vez de usar un EOR?</h3>
+    <p>El EOR tiene sentido mientras el costo del fee sea menor al costo de administrar una entidad local. El punto de equilibrio varía por país. Estimaciones de mercado para 2026 (Remofirst $199/mes como referencia):</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border-radius:var(--radius-sm);border:1px solid var(--border);">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:var(--bg);">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border);">País</th>
+            <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border);">Constitución</th>
+            <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border);">Mantenimiento/mes</th>
+            <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border);">Nº empl. punto equilibrio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇨🇱 Chile (SpA)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$1.500–$3.000</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$400–$700</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">4–6</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇨🇴 Colombia (SAS)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$1.500–$3.500</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$500–$800</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">4–7</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇲🇽 México (S. de R.L.)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$2.000–$4.000</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$600–$900</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">5–8</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇺🇾 Uruguay (SAS)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$2.000–$4.500</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$600–$1.000</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">6–9</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇦🇷 Argentina (SAS)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$2.500–$6.000</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$800–$1.500</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">8–12</td></tr>
+          <tr><td style="padding:10px 14px;font-weight:600;color:var(--text);">🇧🇷 Brasil (LTDA)</td><td style="padding:10px 14px;text-align:right;color:var(--text2);">$4.000–$9.000</td><td style="padding:10px 14px;text-align:right;color:#d97706;font-weight:600;">$1.200–$2.500</td><td style="padding:10px 14px;text-align:right;color:var(--blue);font-weight:700;">10–15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Fuentes: BizLatinHub, Easyco, PIL Services. Estimaciones de mercado — los costos reales varían según el tipo societario y el proveedor. <a href="entrada-06.html" style="color:var(--blue);font-weight:600;">Ver análisis completo en EOR para startups →</a></p>
+  </div>
+
+  <!-- Nota metodológica -->
+  <div class="metodologia reveal">
+    <h3>Cómo calculamos el costo total</h3>
+    <p><strong>Costo total = Salario acordado + Cargas del país + Fee mensual de la plataforma EOR.</strong> Las cargas incluyen aportes patronales, aguinaldo, vacaciones y todos los beneficios obligatorios calculados como provisión mensual real.</p>
+    <p>Los porcentajes de cargas provienen de fuentes oficiales (ministerios de trabajo, organismos de seguridad social) verificados al <strong>15/05/2026</strong>. Próxima revisión: 14/07/2026. Los fees de las plataformas son los publicados en sus sitios oficiales y pueden variar con descuentos por volumen.</p>
+    <p>Este comparador tiene fines informativos. El costo real puede variar según convenios colectivos, sector de actividad y situación particular de cada empleado. Siempre verificá con un asesor local antes de contratar.</p>
+  </div>
+
+</div>
+
+<!-- ─── MODAL ─────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-avatar" id="modal-avatar">NT</div>
+      <div class="modal-title-block">
+        <div class="modal-name" id="modal-name">Plataforma</div>
+        <div class="modal-desc" id="modal-desc">Descripción</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desglose">
+        <div class="modal-desglose-title">Desglose del costo mensual estimado</div>
+        <div class="modal-row">
+          <span class="modal-row-label">Salario acordado</span>
+          <span class="modal-row-value salary" id="modal-salario">—</span>
+        </div>
+        <div class="modal-row">
+          <span class="modal-row-label">Cargas del país <span id="modal-pais-tag" style="font-size:11px;color:var(--text3);"></span></span>
+          <span class="modal-row-value cargas" id="modal-cargas">—</span>
+        </div>
+        <div class="modal-row">
+          <span class="modal-row-label main">Fee plataforma EOR</span>
+          <span class="modal-row-value fee" id="modal-fee">—</span>
+        </div>
+        <div class="modal-sum-line">SALARIO + CARGAS + FEE =</div>
+        <div class="modal-total-row">
+          <span class="modal-total-label">Total mensual</span>
+          <div>
+            <div class="modal-total-value">
+              <span class="cur">$</span><span id="modal-total">—</span>
+            </div>
+            <div style="text-align:right;margin-top:4px;">
+              <span class="modal-pct-pill" id="modal-pct-pill"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-cta">
+        <a href="#" id="modal-cta-btn" target="_blank" rel="noopener" class="btn-modal-primary">
+          Ir a <span id="modal-cta-name">la plataforma</span> →
+        </a>
+        <div class="modal-afil-note">COCO EOR puede recibir una comisión si contratás este servicio. Los datos de costos son independientes de las plataformas.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="52" style="display:block;width:auto;">
+            <g transform="translate(30, 24)">
+              <rect x="0" y="0" width="42" height="42" rx="9" fill="#2a2a2a" stroke="#484848" stroke-width="1.5"/>
+              <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+            </g>
+          </svg>
+        </a>
+        <p>Comparador de plataformas EOR para contratar en LATAM. Simple y claro.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="index.html#calculadora">Calculadora EOR</a></li>
+            <li><a href="comparador.html">Comparador EOR</a></li>
+            <li><a href="guias.html">Guías por país</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guías</h4>
+          <ul>
+            <li><a href="guias.html#brasil">Brasil</a></li>
+            <li><a href="guias.html#argentina">Argentina</a></li>
+            <li><a href="guias.html#colombia">Colombia</a></li>
+            <li><a href="guias.html#mexico">México</a></li>
+            <li><a href="guias.html#chile">Chile</a></li>
+            <li><a href="guias.html">Ver todos →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 COCO Labs. Los datos de costos tienen fines informativos. No constituyen asesoramiento legal ni laboral. Verificá con un asesor local antes de contratar.</p>
+      <p style="color:#4a5a6a;font-size:11px;">Datos: 15/05/2026 · Revisión: 14/07/2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────────── -->
+<script>
+// ─── DATOS ──────────────────────────────────────────
+const PAISES = {
+  argentina:  { name:"Argentina",  flag:"🇦🇷", sobrecosto:36.5,  riesgoContractor:"Muy alto" },
+  brasil:     { name:"Brasil",     flag:"🇧🇷", sobrecosto:62.2,  riesgoContractor:"Muy alto" },
+  colombia:   { name:"Colombia",   flag:"🇨🇴", sobrecosto:34.2,  riesgoContractor:"Alto" },
+  mexico:     { name:"México",     flag:"🇲🇽", sobrecosto:29.9,  riesgoContractor:"Alto" },
+  chile:      { name:"Chile",      flag:"🇨🇱", sobrecosto:22.4,  riesgoContractor:"Moderado" },
+  peru:       { name:"Perú",       flag:"🇵🇪", sobrecosto:36.8,  riesgoContractor:"Alto" },
+  ecuador:    { name:"Ecuador",    flag:"🇪🇨", sobrecosto:32.98, riesgoContractor:"Muy alto" },
+  espana:     { name:"España",     flag:"🇪🇸", sobrecosto:32.1,  riesgoContractor:"Alto" },
+  panama:     { name:"Panamá",     flag:"🇵🇦", sobrecosto:30.42, riesgoContractor:"Moderado" },
+  uruguay:    { name:"Uruguay",    flag:"🇺🇾", sobrecosto:28.6,  riesgoContractor:"Moderado" },
+  paraguay:   { name:"Paraguay",   flag:"🇵🇾", sobrecosto:28.17, riesgoContractor:"Moderado" },
+  costa_rica: { name:"Costa Rica", flag:"🇨🇷", sobrecosto:39.05, riesgoContractor:"Muy alto" }
+};
+
+const PLATAFORMAS = [
+  { id:"native_teams", name:"Native Teams",  ini:"NT", tier:"Económico",  feeEOR:89,  feeLabel:"$79–99/mes",    urlAfil:"#", desc:"La opción más económica. Cobertura sólida en LATAM y Europa. Ideal para equipos que priorizan el costo por encima del soporte premium.", afil:"20% RevShare 12 meses", destacado:false, virtud:"Precio más bajo", virtudClass:"badge-cheapest" },
+  { id:"remofirst",    name:"Remofirst",      ini:"RF", tier:"Económico",  feeEOR:199, feeLabel:"$199/mes",      urlAfil:"#", desc:"Precio fijo sin sorpresas. Fuerte presencia en LATAM y Asia. Buen equilibrio entre precio y funcionalidades.", afil:"$500 CPA", destacado:false, virtud:"Fee fijo sin sorpresas", virtudClass:"badge-onboarding" },
+  { id:"multiplier",   name:"Multiplier",     ini:"MP", tier:"Mid-market", feeEOR:400, feeLabel:"$400/mes",      urlAfil:"#", desc:"Mejor soporte en español del mercado. Muy usado en equipos latinoamericanos. Plataforma intuitiva con cobertura regional destacada.", afil:"$3.000 CPA", destacado:true, destacadoLabel:"Mejor soporte en español", virtud:"Mejor soporte en español", virtudClass:"badge-destacado" },
+  { id:"lano",         name:"Lano",           ini:"LN", tier:"Mid-market", feeEOR:594, feeLabel:"~$594/mes",     urlAfil:"#", desc:"Plataforma europea con cobertura global. Fuerte en compliance de la Unión Europea. Buena opción para equipos con presencia en España.", afil:"€800 + €20/emp/mes", destacado:false, virtud:"Mejor para España/UE", virtudClass:"badge-integraciones" },
+  { id:"deel",         name:"Deel",           ini:"DL", tier:"Premium",    feeEOR:599, feeLabel:"$599/mes",      urlAfil:"#", desc:"El más reconocido del mercado. Integración completa con payroll global, equity y beneficios. La opción de referencia para empresas en crecimiento.", afil:"$1.500 CPA (PartnerStack)", destacado:false, virtud:"Mayor reconocimiento", virtudClass:"badge-integraciones" },
+  { id:"oyster",       name:"Oyster HR",      ini:"OY", tier:"Premium",    feeEOR:649, feeLabel:"$599–699/mes",  urlAfil:"#", desc:"Mejor experiencia del empleado. Fuerte en compliance global. Ideal para empresas que priorizan el employer branding y la experiencia del talento.", afil:"10% RevShare + $500", destacado:false, virtud:"Mejor experiencia de empleado", virtudClass:"badge-onboarding" },
+  { id:"remote",       name:"Remote",         ini:"RM", tier:"Premium",    feeEOR:649, feeLabel:"$599–699/mes",  urlAfil:"#", desc:"Referente en employer branding. Protección de IP incluida. Filosofía de employee-first con foco en equidad de beneficios globales.", afil:"15% RevShare 12 meses", destacado:false }
+];
+
+// ─── ESTADO ─────────────────────────────────────────
+let modo = 1;
+let paisActual = '';
+let paises3 = ['', '', ''];
+let salarioActual = 1200;
+let modalData = null;
+
+// ─── INIT ────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  poblarSelects();
+
+  // Leer ?pais= de la URL
+  const params = new URLSearchParams(window.location.search);
+  const paisUrl = params.get('pais');
+  if (paisUrl && PAISES[paisUrl]) {
+    paisActual = paisUrl;
+    const sel = document.getElementById('sel-pais-1');
+    if (sel) sel.value = paisUrl;
+  }
+
+  renderTodo();
+
+  // Salario
+  document.getElementById('ctrl-salario').addEventListener('input', () => {
+    salarioActual = parseFloat(document.getElementById('ctrl-salario').value) || 0;
+    renderTodo();
+  });
+
+  // Nav shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
+  // Reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+
+// ─── POBLAR SELECTS ──────────────────────────────────
+function poblarSelects() {
+  const orden = ['argentina','brasil','colombia','mexico','chile','peru','ecuador','espana','panama','uruguay','paraguay','costa_rica'];
+  const container = document.getElementById('selects-container');
+  container.innerHTML = '';
+
+  if (modo === 1) {
+    const g = document.createElement('div');
+    g.className = 'ctrl-group';
+    g.style.maxWidth = '220px';
+    g.innerHTML = `<label>País del empleado</label>
+      <select id="sel-pais-1">
+        <option value="">— Seleccioná un país —</option>
+        ${orden.map(k => `<option value="${k}" ${k === paisActual ? 'selected' : ''}>${PAISES[k].flag} ${PAISES[k].name}</option>`).join('')}
+      </select>`;
+    container.appendChild(g);
+
+    const sel = document.getElementById('sel-pais-1');
+    sel.addEventListener('change', () => { paisActual = sel.value; renderTodo(); });
+
+  } else {
+    [0, 1, 2].forEach(i => {
+      const g = document.createElement('div');
+      g.className = 'ctrl-group';
+      g.innerHTML = `<label>País ${i + 1}</label>
+        <select id="sel-pais-3-${i}">
+          <option value="">— País ${i + 1} —</option>
+          ${orden.map(k => `<option value="${k}" ${k === paises3[i] ? 'selected' : ''}>${PAISES[k].flag} ${PAISES[k].name}</option>`).join('')}
+        </select>`;
+      container.appendChild(g);
+      const sel = document.getElementById(`sel-pais-3-${i}`);
+      sel.addEventListener('change', () => { paises3[i] = sel.value; renderTodo(); });
+    });
+  }
+}
+
+// ─── CAMBIAR MODO ────────────────────────────────────
+function setMode(m) {
+  modo = m;
+  document.getElementById('btn-mode-1').classList.toggle('active', m === 1);
+  document.getElementById('btn-mode-3').classList.toggle('active', m === 3);
+  document.getElementById('bloque-1').style.display = m === 1 ? '' : 'none';
+  document.getElementById('bloque-3').style.display = m === 3 ? '' : 'none';
+  poblarSelects();
+  renderTodo();
+}
+
+// ─── RENDER PRINCIPAL ────────────────────────────────
+function renderTodo() {
+  if (modo === 1) render1();
+  else render3();
+}
+
+// ─── MODO 1 PAÍS ─────────────────────────────────────
+function render1() {
+  const grid = document.getElementById('eor-grid');
+  const titleEl = document.getElementById('results-title-1');
+  const subEl = document.getElementById('results-sub-1');
+  const contractorBlock = document.getElementById('contractor-block');
+
+  if (!paisActual || salarioActual < 1) {
+    grid.innerHTML = '<div class="empty-state">Seleccioná un país para ver las plataformas disponibles.</div>';
+    titleEl.textContent = 'Seleccioná un país para ver las plataformas';
+    subEl.textContent = '';
+    contractorBlock.style.display = 'none';
+    document.getElementById('hero-pais-label').textContent = 'tu país';
+    return;
+  }
+
+  const pais = PAISES[paisActual];
+  const costoLaboral = Math.round(salarioActual * (1 + pais.sobrecosto / 100));
+  const cargas = costoLaboral - Math.round(salarioActual);
+
+  // Header
+  titleEl.textContent = `${pais.flag} ${pais.name} · $${salarioActual.toLocaleString('es-AR')} USD/mes`;
+  subEl.innerHTML = `Costo laboral base (sin fee EOR): <strong>$${costoLaboral.toLocaleString('es-AR')}</strong> · incluye <span class="modal-pct-pill" style="font-size:11px;">${pais.sobrecosto}% en cargas</span>`;
+  document.getElementById('hero-pais-label').textContent = pais.name;
+
+  // Tarjeta desglose previo
+  const desgloseCard = document.getElementById('desglose-previo');
+  const fmtUSD = n => '$' + Math.round(n).toLocaleString('es-AR');
+  desgloseCard.innerHTML = `
+    <div class="desglose-card-title">📋 Costo de contratar en <span>${pais.flag} ${pais.name}</span> — antes del fee EOR</div>
+    <div class="desglose-row">
+      <span class="desglose-row-label">Salario bruto acordado</span>
+      <span class="desglose-row-value salary">${fmtUSD(salarioActual)} / mes</span>
+    </div>
+    <div class="desglose-row">
+      <span class="desglose-row-label">Cargas patronales + beneficios <span class="desglose-pct-pill">+${pais.sobrecosto}%</span></span>
+      <span class="desglose-row-value cargas">+ ${fmtUSD(cargas)} / mes</span>
+    </div>
+    <div class="desglose-row">
+      <span class="desglose-row-label"><strong>Costo laboral total (sin EOR)</strong></span>
+      <span class="desglose-row-value total">${fmtUSD(costoLaboral)} / mes</span>
+    </div>
+    <div class="desglose-row" style="border-top:2px solid var(--blue);margin-top:4px;padding-top:12px;">
+      <span class="desglose-row-label" style="color:var(--blue);font-weight:600;">Con plataforma EOR (fee desde $89)</span>
+      <span class="desglose-row-value total-eor">${fmtUSD(costoLaboral + 89)} – ${fmtUSD(costoLaboral + 649)} / mes</span>
+    </div>`;
+  desgloseCard.classList.add('visible');
+
+  // Ordenar plataformas por total ASC
+  const sorted = [...PLATAFORMAS].sort((a, b) => {
+    const ta = costoLaboral + a.feeEOR;
+    const tb = costoLaboral + b.feeEOR;
+    return ta - tb;
+  });
+
+  let html = '';
+  sorted.forEach((plat, idx) => {
+    const total = costoLaboral + plat.feeEOR;
+    const isCheapest = idx === 0;
+    const tierClass = { 'Económico': 'tier-economico', 'Mid-market': 'tier-midmarket', 'Premium': 'tier-premium' }[plat.tier] || '';
+
+    html += `<div class="eor-card${isCheapest ? ' cheapest' : ''}${plat.destacado ? ' destacado' : ''}"
+      onclick="abrirModal('${plat.id}','${paisActual}',${salarioActual})">`;
+
+    if (isCheapest) html += `<span class="card-top-badge badge-cheapest">💰 Más económico</span>`;
+    else if (plat.virtud) html += `<span class="card-top-badge ${plat.virtudClass}">${plat.virtud}</span>`;
+
+    html += `<div class="eor-avatar">${plat.ini}</div>`;
+
+    html += `<div class="eor-info">
+      <div class="eor-name">${plat.name}</div>
+      <div class="eor-desc">${plat.desc}</div>
+      <span class="eor-tier ${tierClass}">${plat.tier}</span>
+    </div>`;
+
+    html += `<div class="eor-fee">
+      <div class="eor-fee-amount">${plat.feeLabel}</div>
+      <div class="eor-fee-label">fee plataforma</div>
+    </div>`;
+
+    html += `<div class="eor-total-block">
+      <div class="eor-total"><span class="cur">$</span><span>${total.toLocaleString('es-AR')}</span></div>
+      <div class="eor-total-sub">costo total/mes</div>
+      <span class="eor-cta-arrow">Ver detalle →</span>
+    </div>`;
+
+    html += '</div>';
+  });
+
+  grid.innerHTML = html;
+
+  // Bloque contractor
+  contractorBlock.style.display = '';
+  document.getElementById('contractor-sub').textContent =
+    `Riesgo de reclasificación laboral: ${pais.riesgoContractor}.`;
+}
+
+// ─── MODO 3 PAÍSES ───────────────────────────────────
+function render3() {
+  const container = document.getElementById('three-grid');
+  const subEl = document.getElementById('results-sub-3');
+  const contractorBlock = document.getElementById('contractor-block');
+  contractorBlock.style.display = 'none';
+
+  const keys = paises3.filter(k => k);
+  if (keys.length === 0 || salarioActual < 1) {
+    container.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Seleccioná al menos un país para ver la comparativa.</div>';
+    subEl.textContent = '';
+    return;
+  }
+
+  subEl.textContent = `Salario base: $${salarioActual.toLocaleString('es-AR')} USD/mes`;
+
+  // Ordenar plataformas por fee ASC para mostrarlas siempre en el mismo orden
+  const sorted = [...PLATAFORMAS].sort((a, b) => a.feeEOR - b.feeEOR);
+
+  let html = '';
+
+  keys.forEach(key => {
+    const pais = PAISES[key];
+    const costoLaboral = Math.round(salarioActual * (1 + pais.sobrecosto / 100));
+
+    // Para cada país calcular totales y el más barato
+    const totalesPais = sorted.map(p => costoLaboral + p.feeEOR);
+    const minTotal = Math.min(...totalesPais);
+
+    html += `<div>`;
+    html += `<div class="three-col-header">
+      <div class="three-flag-name">
+        <span class="three-flag">${pais.flag}</span>
+        <span class="three-country">${pais.name}</span>
+      </div>
+      <div style="font-size:12px;color:var(--text3);">
+        Costo laboral base: <strong style="color:var(--text2);">$${costoLaboral.toLocaleString('es-AR')}</strong>
+        <span class="modal-pct-pill" style="font-size:10px;margin-left:4px;">${pais.sobrecosto}% cargas</span>
+      </div>
+    </div>`;
+
+    html += `<div class="three-col-eor" style="margin-top:8px;">`;
+    sorted.forEach(plat => {
+      const total = costoLaboral + plat.feeEOR;
+      const isCheapest = total === minTotal;
+      html += `<div class="three-eor-card${isCheapest ? ' cheapest' : ''}"
+        onclick="abrirModal('${plat.id}','${key}',${salarioActual})">
+        <div class="three-eor-name">${plat.ini} ${plat.name}${isCheapest ? ' ✓' : ''}</div>
+        <div class="three-eor-total"><span class="cur">$</span><span>${total.toLocaleString('es-AR')}</span></div>
+        <div class="three-eor-sub">fee: ${plat.feeLabel}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
+  container.style.gridTemplateColumns = `repeat(${keys.length}, 1fr)`;
+  if (window.innerWidth <= 768) container.style.gridTemplateColumns = '1fr';
+}
+
+// ─── MODAL ───────────────────────────────────────────
+function abrirModal(platId, paisKey, salario) {
+  const plat = PLATAFORMAS.find(p => p.id === platId);
+  const pais = PAISES[paisKey];
+  if (!plat || !pais) return;
+
+  const costoLaboral = Math.round(salario * (1 + pais.sobrecosto / 100));
+  const cargas = costoLaboral - Math.round(salario);
+  const total = costoLaboral + plat.feeEOR;
+
+  document.getElementById('modal-avatar').textContent = plat.ini;
+  document.getElementById('modal-name').textContent = plat.name;
+  document.getElementById('modal-desc').textContent = plat.desc;
+  document.getElementById('modal-pais-tag').textContent = `· ${pais.flag} ${pais.name} (${pais.sobrecosto}%)`;
+  document.getElementById('modal-salario').textContent = `$${Math.round(salario).toLocaleString('es-AR')}`;
+  document.getElementById('modal-cargas').textContent = `+$${cargas.toLocaleString('es-AR')}`;
+  document.getElementById('modal-fee').textContent = `+${plat.feeLabel}`;
+  document.getElementById('modal-total').textContent = total.toLocaleString('es-AR');
+  document.getElementById('modal-pct-pill').textContent = `incluye ${pais.sobrecosto}% en cargas`;
+  document.getElementById('modal-cta-btn').href = plat.urlAfil;
+  document.getElementById('modal-cta-name').textContent = plat.name;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) cerrarModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+</script>
+
+</body>
+</html>

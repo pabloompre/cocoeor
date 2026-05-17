@@ -1,0 +1,2692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COCO EOR — Cuánto cuesta contratar en LATAM</title>
+  <meta name="description" content="Calculá el costo real de contratar talento en 12 países de LATAM. Comparamos 7 plataformas EOR con datos verificados. Simple y claro."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0099FF;
+      --blue-dark:  #007ACC;
+      --blue-light: #e8f2ff;
+      --blue-mid:   #4da6ff;
+      --bg:         #f8f9fb;
+      --bg-card:    #ffffff;
+      --text:       #0a0a0a;
+      --text2:      #4a5568;
+      --text3:      #9aa5b0;
+      --border:     #e2e8f0;
+      --border2:    #c8d8ea;
+      --green:      #00b341;
+      --amber:      #f59e0b;
+      --red:        #ef4444;
+      --sans:       'Space Grotesk', sans-serif;
+      --heading:    'Plus Jakarta Sans', sans-serif;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow:     0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg:  0 12px 40px rgba(0,153,255,0.12);
+      --radius:     12px;
+      --radius-sm:  8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,249,251,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .nav-logo a {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo a:hover { opacity: 0.85; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .nav-links a.active {
+      color: var(--blue);
+      font-weight: 600;
+      background: var(--blue-light);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 2.5px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: #fff !important;
+      padding: 9px 20px !important;
+      border-radius: 9px !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+      box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-dark) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 16px rgba(0,153,255,0.35) !important;
+    }
+
+    .nav-cta.active { background: var(--blue-dark) !important; }
+
+    .nav-social {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-social a:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .hamburger:hover { background: var(--blue-light); }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px 20px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      animation: slideDown 0.25s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 12px 12px;
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .mobile-menu a.active {
+      color: var(--blue);
+      font-weight: 600;
+      background: var(--blue-light);
+    }
+
+    /* ─── HERO ────────────────────────────────────── */
+    /* ─── HERO ────────────────────────────────────── */
+    .hero-wrapper {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero {
+      padding: 80px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,153,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border2);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text2);
+      line-height: 1.65;
+      max-width: 460px;
+      margin-bottom: 32px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-num {
+      font-family: var(--heading);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .countries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 340px;
+      width: 100%;
+    }
+
+    .country-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .country-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .country-flag { font-size: 18px; line-height: 1; }
+    .country-name { font-size: 11px; font-weight: 600; color: var(--text); }
+    .country-pct  { font-size: 10px; font-weight: 600; }
+    .country-pct.high { color: var(--red); }
+    .country-pct.mid  { color: var(--amber); }
+    .country-pct.low  { color: var(--green); }
+
+    /* ─── BOTÓN CONVERSIÓN ───────────────────────── */
+    .btn-conv {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,153,255,0.28);
+    }
+    .btn-conv:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,153,255,0.35);
+    }
+
+    /* ─── SECTION COMMONS ─────────────────────────── */
+
+    section { padding: 64px 24px; }
+
+    .container { max-width: 960px; margin: 0 auto; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .section-header h2 {
+      font-family: var(--heading);
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    #calculadora { background: var(--bg); }
+
+    .calc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-mid), #6ec6ff);
+    }
+
+    .calc-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+      letter-spacing: 0.01em;
+    }
+
+    .form-group select,
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-family: var(--sans);
+      border: 1.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239aa5b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.12);
+    }
+
+    .input-prefix {
+      position: relative;
+    }
+
+    .input-prefix .prefix-label {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text3);
+      pointer-events: none;
+    }
+
+    .input-prefix input {
+      padding-left: 32px !important;
+    }
+
+    /* Resultado calculadora */
+    .calc-result {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e4f0ff 100%);
+      border: 1.5px solid rgba(0,153,255,0.25);
+      border-radius: var(--radius);
+      padding: 28px 28px 20px;
+      margin-bottom: 20px;
+      display: none;
+      box-shadow: 0 4px 20px rgba(0,153,255,0.08);
+    }
+
+    .calc-result.visible { display: block; }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .result-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .result-country {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .result-amount {
+      font-family: var(--heading);
+      font-size: clamp(48px, 8vw, 68px);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -0.03em;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .result-amount.updating { color: var(--blue); }
+
+    .result-amount .currency {
+      font-size: 0.52em;
+      color: var(--text2);
+      font-weight: 700;
+      line-height: 1;
+      padding-bottom: 4px;
+    }
+
+    .result-per {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .result-pct-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(245,158,11,0.12);
+      color: #b45309;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+
+    .result-breakdown-preview {
+      display: flex;
+      gap: 0;
+      background: rgba(255,255,255,0.6);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(0,153,255,0.12);
+    }
+
+    .breakdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      padding: 12px 14px;
+    }
+
+    .breakdown-item + .breakdown-item {
+      border-left: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .breakdown-value {
+      font-family: var(--heading);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1;
+      transition: all 0.3s;
+    }
+
+    .breakdown-value.v-salary  { color: var(--text2); }
+    .breakdown-value.v-cargas  { color: #d97706; }
+    .breakdown-value.v-pct     { color: var(--blue); font-size: 17px; }
+
+    .breakdown-label {
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    /* Gate para desglose completo */
+    .gate-block {
+      border: 1.5px dashed var(--border2);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .gate-block.visible { display: block; }
+
+    .gate-intro {
+      font-size: 14px;
+      color: var(--text2);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .gate-intro strong { color: var(--text); }
+
+    .gate-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      width: 100%;
+    }
+
+    .btn-primary:hover { background: var(--blue-dark); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--blue);
+      border: 1.5px solid var(--blue);
+    }
+
+    .btn-outline:hover { background: var(--blue-light); }
+
+    /* Desglose completo */
+    .desglose-completo {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .desglose-completo.visible { display: block; }
+
+    .desglose-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .desglose-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .desglose-table td {
+      padding: 10px 0;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    /* Columna izquierda — nombre del ítem */
+    .desglose-table .td-item {
+      color: var(--text2);
+    }
+
+    .desglose-table .td-item .item-name {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .desglose-table .td-item .item-pct {
+      font-size: 11px;
+      color: var(--text3);
+      margin-left: 4px;
+    }
+
+    .desglose-table .td-item .item-nota {
+      display: block;
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 1px;
+    }
+
+    /* Badge variable */
+    .badge-variable {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(245,158,11,0.12);
+      color: #92400e;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    /* Columna derecha — monto */
+    .desglose-table .td-monto {
+      text-align: right;
+      font-weight: 700;
+      color: #d97706;   /* ámbar — son cargas, costo adicional */
+      white-space: nowrap;
+    }
+
+    /* Fila salario base */
+    .desglose-table .row-salario .td-item .item-name { color: var(--text2); font-weight: 400; }
+    .desglose-table .row-salario .td-monto { color: var(--text2); font-weight: 600; }
+
+    /* Fila total */
+    .desglose-table .total-row td {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      border-top: 2px solid var(--text);
+      border-bottom: none;
+      padding-top: 14px;
+    }
+
+    .desglose-table .total-row .td-monto {
+      color: var(--text);
+    }
+
+    /* Nota variable debajo de la tabla */
+    .nota-variable {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(245,158,11,0.08);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 12px;
+      color: #92400e;
+      line-height: 1.5;
+    }
+
+    /* Alertas dentro del desglose */
+    .alerta {
+      display: flex;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .alerta.bad {
+      background: #fff1f1;
+      border-left: 3px solid var(--red);
+      color: #7f1d1d;
+    }
+
+    .alerta.warn {
+      background: #fffbeb;
+      border-left: 3px solid var(--amber);
+      color: #78350f;
+    }
+
+    .alerta.info {
+      background: var(--blue-light);
+      border-left: 3px solid var(--blue);
+      color: #1e40af;
+    }
+
+    /* CTA post-cálculo */
+    .cta-post-calc {
+      display: none;
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      margin-top: 16px;
+      text-decoration: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+
+    .cta-post-calc.visible { display: flex; }
+    .cta-post-calc:hover { background: var(--blue-dark); }
+
+    .cta-post-calc-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .cta-post-calc-arrow {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Toggle desglose */
+    .toggle-desglose {
+      background: none;
+      border: none;
+      color: var(--blue);
+      font-size: 14px;
+      font-family: var(--sans);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+    }
+
+    /* ─── COMPARATIVA 3 PAÍSES ────────────────────── */
+    #comparativa { background: #f0f5fa; }
+
+    .comp3-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 28px;
+      background: var(--bg-card);
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .comp3-salary {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comp3-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .comp3-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 18px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+      position: relative;
+    }
+
+    .comp3-card.cheapest {
+      border-color: var(--green);
+      box-shadow: 0 0 0 1px var(--green);
+    }
+
+    .comp3-card.priciest {
+      border-color: var(--amber);
+    }
+
+    .comp3-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .badge-cheap {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .badge-pricey {
+      background: var(--amber);
+      color: #fff;
+    }
+
+    .comp3-flag-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .comp3-flag {
+      font-size: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .comp3-country {
+      font-family: var(--heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .comp3-total {
+      font-family: var(--heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 2px;
+      letter-spacing: -0.02em;
+    }
+
+    .comp3-total-block {
+      margin-bottom: 16px;
+    }
+
+    .comp3-total {
+      font-family: var(--heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .comp3-total-sub {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+    }
+
+    .comp3-pct-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(245,158,11,0.12);
+      color: #b45309;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+
+    .comp3-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comp3-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .comp3-item-label {
+      color: var(--text3);
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    .comp3-item-value {
+      font-weight: 700;
+      color: var(--text2);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .comp3-item-value.salary { color: var(--text2); }
+    .comp3-item-value.cargas { color: var(--amber); }
+    .comp3-item-value.complejidad { color: var(--text2); font-weight: 600; font-size: 12px; }
+    .comp3-item-value.riesgo { color: var(--text3); font-weight: 500; font-size: 12px; }
+
+    .comp3-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 6px 0;
+    }
+
+    .comp3-cta {
+      display: block;
+      margin-top: 16px;
+      padding: 11px 14px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .comp3-cta:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .comp3-empty {
+      text-align: center;
+      color: var(--text3);
+      font-size: 14px;
+      padding: 16px;
+    }
+
+    /* ─── CÓMO FUNCIONA ───────────────────────────── */
+    #como-funciona { background: var(--bg); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      color: #fff;
+      font-weight: 800;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-family: var(--heading);
+      box-shadow: 0 4px 12px rgba(0,153,255,0.3);
+    }
+
+    .step-card h3 {
+      font-family: var(--heading);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .step-card p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ─── CÓMO CALCULAMOS ─────────────────────────── */
+    #como-funciona { background: var(--bg); }
+
+    .metodo-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .metodo-cards { grid-template-columns: 1fr; }
+    }
+
+    .metodo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metodo-num {
+      width: 40px; height: 40px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--heading);
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .metodo-card h3 {
+      font-family: var(--heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .metodo-card p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ─── TRANSPARENCIA ────────────────────────────── */
+    #metodologia {
+      background: #111827;
+      color: #fff;
+    }
+
+    .metod-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .metod-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .metod-left h2 {
+      font-family: var(--heading);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .accent-text { color: var(--blue); }
+
+    .metod-left p {
+      font-size: 15px;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    .metod-list {
+      list-style: none;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .metod-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+
+    .check {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .disclaimer-box {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .disclaimer-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    .disclaimer-text {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    .disclaimer-badge {
+      margin-top: 16px;
+      display: inline-block;
+      background: rgba(0,153,255,0.15);
+      border: 1px solid rgba(0,153,255,0.3);
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ─── FAQ ──────────────────────────────────────── */
+    #faq { background: var(--bg-card); }
+
+    .faq-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg-card);
+      transition: box-shadow 0.2s;
+    }
+
+    .faq-item.open { box-shadow: var(--shadow); }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+      transition: background 0.15s;
+    }
+
+    .faq-q:hover { background: var(--blue-light); }
+
+    .faq-icon {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      padding: 0 20px;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 20px 18px;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: #0a0f1a;
+      color: #8a9ab0;
+      padding: 48px 24px 32px;
+    }
+
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #6a7a8a;
+      margin-top: 12px;
+      max-width: 300px;
+    }
+
+    .footer-links-group {
+      display: flex;
+      gap: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4a5a6a;
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: #8a9ab0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--blue); }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid #1e2a3a;
+      color: #6a7a8a;
+      transition: all 0.2s;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e2a3a;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: #4a5a6a;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* ─── FEEDBACK GATE ───────────────────────────── */
+    .gate-success {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .gate-success.visible { display: block; }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+
+      .nav-links { display: none; }
+      .nav-social { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 48px 16px 40px; }
+      .hero-stats { gap: 32px; }
+
+      section { padding: 48px 16px; }
+
+      .calc-card { padding: 24px 20px; }
+      .calc-controls { grid-template-columns: 1fr; }
+
+      .gate-form { grid-template-columns: 1fr; }
+
+      .comp3-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .comp3-cards { grid-template-columns: 1fr !important; }
+
+      .steps { grid-template-columns: 1fr; }
+
+      .footer-top { flex-direction: column; gap: 28px; }
+      .footer-links-group { flex-wrap: wrap; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .stat-num { font-size: 26px; }
+      .result-amount { font-size: 34px; }
+    }
+
+    /* ─── SCROLL REVEAL ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+    /* ─── NOTA DATOS ──────────────────────────────── */
+    .data-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 16px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .data-note svg { flex-shrink: 0; }
+
+    /* ─── COMPLEJIDAD BADGE ───────────────────────── */
+    .complejidad-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+
+    .complejidad-muy-alta { background: #fff1f1; color: #dc2626; }
+    .complejidad-alta { background: #fffbeb; color: #d97706; }
+    .complejidad-media-alta { background: #fff7ed; color: #ea580c; }
+    .complejidad-media { background: #f0fdf4; color: #16a34a; }
+
+    /* ─── TIPOGRAFÍA FORMULARIOS ───────────────────── */
+    select, input[type="number"], input[type="text"], input[type="email"] {
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      color: var(--text) !important;
+    }
+    label, .form-group label, .field label, .ctrl-group label {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--text2) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="guias.html">Guías</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Menú mobile -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#calculadora" onclick="closeMobile()">Calculadora</a>
+  <a href="guias.html">Guías</a>
+  <a href="blog.html">Blog</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<!-- ─── HERO ────────────────────────────────────────── -->
+<div class="hero-wrapper">
+<section id="inicio" class="hero reveal">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Datos verificados · 15/05/2026
+        </div>
+        <h1>El costo real de contratar<br/>en <span>LATAM</span> y España</h1>
+        <p>Cargas patronales, aguinaldo, vacaciones y salario mínimo de 12 países, verificados desde fuentes oficiales. Sin estimaciones ni datos de marketing.</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">12</div>
+            <div class="stat-label">países</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7</div>
+            <div class="stat-label">plataformas EOR</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+62%</div>
+            <div class="stat-label">sobrecosto máx. (Brasil)</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="countries-grid" id="hero-countries-grid">
+          <!-- Generado por JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ─── CALCULADORA ─────────────────────────────────── -->
+<section id="calculadora">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Calculadora</span>
+      <h2>¿Cuánto te cuesta realmente contratar?</h2>
+      <p>El salario acordado es solo una parte del costo. Las cargas patronales, aguinaldo y vacaciones pueden sumar hasta un 62% más.</p>
+    </div>
+
+    <div class="calc-card reveal">
+      <div class="calc-controls">
+        <div class="form-group">
+          <label for="calc-pais">País del empleado</label>
+          <select id="calc-pais">
+            <option value="">— Seleccioná un país —</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="calc-salario">Salario mensual (USD)</label>
+          <div class="input-prefix">
+            <span class="prefix-label">$</span>
+            <input type="number" id="calc-salario" placeholder="1.200" min="100" max="50000" step="100" value="1200"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultado parcial (siempre visible al seleccionar) -->
+      <div class="calc-result" id="calc-result">
+        <div class="result-header">
+          <span class="result-label">Costo total mensual estimado</span>
+          <span class="result-country" id="result-country-label"></span>
+        </div>
+        <div class="result-amount" id="result-amount"><span class="currency">$</span>—</div>
+        <div class="result-per" id="result-per">costo real/mes · cargas incluidas</div>
+        <div class="result-breakdown-preview">
+          <div class="breakdown-item">
+            <div class="breakdown-value v-salary" id="result-salario-display">—</div>
+            <div class="breakdown-label">Salario acordado</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-value v-cargas" id="result-cargas-display">—</div>
+            <div class="breakdown-label">Cargas incluidas</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-value v-pct" id="result-pct-display">—</div>
+            <div class="breakdown-label">Ya incluido en total</div>
+          </div>
+        </div>
+        <button class="toggle-desglose" id="btn-toggle-desglose">
+          Ver desglose completo ▾
+        </button>
+        <div id="calc-cta-comparador" style="display:none;margin-top:16px;text-align:center;">
+          <a href="comparador.html" class="btn-conv">
+            Comparar plataformas EOR para este país →
+          </a>
+        </div>
+      </div>
+
+      <!-- Desglose completo (requiere gate) -->
+      <div class="desglose-completo" id="desglose-completo">
+        <div id="desglose-tabla-wrapper"></div>
+        <div id="desglose-alertas"></div>
+      </div>
+
+      <!-- Gate para desglose -->
+      <div class="gate-block" id="gate-calc">
+        <div class="gate-intro">
+          <strong>Recibí el desglose completo por email.</strong><br/>
+          Ítem por ítem: INSS, FGTS, aguinaldo, vacaciones y todos los aportes del país seleccionado.
+        </div>
+        <div class="gate-form">
+          <div class="form-group">
+            <label for="gate-nombre">Tu nombre</label>
+            <input type="text" id="gate-nombre" placeholder="Juan García"/>
+          </div>
+          <div class="form-group">
+            <label for="gate-email">Email</label>
+            <input type="email" id="gate-email" placeholder="juan@empresa.com"/>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-gate-calc" style="margin-top:12px;">
+          Ver desglose completo →
+        </button>
+        <div class="gate-success" id="gate-success">
+          ✓ ¡Listo! Desglose desbloqueado.
+        </div>
+      </div>
+
+      <!-- CTA post-cálculo -->
+      <a href="comparador.html" class="cta-post-calc" id="cta-post-calc">
+        <div class="cta-post-calc-text" id="cta-post-calc-text">
+          ¿Querés contratar en este país? Compará las plataformas EOR disponibles
+        </div>
+        <div class="cta-post-calc-arrow">→</div>
+      </a>
+
+      <div class="data-note">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Datos verificados en fuentes oficiales al 15/05/2026. Próxima revisión: 14/07/2026.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPARATIVA 3 PAÍSES ────────────────────────── -->
+<section id="comparativa">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Comparativa</span>
+      <h2>Comparar hasta 3 países</h2>
+      <p>Elegí los países y el salario para ver el costo total lado a lado.</p>
+    </div>
+
+    <div class="comp3-controls reveal">
+      <div class="form-group">
+        <label>País 1</label>
+        <select id="comp3-p1" class="comp3-select">
+          <option value="">— País 1 —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>País 2</label>
+        <select id="comp3-p2" class="comp3-select">
+          <option value="">— País 2 —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>País 3</label>
+        <select id="comp3-p3" class="comp3-select">
+          <option value="">— País 3 —</option>
+        </select>
+      </div>
+      <div class="comp3-salary form-group">
+        <label>Salario (USD/mes)</label>
+        <div class="input-prefix">
+          <span class="prefix-label">$</span>
+          <input type="number" id="comp3-salario" value="1200" min="100" max="50000" step="100"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp3-cards reveal" id="comp3-cards">
+      <div class="comp3-empty" style="grid-column:1/-1">Seleccioná al menos un país para ver la comparativa.</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:32px;padding-bottom:8px;">
+    <a href="comparador.html" class="btn-conv">
+      Ver comparativa de plataformas EOR con fee incluido →
+    </a>
+  </div>
+</section>
+
+<!-- ─── CÓMO CALCULAMOS ─────────────────────────────── -->
+<section id="como-funciona">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Metodología</span>
+      <h2>Cómo calculamos el costo</h2>
+      <p>Todos los datos se verifican directamente desde fuentes oficiales, nunca desde proveedores ni estimaciones.</p>
+    </div>
+    <div class="metodo-cards reveal">
+      <div class="metodo-card">
+        <div class="metodo-num">1</div>
+        <h3>Cargas patronales verificadas</h3>
+        <p>Cada porcentaje se extrae del organismo oficial: CCSS en Costa Rica, IESS en Ecuador, IPS en Paraguay, y equivalentes en cada país. Sin datos de terceros.</p>
+      </div>
+      <div class="metodo-card">
+        <div class="metodo-num">2</div>
+        <h3>Beneficios obligatorios incluidos</h3>
+        <p>Aguinaldo, vacaciones pagadas y cualquier otro beneficio mandatorio legal se suman al costo real. Lo que los comparadores de EOR suelen omitir.</p>
+      </div>
+      <div class="metodo-card">
+        <div class="metodo-num">3</div>
+        <h3>Revisión cada 60 días</h3>
+        <p>Los datos se actualizan con cada cambio normativo relevante. Próxima revisión: 14/07/2026. Cada resultado muestra la fecha de última verificación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRANSPARENCIA ─────────────────────────────────── -->
+<section id="metodologia">
+  <div class="container">
+    <div class="metod-inner reveal">
+      <div class="metod-left">
+        <h2>La <span class="accent-text">transparencia</span> es la diferencia</h2>
+        <p>Ningún comparador de EOR en español dice cuánto cuesta realmente contratar. Muestran el fee de la plataforma, pero ocultan el sobrecosto laboral real del país.</p>
+        <p style="margin-top:12px;">COCO EOR muestra el número completo: salario bruto + cargas + aguinaldo + todo lo que tu empresa efectivamente paga.</p>
+        <ul class="metod-list">
+          <li><span class="check">✓</span> Datos de ministerios y organismos oficiales, no de plataformas</li>
+          <li><span class="check">✓</span> Sin números aproximados ni "varía según caso"</li>
+          <li><span class="check">✓</span> Alertas de reclasificación laboral y riesgo legal por país</li>
+          <li><span class="check">✓</span> Comparativa honesta de plataformas EOR con fees reales</li>
+          <li><span class="check">✓</span> Simple y claro. — COCO EOR</li>
+        </ul>
+      </div>
+      <div class="metod-right">
+        <div class="disclaimer-box">
+          <div class="disclaimer-title">Aviso sobre los datos</div>
+          <div class="disclaimer-text">
+            Los porcentajes de cargas patronales son estables (cambian raramente, generalmente por decreto anual). Los salarios mínimos en países con moneda propia fluctúan en USD según el tipo de cambio vigente.<br><br>
+            Los cálculos de costo total son modelos de referencia sobre una base de $1.200 USD/mes de salario bruto. No incluyen costos de onboarding ni fees de plataformas EOR.<br><br>
+            Argentina: el SMVM se actualiza mensualmente por esquema escalonado. El equivalente en USD varía con el tipo de cambio oficial BNA.<br><br>
+            COCO EOR no es asesor legal ni contable. Para decisiones de contratación, consultá a un especialista en derecho laboral local.
+          </div>
+          <div class="disclaimer-badge">🗓 Próxima revisión obligatoria: 14/07/2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─────────────────────────────────────────────── -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Preguntas frecuentes</span>
+      <h2>Lo que necesitás saber</h2>
+    </div>
+    <div class="faq-grid reveal">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué es un EOR (Employer of Record)?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Un EOR es una empresa que contrata legalmente a tu empleado en su nombre, en el país donde ese empleado vive. Vos seguís dirigiendo el trabajo, pero el EOR figura como empleador legal: paga las cargas, gestiona los beneficios y asume la responsabilidad de cumplimiento laboral. Así podés contratar en 12 países sin abrir una entidad legal en cada uno.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Por qué no puedo contratar como contractor y listo?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Podés, pero tiene un riesgo legal concreto: si hay subordinación de hecho (horarios fijos, dirección cotidiana, exclusividad), los inspectores laborales de Brasil, Ecuador, Argentina y la mayoría de los países de LATAM pueden reclasificar esa relación como relación de dependencia. El resultado es deuda retroactiva de hasta 5 años de cargas no pagadas, más intereses y multas.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Los porcentajes de sobrecosto son exactos?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Son los porcentajes legales verificados en fuentes oficiales. En la práctica, el costo real puede ser mayor en sectores con convenios colectivos, actividades de alto riesgo laboral o países con alta volatilidad regulatoria. Los valores que mostramos son el piso legal, no el máximo posible.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué diferencia a las 7 plataformas EOR?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Precio (de $89 a $649/mes por empleado), cobertura geográfica, calidad del soporte y velocidad de onboarding. Native Teams y Remofirst son las opciones más económicas. Deel y Remote son las más reconocidas. Multiplier tiene el mejor soporte en español para equipos latinoamericanos. Podés ver la comparativa completa en el <a href="comparador.html" style="color:var(--blue);font-weight:600;">Comparador EOR →</a>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿COCO EOR tiene afiliación con las plataformas que compara?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Sí, y lo decimos explícitamente. Si hacés clic en una plataforma y contratás su servicio, COCO EOR recibe una comisión de afiliado. Eso no cambia los datos que mostramos — los costos de cargas patronales vienen de fuentes oficiales, no de las plataformas. El comparador ordena por precio total real, no por comisión.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa si el país donde quiero contratar no está en la lista?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          La primera versión cubre 12 países de LATAM + España. Estamos trabajando en expandir la cobertura. Si necesitás un país específico, escribinos por Instagram o X y priorizamos esa investigación para la próxima actualización.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <!-- Logo A dark -->
+        <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+            <g transform="translate(30, 24)">
+              <rect x="0" y="0" width="42" height="42" rx="9" fill="#2a2a2a" stroke="#484848" stroke-width="1.5"/>
+              <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+            </g>
+          </svg>
+        </a>
+        <p>Comparador de costos laborales y plataformas EOR para contratar en LATAM. Simple y claro.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener" title="X">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="#calculadora">Calculadora EOR</a></li>
+            <li><a href="comparador.html">Comparador EOR</a></li>
+            <li><a href="guias.html">Guías por país</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guías</h4>
+          <ul>
+            <li><a href="guias.html#brasil">Brasil</a></li>
+            <li><a href="guias.html#argentina">Argentina</a></li>
+            <li><a href="guias.html#colombia">Colombia</a></li>
+            <li><a href="guias.html#mexico">México</a></li>
+            <li><a href="guias.html#chile">Chile</a></li>
+            <li><a href="guias.html">Ver todos →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 COCO Labs. Los datos de sobrecostos patronales provienen de fuentes oficiales y tienen fines informativos. No constituyen asesoramiento legal ni laboral. Verificá siempre con un asesor local antes de contratar.</p>
+      <p style="color:#4a5a6a;font-size:11px;">Datos base: 15/05/2026 · Revisión: 14/07/2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────────── -->
+<script>
+// ─── DATOS ──────────────────────────────────────────
+const PAISES = {
+  brasil:     { name:"Brasil",      flag:"🇧🇷", sobrecosto:62.2,  complejidad:"Muy Alta",   riesgoContractor:"Muy alto",
+    desglose:[
+      { item:"INSS patronal",                    pct:20,    nota:"variable según actividad" },
+      { item:"RAT/SAT (riesgo trabajo)",          pct:3,     nota:"1–3% según sector" },
+      { item:"FGTS (fondo antigüedad)",           pct:8 },
+      { item:"Sistema S (SENAI/SESI)",            pct:5.8 },
+      { item:"13° salário (aguinaldo)",           pct:8.33,  nota:"1/12 por mes" },
+      { item:"Vacaciones + 1/3 constitucional",   pct:11.1 },
+      { item:"Otras contribuciones",              pct:5.97 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"Reclasificación laboral: riesgo muy alto. Inspecciones SRTE frecuentes. Deuda retroactiva hasta 5 años." },
+      { tipo:"warn", msg:"La CLT es extremadamente protectora. El 62% puede subestimarse en sectores de alto riesgo." },
+      { tipo:"info", msg:"Fuentes: Receita Federal, INSS, FGTS/CAIXA, MTE. Verificado 15/05/2026." }
+    ]
+  },
+  costa_rica: { name:"Costa Rica",  flag:"🇨🇷", sobrecosto:39.05, complejidad:"Alta",        riesgoContractor:"Muy alto",
+    desglose:[
+      { item:"CCSS SEM (enfermedad-maternidad)",   pct:9.25 },
+      { item:"CCSS IVM (invalidez-vejez-muerte)",  pct:5.58 },
+      { item:"FODESAF",                            pct:5.00 },
+      { item:"INA (capacitación)",                 pct:1.50 },
+      { item:"IMAS",                               pct:0.50 },
+      { item:"Banco Popular",                      pct:0.50 },
+      { item:"ROP (pensión complementaria)",       pct:1.50 },
+      { item:"FCL (fondo capitalización laboral)",  pct:3.00, nota:"depósito mensual en cuenta del trabajador" },
+      { item:"Aguinaldo (1 mes)",                  pct:8.33,  nota:"pago 1–20 diciembre" },
+      { item:"Vacaciones (14 días/50 semanas)",    pct:3.85 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"CCSS cobra retroactivo con intereses si detecta relación laboral no declarada. Control estricto." },
+      { tipo:"warn", msg:"FCL se deposita mensualmente en cuenta del trabajador — no es diferido, suma al costo mensual." },
+      { tipo:"info", msg:"Fuentes: CCSS, MTSS, Decreto N°45303-MTSS. Verificado 15/05/2026." }
+    ]
+  },
+  peru:       { name:"Perú",        flag:"🇵🇪", sobrecosto:36.8,  complejidad:"Alta",        riesgoContractor:"Alto",
+    desglose:[
+      { item:"EsSalud (seguro salud)",             pct:9 },
+      { item:"Gratificaciones (2/año)",            pct:16.67, nota:"julio y diciembre" },
+      { item:"CTS (compensación tiempo servicio)", pct:8.33,  nota:"depósito semestral" },
+      { item:"Vacaciones (30 días/año)",           pct:8.33 },
+      { item:"Otras cargas",                       pct:3.67 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"La CTS es intangible — debe depositarse en banco designado. Incumplimiento genera intereses legales." },
+      { tipo:"info", msg:"Fuentes: SUNAFIL, ESSALUD, Ministerio de Trabajo Perú. Verificado 15/05/2026." }
+    ]
+  },
+  argentina:  { name:"Argentina",   flag:"🇦🇷", sobrecosto:36.5,  complejidad:"Muy Alta",   riesgoContractor:"Muy alto",
+    desglose:[
+      { item:"ANSES (jubilaciones)",               pct:10.17 },
+      { item:"Obra Social",                        pct:6.00 },
+      { item:"ART (riesgo trabajo)",               pct:2.00,  nota:"variable según sector" },
+      { item:"ANSSAL / INSSJP / FONASA",           pct:2.41 },
+      { item:"Asignaciones familiares",            pct:7.50,  variable:true, notaVariable:"Se aplica solo si el empleado tiene hijos a cargo. El empleador lo abona igualmente vía ANSES, pero el monto efectivo depende de la situación familiar." },
+      { item:"SAC (aguinaldo)",                    pct:8.33,  nota:"pago semestral" },
+      { item:"Vacaciones (14+ días/año)",          pct:5.33 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"Alta inestabilidad regulatoria — porcentajes pueden variar por decreto sin aviso previo." },
+      { tipo:"warn", msg:"SMVM en USD varía mensualmente con el tipo de cambio BNA. TC al 15/05/2026: $1.391 ARS/USD." },
+      { tipo:"warn", msg:"Reclasificación laboral (monotributista vs. relación de dependencia) es el conflicto laboral más frecuente en Argentina." },
+      { tipo:"info", msg:"Fuentes: AFIP, ANSES, MTSS Argentina. SMVM: Res. 9/2025. Verificado 15/05/2026." }
+    ]
+  },
+  colombia:   { name:"Colombia",    flag:"🇨🇴", sobrecosto:34.2,  complejidad:"Media-Alta",  riesgoContractor:"Alto",
+    desglose:[
+      { item:"Pensión (AFP)",                      pct:12.0 },
+      { item:"Salud (EPS)",                        pct:8.5 },
+      { item:"Caja de compensación familiar",      pct:4.0,   variable:true, notaVariable:"El empleador aporta el 4% obligatoriamente a una Caja de Compensación. El subsidio familiar que recibe el empleado depende de si tiene hijos o personas a cargo — el costo patronal es fijo." },
+      { item:"SENA",                               pct:2.0 },
+      { item:"ICBF",                               pct:3.0 },
+      { item:"Prima de servicios",                 pct:8.33 },
+      { item:"Vacaciones",                         pct:4.17 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"Salarios hasta 2 SMLMV tienen auxilio de transporte obligatorio (monto fijo mensual)." },
+      { tipo:"info", msg:"Fuentes: Ministerio del Trabajo Colombia, UGPP, SENA. Verificado 15/05/2026." }
+    ]
+  },
+  espana:     { name:"España",      flag:"🇪🇸", sobrecosto:32.1,  complejidad:"Media",       riesgoContractor:"Alto",
+    desglose:[
+      { item:"Seguridad Social (cont. comunes)",   pct:23.6 },
+      { item:"Desempleo",                          pct:5.5 },
+      { item:"FOGASA (garantía salarial)",         pct:0.2 },
+      { item:"Formación profesional",              pct:0.6 },
+      { item:"Paga extra (prorrateada)",           pct:8.33,  nota:"2 pagas extra/año" }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Único mercado europeo del listado. Deel, Remote, Oyster operan con entidad constituida en España." },
+      { tipo:"warn", msg:"Convenios colectivos pueden elevar el costo real. El % indicado es el mínimo legal sin convenio." },
+      { tipo:"info", msg:"Fuentes: TGSS, BOE. Verificado 15/05/2026." }
+    ]
+  },
+  ecuador:    { name:"Ecuador",     flag:"🇪🇨", sobrecosto:32.98, complejidad:"Media-Alta",  riesgoContractor:"Muy alto",
+    desglose:[
+      { item:"IESS (seguro social)",               pct:11.15 },
+      { item:"Fondo de Reserva",                   pct:8.33,  nota:"desde segundo año" },
+      { item:"IECE/SECAP (parafiscales)",          pct:1.00 },
+      { item:"Décima Tercera (aguinaldo)",         pct:8.33 },
+      { item:"Décima Cuarta (bono escolar)",       pct:3.85,  nota:"equivalente a 1 SBU/año" },
+      { item:"Vacaciones (15 días/año)",           pct:4.17 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Economía dolarizada — sin riesgo cambiario." },
+      { tipo:"warn", msg:"Principio de 'primacía de la realidad': inspectores pueden reclasificar contractors si existe subordinación de hecho." },
+      { tipo:"bad",  msg:"Registro en SUT y afiliación al IESS obligatorios desde el primer día. No registrar genera multas retroactivas." },
+      { tipo:"info", msg:"Fuentes: IESS, Ministerio de Trabajo Ecuador, SUT. Verificado 15/05/2026." }
+    ]
+  },
+  mexico:     { name:"México",      flag:"🇲🇽", sobrecosto:29.9,  complejidad:"Media",       riesgoContractor:"Alto",
+    desglose:[
+      { item:"IMSS (seguro social)",               pct:12.0 },
+      { item:"INFONAVIT (vivienda)",               pct:5.0 },
+      { item:"SAR (retiro)",                       pct:2.0 },
+      { item:"Aguinaldo (15 días mínimo)",         pct:4.11 },
+      { item:"Prima vacacional",                   pct:1.37 },
+      { item:"Vacaciones (12+ días/año)",          pct:3.29 },
+      { item:"PTU (participación utilidades)",     pct:3.0,   nota:"10% utilidades fiscales — variable" }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"PTU variable — un año sin utilidades elimina este costo. Provisionarlo igualmente es recomendable." },
+      { tipo:"info", msg:"Ecosistema EOR maduro: Deel, Remote, Globalization Partners operan localmente." },
+      { tipo:"info", msg:"Fuentes: IMSS, SAT, INFONAVIT, LFT. Verificado 15/05/2026." }
+    ]
+  },
+  panama:     { name:"Panamá",      flag:"🇵🇦", sobrecosto:30.42, complejidad:"Media-Alta",  riesgoContractor:"Moderado",
+    desglose:[
+      { item:"CSS (seguro social)",                pct:12.25 },
+      { item:"Seguro educativo",                   pct:1.50 },
+      { item:"Riesgos profesionales",              pct:0,     nota:"0.56–4.08% según sector" },
+      { item:"Décimo Tercer Mes (3 cuotas)",       pct:8.33,  nota:"abril / agosto / diciembre" },
+      { item:"Vacaciones (30 días/11 meses)",      pct:8.33 },
+      { item:"Prima de antigüedad",                pct:1.00,  nota:"diferida — 1% del total histórico" }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Economía dolarizada — sin riesgo cambiario. Hub empresarial de LATAM." },
+      { tipo:"warn", msg:"Décimo Tercer Mes se paga en 3 cuotas durante el año — debe provisionarse mensualmente." },
+      { tipo:"bad",  msg:"Zonas Especiales (Panamá Pacífico) tienen restricciones migratorias para trabajadores remotos extranjeros." },
+      { tipo:"info", msg:"Fuentes: MITRADEL, CSS Panamá. Verificado 15/05/2026." }
+    ]
+  },
+  uruguay:    { name:"Uruguay",     flag:"🇺🇾", sobrecosto:28.6,  complejidad:"Media",       riesgoContractor:"Moderado",
+    desglose:[
+      { item:"BPS (seguridad social)",             pct:7.5 },
+      { item:"FONASA (salud)",                     pct:5.0 },
+      { item:"FRL (fondo reconversión laboral)",   pct:0.5 },
+      { item:"Aguinaldo (2 pagas)",                pct:8.33,  nota:"junio y noviembre" },
+      { item:"Licencia (20 días/año)",             pct:5.48 },
+      { item:"Salario vacacional",                 pct:1.67 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Mercado laboral más estable y predecible de LATAM. Alta seguridad jurídica." },
+      { tipo:"warn", msg:"Consejos de salarios (negociación colectiva) pueden elevar el costo real sobre el mínimo legal." },
+      { tipo:"info", msg:"Fuentes: BPS, MTSS Uruguay. Verificado 15/05/2026." }
+    ]
+  },
+  paraguay:   { name:"Paraguay",    flag:"🇵🇾", sobrecosto:28.17, complejidad:"Media-Alta",  riesgoContractor:"Moderado",
+    desglose:[
+      { item:"IPS (seguro social)",                pct:14.00 },
+      { item:"SNPP/SENEPA/SINAFOCAL",             pct:2.50 },
+      { item:"Aguinaldo (1 mes, diciembre)",       pct:8.33,  nota:"inembargable" },
+      { item:"Vacaciones (12–30 días)",            pct:4.11 },
+      { item:"Preaviso (prorrateado)",             pct:1.67 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"TC guaraní/USD volátil — el equivalente USD del salario mínimo puede variar entre revisiones." },
+      { tipo:"bad",  msg:"Fallos laborales retroactivos frecuentes. Art. 91 Ley 213/93 define indemnización por despido sin causa." },
+      { tipo:"info", msg:"Fuentes: MTESS Paraguay, IPS (REI), Ley 213/93. Verificado 15/05/2026." }
+    ]
+  },
+  chile:      { name:"Chile",       flag:"🇨🇱", sobrecosto:22.4,  complejidad:"Media",       riesgoContractor:"Moderado",
+    desglose:[
+      { item:"AFP (pensión)",                      pct:1.26,  nota:"seguro invalidez/sobrevivencia" },
+      { item:"ISAPRE/FONASA (salud)",              pct:7.00 },
+      { item:"Seguro de cesantía (AFC)",           pct:2.40 },
+      { item:"Mutual de seguridad",                pct:0.90,  nota:"varía según sector" },
+      { item:"Gratificación legal (25%)",          pct:10.00, nota:"máximo 4.75 IMM/año" },
+      { item:"Vacaciones (15 días hábiles)",       pct:6.25 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Menor sobrecosto patronal del listado — 22.4%. El mercado más fácil para contratar en LATAM." },
+      { tipo:"warn", msg:"Reforma previsional en discusión al 15/05/2026: AFP patronal podría aumentar." },
+      { tipo:"info", msg:"Fuentes: DT, Superintendencia de AFP, AFC Chile. Verificado 15/05/2026." }
+    ]
+  }
+};
+
+// ─── POBLAR SELECTS ─────────────────────────────────
+function poblarSelects() {
+  const orden = ['brasil','argentina','colombia','mexico','chile','espana','peru','ecuador','panama','uruguay','paraguay','costa_rica'];
+  const calcSelect = document.getElementById('calc-pais');
+  const comp3Selects = document.querySelectorAll('.comp3-select');
+
+  orden.forEach(key => {
+    const p = PAISES[key];
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = `${p.flag} ${p.name}`;
+    calcSelect.appendChild(opt);
+
+    comp3Selects.forEach(sel => {
+      const o2 = opt.cloneNode(true);
+      sel.appendChild(o2);
+    });
+  });
+}
+
+// ─── CALCULADORA PRINCIPAL ──────────────────────────
+let gateUnlocked = false;
+let paisActual = null;
+let salarioActual = 1200;
+
+function calcular() {
+  const key = document.getElementById('calc-pais').value;
+  const salario = parseFloat(document.getElementById('calc-salario').value) || 0;
+
+  salarioActual = salario;
+  paisActual = key;
+
+  if (!key || salario < 1) {
+    document.getElementById('calc-result').classList.remove('visible');
+    document.getElementById('cta-post-calc').classList.remove('visible');
+    document.getElementById('gate-calc').classList.remove('visible');
+    document.getElementById('desglose-completo').classList.remove('visible');
+    return;
+  }
+
+  const pais = PAISES[key];
+  const costoLaboral = Math.round(salario * (1 + pais.sobrecosto / 100));
+  const cargas = costoLaboral - Math.round(salario);
+
+  // Mostrar resultado
+  const resultEl = document.getElementById('calc-result');
+  resultEl.classList.add('visible');
+
+  document.getElementById('result-country-label').textContent = `${pais.flag} ${pais.name}`;
+
+  // Animación del número principal
+  const amountEl = document.getElementById('result-amount');
+  amountEl.classList.add('updating');
+  setTimeout(() => amountEl.classList.remove('updating'), 400);
+  amountEl.innerHTML = `<span class="currency">$</span><span>${costoLaboral.toLocaleString('es-AR')}</span>`;
+
+  // Subtítulo con pill dinámica
+  document.getElementById('result-per').innerHTML =
+    `costo real/mes · incluye <span class="result-pct-pill">${pais.sobrecosto}% en cargas</span>`;
+
+  document.getElementById('result-salario-display').textContent = `$${Math.round(salario).toLocaleString('es-AR')}`;
+  document.getElementById('result-cargas-display').textContent  = `+$${cargas.toLocaleString('es-AR')}`;
+  document.getElementById('result-pct-display').textContent     = `${pais.sobrecosto}%`;
+
+  // CTA post-cálculo
+  const ctaEl = document.getElementById('cta-post-calc');
+  ctaEl.classList.add('visible');
+  ctaEl.href = `comparador.html?pais=${key}`;
+  document.getElementById('cta-post-calc-text').textContent =
+    `¿Querés contratar en ${pais.name}? Compará las plataformas EOR disponibles →`;
+
+  // Gate o desglose si ya desbloqueado
+  if (!gateUnlocked) {
+    document.getElementById('gate-calc').classList.add('visible');
+    document.getElementById('desglose-completo').classList.remove('visible');
+  } else {
+    mostrarDesglose(key, salario, costoLaboral);
+  }
+}
+
+function mostrarDesglose(key, salario, costoTotal) {
+  const pais = PAISES[key];
+  const wrapper = document.getElementById('desglose-tabla-wrapper');
+  const alertasEl = document.getElementById('desglose-alertas');
+  const desgloseEl = document.getElementById('desglose-completo');
+
+  // Tabla
+  let html = '<table class="desglose-table">';
+  html += `<tr class="row-salario">
+    <td class="td-item"><span class="item-name">Salario acordado</span></td>
+    <td class="td-monto">$${Math.round(salario).toLocaleString('es-AR')}</td>
+  </tr>`;
+
+  let hayVariables = [];
+
+  pais.desglose.forEach(item => {
+    const monto = Math.round(salario * item.pct / 100);
+    const notaHtml = item.nota
+      ? `<span class="item-nota">${item.nota}</span>`
+      : '';
+    const badgeVar = item.variable
+      ? `<span class="badge-variable">variable</span>`
+      : '';
+    html += `<tr>
+      <td class="td-item">
+        <span class="item-name">${item.item}${badgeVar}</span>
+        <span class="item-pct">${item.pct}%</span>
+        ${notaHtml}
+      </td>
+      <td class="td-monto">+$${monto.toLocaleString('es-AR')}</td>
+    </tr>`;
+    if (item.variable && item.notaVariable) hayVariables.push(item.notaVariable);
+  });
+
+  html += `<tr class="total-row">
+    <td class="td-item"><span class="item-name">Total mensual estimado</span></td>
+    <td class="td-monto">$${costoTotal.toLocaleString('es-AR')}</td>
+  </tr>`;
+  html += '</table>';
+
+  // Notas de ítems variables
+  if (hayVariables.length > 0) {
+    hayVariables.forEach(nota => {
+      html += `<div class="nota-variable">⚠ ${nota}</div>`;
+    });
+  }
+
+  wrapper.innerHTML = html;
+
+  // Alertas
+  let alertasHtml = '';
+  pais.alertas.forEach(a => {
+    alertasHtml += `<div class="alerta ${a.tipo}">${a.msg}</div>`;
+  });
+  alertasEl.innerHTML = alertasHtml;
+
+  desgloseEl.classList.add('visible');
+}
+
+// ─── TOGGLE DESGLOSE ────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+
+  poblarSelects();
+
+  // Calculadora — auto-recálculo
+  const calcPais = document.getElementById('calc-pais');
+  const calcSalario = document.getElementById('calc-salario');
+
+  function onCalcChange() { calcular(); }
+
+  calcPais.addEventListener('change', onCalcChange);
+  calcSalario.addEventListener('input', onCalcChange);
+
+  // Inicializar con Argentina por defecto
+  calcPais.value = 'argentina';
+  calcular();
+
+  // Toggle desglose
+  const btnToggle = document.getElementById('btn-toggle-desglose');
+  if (btnToggle) {
+    btnToggle.addEventListener('click', () => {
+      const desgloseEl = document.getElementById('desglose-completo');
+      const gateEl = document.getElementById('gate-calc');
+
+      if (gateUnlocked) {
+        const visible = desgloseEl.classList.contains('visible');
+        if (visible) {
+          desgloseEl.classList.remove('visible');
+          btnToggle.textContent = 'Ver desglose completo ▾';
+        } else {
+          if (paisActual) {
+            const costoLaboral = Math.round(salarioActual * (1 + PAISES[paisActual].sobrecosto / 100));
+            mostrarDesglose(paisActual, salarioActual, costoLaboral);
+          }
+          btnToggle.textContent = 'Ocultar desglose ▴';
+        }
+      } else {
+        // Scrollear suavemente al gate
+        gateEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        gateEl.classList.add('visible');
+      }
+    });
+  }
+
+  // Gate submit — validación robusta de email
+  const btnGate = document.getElementById('btn-gate-calc');
+  if (btnGate) {
+    btnGate.addEventListener('click', async () => {
+      const nombre = document.getElementById('gate-nombre').value.trim();
+      const email = document.getElementById('gate-email').value.trim();
+      const emailInput = document.getElementById('gate-email');
+      const nombreInput = document.getElementById('gate-nombre');
+
+      // Limpiar errores previos
+      [emailInput, nombreInput].forEach(el => {
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+      });
+
+      let hasError = false;
+
+      if (!nombre) {
+        nombreInput.style.borderColor = 'var(--red)';
+        nombreInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.12)';
+        nombreInput.placeholder = 'Tu nombre es requerido';
+        hasError = true;
+      }
+
+      // Regex robusto: dominio con TLD de al menos 2 chars, sin espacios, sin doble punto
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+
+      if (!email || !emailRegex.test(email)) {
+        emailInput.style.borderColor = 'var(--red)';
+        emailInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.12)';
+        if (!email) {
+          emailInput.placeholder = 'Tu email es requerido';
+        } else {
+          emailInput.value = '';
+          emailInput.placeholder = 'Email inválido — ingresá uno real';
+        }
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Loading state
+      btnGate.textContent = 'Verificando...';
+      btnGate.disabled = true;
+
+      // Enviar al webhook (silencioso)
+      const costoTotal = paisActual
+        ? Math.round(salarioActual * (1 + PAISES[paisActual].sobrecosto / 100))
+        : 0;
+
+      fetch('https://hook.us2.make.com/vmilsqejfvv4niejrqs2lawyu382mhr3', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre,
+          email,
+          pais: paisActual || '',
+          salario: salarioActual,
+          costo_total: costoTotal,
+          fuente: 'gate_calculadora',
+          sitio: 'cocoeor.com',
+          timestamp: new Date().toISOString()
+        })
+      }).catch(() => {}); // silencioso siempre
+
+      // Desbloquear
+      gateUnlocked = true;
+      document.getElementById('gate-calc').classList.remove('visible');
+      const successEl = document.getElementById('gate-success');
+      successEl.classList.add('visible');
+      setTimeout(() => successEl.classList.remove('visible'), 3000);
+
+      if (paisActual) {
+        mostrarDesglose(paisActual, salarioActual, costoTotal);
+        document.getElementById('btn-toggle-desglose').textContent = 'Ocultar desglose ▴';
+      }
+
+      btnGate.textContent = 'Ver desglose completo →';
+      btnGate.disabled = false;
+    });
+  }
+
+  // ─── COMPARATIVA 3 PAÍSES ──────────────────────────
+  const comp3Selects = document.querySelectorAll('.comp3-select');
+  const comp3Salario = document.getElementById('comp3-salario');
+
+  function renderComp3() {
+    const salario = parseFloat(comp3Salario.value) || 0;
+    const keys = [
+      document.getElementById('comp3-p1').value,
+      document.getElementById('comp3-p2').value,
+      document.getElementById('comp3-p3').value
+    ].filter(k => k);
+
+    const container = document.getElementById('comp3-cards');
+
+    if (keys.length === 0 || salario < 1) {
+      container.innerHTML = '<div class="comp3-empty" style="grid-column:1/-1">Seleccioná al menos un país para ver la comparativa.</div>';
+      container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      return;
+    }
+
+    // Calcular totales para badges
+    const totales = keys.map(k => Math.round(salario * (1 + PAISES[k].sobrecosto / 100)));
+    const minTotal = Math.min(...totales);
+    const maxTotal = Math.max(...totales);
+
+    // Solo aplicar grid multi-columna en desktop
+    if (window.innerWidth > 768) {
+      container.style.gridTemplateColumns = keys.length === 1 ? '1fr' : `repeat(${keys.length}, 1fr)`;
+    } else {
+      container.style.gridTemplateColumns = '1fr';
+    }
+
+    let html = '';
+    keys.forEach((key, i) => {
+      const pais = PAISES[key];
+      const total = totales[i];
+      const cargas = total - Math.round(salario);
+      const isCheapest = keys.length > 1 && total === minTotal;
+      const isPriciest = keys.length > 1 && total === maxTotal && total !== minTotal;
+
+      const complexClass = pais.complejidad.toLowerCase().replace(' ', '-').replace('á', 'a').replace('é', 'e');
+
+      html += `<div class="comp3-card${isCheapest ? ' cheapest' : ''}${isPriciest ? ' priciest' : ''}">`;
+      if (isCheapest) html += `<span class="comp3-badge badge-cheap">Más económico</span>`;
+      if (isPriciest) html += `<span class="comp3-badge badge-pricey">Más caro</span>`;
+
+      // Bandera + nombre en línea
+      html += `<div class="comp3-flag-name">
+        <span class="comp3-flag">${pais.flag}</span>
+        <span class="comp3-country">${pais.name}</span>
+      </div>`;
+
+      // Total con explicación del porcentaje
+      html += `<div class="comp3-total-block">
+        <div class="comp3-total">$${total.toLocaleString('es-AR')}</div>
+        <div class="comp3-total-sub">
+          costo real/mes · incluye
+          <span class="comp3-pct-pill">${pais.sobrecosto}% en cargas</span>
+        </div>
+      </div>`;
+
+      // Items con jerarquía de color
+      html += `<div class="comp3-items">`;
+      html += `<div class="comp3-item">
+        <span class="comp3-item-label">Salario acordado</span>
+        <span class="comp3-item-value salary">$${Math.round(salario).toLocaleString('es-AR')}</span>
+      </div>`;
+      html += `<div class="comp3-item">
+        <span class="comp3-item-label">Cargas y beneficios</span>
+        <span class="comp3-item-value cargas">+$${cargas.toLocaleString('es-AR')}</span>
+      </div>`;
+      html += `<div class="comp3-divider"></div>`;
+      html += `<div class="comp3-item">
+        <span class="comp3-item-label">Complejidad</span>
+        <span class="comp3-item-value complejidad">${pais.complejidad}</span>
+      </div>`;
+      html += `<div class="comp3-item">
+        <span class="comp3-item-label">Riesgo contractor</span>
+        <span class="comp3-item-value riesgo">${pais.riesgoContractor}</span>
+      </div>`;
+      html += `</div>`;
+
+      // CTA azul
+      html += `<a href="comparador.html?pais=${key}" class="comp3-cta">Ver plataformas EOR →</a>`;
+      html += '</div>';
+    });
+
+    container.innerHTML = html;
+  }
+
+  comp3Selects.forEach(sel => sel.addEventListener('change', renderComp3));
+  comp3Salario.addEventListener('input', renderComp3);
+
+  // ─── FAQ ──────────────────────────────────────────
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ─── NAV SCROLL SHADOW ────────────────────────────
+  window.addEventListener('scroll', () => {
+    const navEl = document.querySelector('nav');
+    if (window.scrollY > 12) {
+      navEl.classList.add('scrolled');
+    } else {
+      navEl.classList.remove('scrolled');
+    }
+  });
+
+  // ─── NAV SCROLL SPY ───────────────────────────────
+  const navSections = [
+    { id: 'calculadora', selector: 'a[href="#calculadora"]' },
+    { id: 'comparativa', selector: 'a[href="guias.html"]' },
+    { id: 'como-funciona', selector: 'a[href="#como-funciona"]' },
+    { id: 'faq', selector: 'a[href="#faq"]' },
+  ];
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const match = navSections.find(s => s.id === entry.target.id);
+        // Quitar active de todos
+        document.querySelectorAll('.nav-links a:not(.nav-cta), .mobile-menu a').forEach(a => a.classList.remove('active'));
+        // Poner active al que corresponde
+        if (match) {
+          const navLink = document.querySelector(`.nav-links ${match.selector}`);
+          const mobileLink = document.querySelector(`.mobile-menu ${match.selector}`);
+          if (navLink) navLink.classList.add('active');
+          if (mobileLink) mobileLink.classList.add('active');
+        }
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  ['calculadora', 'comparativa', 'como-funciona', 'faq'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) spyObserver.observe(el);
+  });
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  // ─── SCROLL REVEAL ────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ─── HERO COUNTRIES GRID ───────────────────────────────
+const HERO_COUNTRIES = [
+  { flag: '🇧🇷', name: 'Brasil',     pct: '+62.2%', cls: 'high' },
+  { flag: '🇨🇷', name: 'Costa Rica', pct: '+39.1%', cls: 'high' },
+  { flag: '🇵🇪', name: 'Perú',       pct: '+36.8%', cls: 'high' },
+  { flag: '🇦🇷', name: 'Argentina',  pct: '+36.5%', cls: 'high' },
+  { flag: '🇨🇴', name: 'Colombia',   pct: '+34.2%', cls: 'high' },
+  { flag: '🇪🇸', name: 'España',     pct: '+32.1%', cls: 'high' },
+  { flag: '🇪🇨', name: 'Ecuador',    pct: '+33.0%', cls: 'mid' },
+  { flag: '🇲🇽', name: 'México',     pct: '+29.9%', cls: 'mid' },
+  { flag: '🇵🇦', name: 'Panamá',     pct: '+30.4%', cls: 'mid' },
+  { flag: '🇺🇾', name: 'Uruguay',    pct: '+28.6%', cls: 'mid' },
+  { flag: '🇵🇾', name: 'Paraguay',   pct: '+28.2%', cls: 'mid' },
+  { flag: '🇨🇱', name: 'Chile',      pct: '+22.4%', cls: 'low'  },
+];
+
+(function renderHeroGrid() {
+  const grid = document.getElementById('hero-countries-grid');
+  if (!grid) return;
+  grid.innerHTML = HERO_COUNTRIES.map(c => `
+    <div class="country-pill">
+      <div class="country-flag">${c.flag}</div>
+      <div class="country-name">${c.name}</div>
+      <div class="country-pct ${c.cls}">${c.pct}</div>
+    </div>`).join('');
+})();
+
+// ─── FAQ ACCORDION ─────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ─── CTA COMPARADOR TRAS CALCULAR ──────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const btnCalc = document.querySelector('.btn-calc, #btn-calcular');
+  if (btnCalc) {
+    btnCalc.addEventListener('click', function() {
+      setTimeout(function() {
+        const cta = document.getElementById('calc-cta-comparador');
+        if (cta) cta.style.display = 'block';
+      }, 500);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

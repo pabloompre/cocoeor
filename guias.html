@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guías por país — Contratar en LATAM | COCO EOR</title>
+  <meta name="description" content="Guías completas de costos laborales para 12 países de LATAM. Cargas patronales, alertas legales y fuentes oficiales. Datos verificados."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0099FF;
+      --blue-dark:  #007ACC;
+      --blue-light: #e8f2ff;
+      --blue-mid:   #4da6ff;
+      --bg:         #f8f9fb;
+      --bg-card:    #ffffff;
+      --text:       #0a0a0a;
+      --text2:      #4a5568;
+      --text3:      #9aa5b0;
+      --border:     #e2e8f0;
+      --border2:    #c8d8ea;
+      --green:      #00b341;
+      --amber:      #f59e0b;
+      --red:        #ef4444;
+      --sans:       'Space Grotesk', sans-serif;
+      --heading:    'Plus Jakarta Sans', sans-serif;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06);
+      --shadow:     0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg:  0 12px 40px rgba(0,153,255,0.12);
+      --radius:     12px;
+      --radius-sm:  8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,249,251,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo a { text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.2s; }
+    .nav-logo a:hover { opacity: 0.85; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    .nav-links a.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 18px; height: 2.5px; background: var(--blue); border-radius: 2px; }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; border-radius: 9px !important; font-weight: 600 !important; font-size: 14px !important; transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important; box-shadow: 0 2px 10px rgba(0,153,255,0.25) !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px rgba(0,153,255,0.35) !important; }
+    .nav-cta.active { background: var(--blue-dark) !important; }
+    .nav-social { display: flex; align-items: center; gap: 8px; }
+    .nav-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); color: var(--text2); transition: all 0.2s; text-decoration: none; }
+    .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; border-radius: 8px; transition: background 0.2s; }
+    .hamburger:hover { background: var(--blue-light); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 20px 20px; z-index: 99; flex-direction: column; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); animation: slideDown 0.25s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 12px 12px; border-radius: 8px; transition: all 0.15s; }
+    .mobile-menu a:hover { color: var(--blue); background: var(--blue-light); }
+    .mobile-menu a.active { color: var(--blue); font-weight: 600; background: var(--blue-light); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero-comp {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,153,255,0.08) 0%, transparent 70%), var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-comp .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card); color: var(--blue-dark);
+      font-size: 13px; font-weight: 600; padding: 6px 16px;
+      border-radius: 100px; margin-bottom: 20px;
+      border: 1px solid var(--border2); box-shadow: var(--shadow-sm);
+    }
+
+    .hero-comp h1 {
+      font-family: var(--heading);
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800; letter-spacing: -0.025em;
+      color: var(--text); margin-bottom: 12px; line-height: 1.1;
+    }
+
+    .hero-comp h1 span { color: var(--blue); }
+
+    .hero-comp p {
+      font-size: 16px; color: var(--text2);
+      max-width: 480px; margin: 0 auto; line-height: 1.6;
+    }
+
+    /* ─── BÚSQUEDA / FILTROS ──────────────────────── */
+    .search-bar {
+      max-width: 960px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+    }
+
+    .search-input-wrap {
+      position: relative;
+    }
+
+    .search-input-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      font-size: 15px;
+      font-family: var(--sans);
+      border: 1.5px solid var(--border2);
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.12);
+    }
+
+    /* ─── GRID PAÍSES ─────────────────────────────── */
+    .paises-grid {
+      max-width: 960px;
+      margin: 28px auto 0;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    /* ─── CARD PAÍS ───────────────────────────────── */
+    .pais-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .pais-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+
+    .pais-card.open { box-shadow: var(--shadow-lg); border-color: var(--blue-mid); }
+
+    /* Cabecera de la card */
+    .pais-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 20px 18px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .pais-flag { font-size: 32px; line-height: 1; flex-shrink: 0; }
+
+    .pais-header-info { flex: 1; min-width: 0; }
+
+    .pais-name {
+      font-family: var(--heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .pais-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Sobrecosto badge — el número grande */
+    .pais-pct {
+      font-family: var(--heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .pais-pct-label {
+      font-size: 11px;
+      color: var(--text3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pais-complejidad {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
+    .cpx-muy-alta { background: #fff1f1; color: #dc2626; }
+    .cpx-alta     { background: #fffbeb; color: #d97706; }
+    .cpx-media-alta { background: #fff7ed; color: #ea580c; }
+    .cpx-media    { background: #f0fdf4; color: #16a34a; }
+
+    /* Flecha expand */
+    .pais-arrow {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text3);
+      transition: transform 0.3s, background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .pais-card.open .pais-arrow {
+      transform: rotate(180deg);
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    /* Barra de progreso de sobrecosto */
+    .pais-bar-wrap {
+      padding: 0 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pais-bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--bg);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .pais-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pais-bar-label {
+      font-size: 11px;
+      color: var(--text3);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    /* ─── CONTENIDO EXPANDIBLE ────────────────────── */
+    .pais-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pais-card.open .pais-content { max-height: 1200px; }
+
+    .pais-content-inner { padding: 20px; }
+
+    /* Tabla desglose */
+    .desglose-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text3);
+      margin-bottom: 10px;
+    }
+
+    .desglose-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+
+    .desglose-table tr { border-bottom: 1px solid var(--border); }
+    .desglose-table tr:last-child { border-bottom: none; }
+
+    .desglose-table td { padding: 9px 0; font-size: 13px; vertical-align: middle; }
+
+    .td-item-name { font-weight: 500; color: var(--text); }
+    .td-item-pct  { font-size: 11px; color: var(--text3); margin-left: 4px; }
+    .td-item-nota { display: block; font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+    .td-monto {
+      text-align: right;
+      font-family: var(--heading);
+      font-weight: 700;
+      color: #d97706;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    /* Fila de referencia salario */
+    .row-ref td { border-bottom: 1px solid var(--border2); }
+    .row-ref .td-ref-label { font-size: 12px; color: var(--text3); }
+    .row-ref .td-ref-value { font-size: 12px; color: var(--text2); font-weight: 600; text-align: right; }
+
+    /* Fila total */
+    .row-total { border-top: 2px solid var(--text) !important; border-bottom: none !important; }
+    .row-total td { padding-top: 12px; }
+    .row-total .td-total-label { font-weight: 700; font-size: 14px; color: var(--text); }
+    .row-total .td-total-value {
+      text-align: right;
+      font-family: var(--heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    /* Badge variable */
+    .badge-variable {
+      display: inline-flex;
+      background: rgba(245,158,11,0.12);
+      color: #92400e;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 4px;
+      margin-left: 5px;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    /* Nota variable */
+    .nota-variable {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(245,158,11,0.08);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 12px;
+      color: #92400e;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    /* Alertas */
+    .alertas { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+
+    .alerta {
+      display: flex;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .alerta.bad  { background: #fff1f1; border-left: 3px solid var(--red);   color: #7f1d1d; }
+    .alerta.warn { background: #fffbeb; border-left: 3px solid var(--amber);  color: #78350f; }
+    .alerta.info { background: var(--blue-light); border-left: 3px solid var(--blue); color: #1e40af; }
+
+    /* CTA dentro de la card */
+    .pais-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .pais-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* Salario de referencia input */
+    .salario-ref-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .salario-ref-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    .salario-ref-input-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .salario-ref-prefix {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text3);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .salario-ref-input {
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 9px 12px 9px 26px;
+      font-size: 14px;
+      font-family: var(--sans);
+      border: 1.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      color: var(--text);
+      width: 140px;
+      transition: border-color 0.2s;
+    }
+
+    .salario-ref-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.12);
+    }
+
+    .salario-ref-note {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    /* ─── REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer { background: #0a0f1a; color: #8a9ab0; padding: 48px 24px 32px; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 40px; margin-bottom: 32px; flex-wrap: wrap;
+    }
+
+    .footer-brand p { font-size: 13px; line-height: 1.6; color: #6a7a8a; margin-top: 12px; max-width: 300px; }
+
+    .footer-links-group { display: flex; gap: 48px; }
+
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #4a5a6a; margin-bottom: 14px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .footer-col a { font-size: 14px; color: #8a9ab0; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--blue); }
+
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; }
+
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 8px;
+      border: 1px solid #1e2a3a; color: #6a7a8a;
+      transition: all 0.2s; text-decoration: none;
+    }
+
+    .footer-social a:hover { border-color: var(--blue); color: var(--blue); }
+
+    .footer-bottom {
+      border-top: 1px solid #1e2a3a; padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+
+    .footer-bottom p { font-size: 12px; color: #4a5a6a; line-height: 1.6; max-width: 600px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links, .nav-social { display: none; }
+      .hamburger { display: flex; }
+      .hero-comp { padding: 40px 16px 36px; }
+      .search-bar { padding: 0 16px; }
+      .salario-ref-wrap { padding: 0 16px 4px; flex-wrap: wrap; }
+      .paises-grid { padding: 0 16px 60px; grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 28px; }
+      .footer-links-group { flex-wrap: wrap; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ─── GATE DESGLOSE ─────────────────────────── */
+    .gate-desglose {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f2ff 100%);
+      border: 1.5px solid rgba(0,153,255,0.2);
+      border-radius: var(--radius);
+      padding: 20px 20px 16px;
+      margin-top: 12px;
+    }
+    .gate-desglose-title {
+      font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px;
+    }
+    .gate-desglose-sub {
+      font-size: 13px; color: var(--text2); margin-bottom: 14px; line-height: 1.5;
+    }
+    .gate-desglose-inputs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
+    }
+    @media (max-width: 480px) { .gate-desglose-inputs { grid-template-columns: 1fr; } }
+    .gate-desglose-inputs input {
+      padding: 10px 14px; font-size: 14px; font-weight: 500;
+      border: 1.5px solid var(--border2); border-radius: 8px;
+      font-family: var(--sans); background: #fff; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .gate-desglose-inputs input:focus { outline: none; border-color: var(--blue); }
+    .gate-desglose-inputs input::placeholder { color: var(--text3); font-weight: 400; }
+    .btn-gate-desglose {
+      width: 100%; padding: 11px; background: var(--blue); color: #fff;
+      border: none; border-radius: 8px; font-family: var(--sans);
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-gate-desglose:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .gate-desglose-ok { display:none; font-size:13px; color:var(--green); font-weight:600; margin-top:8px; text-align:center; }
+    .desglose-locked { display: none; }
+    .desglose-locked.unlocked { display: block; }
+
+    /* ─── TIPOGRAFÍA FORMULARIOS ───────────────────── */
+    select, input[type="number"], input[type="text"], input[type="email"] {
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      color: var(--text) !important;
+    }
+    label, .form-group label, .field label, .ctrl-group label {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--text2) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="72" style="display:block;width:auto;">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#calculadora">Calculadora</a></li>
+    <li><a href="guias.html" class="active">Guías</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="comparador.html" class="nav-cta">Comparador EOR →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#calculadora">Calculadora</a>
+  <a href="guias.html" class="active">Guías</a>
+  <a href="blog.html">Blog</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="comparador.html">Comparador EOR →</a>
+</div>
+
+<!-- ─── HERO ────────────────────────────────────────── -->
+<div class="hero-comp reveal">
+  <div class="badge">12 países · Datos oficiales verificados · Mayo 2026</div>
+  <h1>Guías de contratación<br/>por <span>país</span></h1>
+  <p>Desglose completo de cargas patronales, alertas legales y fuentes oficiales para cada mercado.</p>
+</div>
+
+<!-- ─── SALARIO DE REFERENCIA ────────────────────────── -->
+<div class="salario-ref-wrap" style="margin-top:28px;">
+  <span class="salario-ref-label">Calcular para un salario de</span>
+  <div class="salario-ref-input-wrap">
+    <span class="salario-ref-prefix">$</span>
+    <input type="number" class="salario-ref-input" id="salario-ref" value="1200" min="100" max="50000" step="100"/>
+  </div>
+  <span class="salario-ref-note">USD/mes — los montos en el desglose se actualizan en tiempo real</span>
+</div>
+
+<!-- ─── BÚSQUEDA ─────────────────────────────────────── -->
+<div class="search-bar" style="margin-top:12px;">
+  <div class="search-input-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="search-paises" placeholder="Buscar país..."/>
+  </div>
+</div>
+
+<!-- ─── GRID ──────────────────────────────────────────── -->
+<div class="paises-grid" id="paises-grid"></div>
+
+<!-- ─── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="text-decoration:none;display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 90" height="52" style="display:block;width:auto;">
+            <g transform="translate(30, 24)">
+              <rect x="0" y="0" width="42" height="42" rx="9" fill="#2a2a2a" stroke="#484848" stroke-width="1.5"/>
+              <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+            </g>
+          </svg>
+        </a>
+        <p>Guías de contratación y plataformas EOR para LATAM. Simple y claro.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="index.html#calculadora">Calculadora EOR</a></li>
+            <li><a href="comparador.html">Comparador EOR</a></li>
+            <li><a href="guias.html">Guías por país</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guías</h4>
+          <ul>
+            <li><a href="#brasil">Brasil</a></li>
+            <li><a href="#argentina">Argentina</a></li>
+            <li><a href="#colombia">Colombia</a></li>
+            <li><a href="#mexico">México</a></li>
+            <li><a href="#chile">Chile</a></li>
+            <li><a href="#" onclick="document.getElementById('search-paises').focus();return false;">Ver todos →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 COCO Labs. Los datos de sobrecostos provienen de fuentes oficiales con fines informativos. No constituyen asesoramiento legal ni laboral. Verificá con un asesor local antes de contratar.</p>
+      <p style="color:#4a5a6a;font-size:11px;">Datos: 15/05/2026 · Revisión: 14/07/2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────────── -->
+<script>
+const PAISES = [
+  { key:"brasil",     name:"Brasil",      flag:"🇧🇷", sobrecosto:62.2,  complejidad:"Muy Alta",   cpxClass:"cpx-muy-alta",
+    desglose:[
+      { item:"INSS patronal",                  pct:20,    nota:"variable según actividad" },
+      { item:"RAT/SAT (riesgo trabajo)",        pct:3,     nota:"1–3% según sector" },
+      { item:"FGTS (fondo antigüedad)",         pct:8 },
+      { item:"Sistema S (SENAI/SESI)",          pct:5.8 },
+      { item:"13° salário (aguinaldo)",         pct:8.33,  nota:"1/12 por mes" },
+      { item:"Vacaciones + 1/3 constitucional", pct:11.1 },
+      { item:"Otras contribuciones",            pct:5.97 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"Reclasificación laboral: riesgo muy alto. Inspecciones SRTE frecuentes. Deuda retroactiva hasta 5 años." },
+      { tipo:"warn", msg:"La CLT es extremadamente protectora. El 62% puede subestimarse en sectores de alto riesgo." },
+      { tipo:"info", msg:"Fuentes: Receita Federal, INSS, FGTS/CAIXA, MTE. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"costa_rica", name:"Costa Rica",  flag:"🇨🇷", sobrecosto:39.05, complejidad:"Alta",        cpxClass:"cpx-alta",
+    desglose:[
+      { item:"CCSS SEM (enfermedad-maternidad)",  pct:9.25 },
+      { item:"CCSS IVM (invalidez-vejez-muerte)", pct:5.58 },
+      { item:"FODESAF",                           pct:5.00 },
+      { item:"INA (capacitación)",                pct:1.50 },
+      { item:"IMAS",                              pct:0.50 },
+      { item:"Banco Popular",                     pct:0.50 },
+      { item:"ROP (pensión complementaria)",      pct:1.50 },
+      { item:"FCL (fondo capitalización laboral)", pct:3.00, nota:"depósito mensual en cuenta del trabajador" },
+      { item:"Aguinaldo (1 mes)",                 pct:8.33, nota:"pago 1–20 diciembre" },
+      { item:"Vacaciones (14 días/50 semanas)",   pct:3.85 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"CCSS cobra retroactivo con intereses si detecta relación laboral no declarada. Control estricto." },
+      { tipo:"warn", msg:"FCL se deposita mensualmente en cuenta del trabajador — no es diferido, suma al costo mensual." },
+      { tipo:"info", msg:"Fuentes: CCSS, MTSS, Decreto N°45303-MTSS. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"peru",       name:"Perú",        flag:"🇵🇪", sobrecosto:36.8,  complejidad:"Alta",        cpxClass:"cpx-alta",
+    desglose:[
+      { item:"EsSalud (seguro salud)",             pct:9 },
+      { item:"Gratificaciones (2/año)",            pct:16.67, nota:"julio y diciembre" },
+      { item:"CTS (compensación tiempo servicio)", pct:8.33,  nota:"depósito semestral" },
+      { item:"Vacaciones (30 días/año)",           pct:8.33 },
+      { item:"Otras cargas",                       pct:3.67 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"La CTS es intangible — debe depositarse en banco designado. Incumplimiento genera intereses legales." },
+      { tipo:"info", msg:"Fuentes: SUNAFIL, ESSALUD, Ministerio de Trabajo Perú. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"argentina",  name:"Argentina",   flag:"🇦🇷", sobrecosto:36.5,  complejidad:"Muy Alta",   cpxClass:"cpx-muy-alta",
+    desglose:[
+      { item:"ANSES (jubilaciones)",              pct:10.17 },
+      { item:"Obra Social",                       pct:6.00 },
+      { item:"ART (riesgo trabajo)",              pct:2.00, nota:"variable según sector" },
+      { item:"ANSSAL / INSSJP / FONASA",          pct:2.41 },
+      { item:"Asignaciones familiares",           pct:7.50, variable:true, notaVariable:"Se aplica solo si el empleado tiene hijos a cargo. El empleador abona igualmente vía ANSES, pero el monto efectivo depende de la situación familiar." },
+      { item:"SAC (aguinaldo)",                   pct:8.33, nota:"pago semestral" },
+      { item:"Vacaciones (14+ días/año)",         pct:5.33 }
+    ],
+    alertas:[
+      { tipo:"bad",  msg:"Alta inestabilidad regulatoria — porcentajes pueden variar por decreto sin aviso previo." },
+      { tipo:"warn", msg:"SMVM en USD varía mensualmente con el tipo de cambio BNA. TC al 15/05/2026: $1.391 ARS/USD." },
+      { tipo:"warn", msg:"Reclasificación laboral (monotributista vs. relación de dependencia) es el conflicto laboral más frecuente en Argentina." },
+      { tipo:"info", msg:"Fuentes: AFIP, ANSES, MTSS Argentina. SMVM: Res. 9/2025. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"colombia",   name:"Colombia",    flag:"🇨🇴", sobrecosto:34.2,  complejidad:"Media-Alta",  cpxClass:"cpx-media-alta",
+    desglose:[
+      { item:"Pensión (AFP)",                     pct:12.0 },
+      { item:"Salud (EPS)",                       pct:8.5 },
+      { item:"Caja de compensación familiar",     pct:4.0, variable:true, notaVariable:"El empleador aporta el 4% obligatoriamente. El subsidio que recibe el empleado varía según si tiene hijos a cargo — el costo patronal es fijo." },
+      { item:"SENA",                              pct:2.0 },
+      { item:"ICBF",                              pct:3.0 },
+      { item:"Prima de servicios",                pct:8.33 },
+      { item:"Vacaciones",                        pct:4.17 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"Salarios hasta 2 SMLMV tienen auxilio de transporte obligatorio (monto fijo mensual)." },
+      { tipo:"info", msg:"Fuentes: Ministerio del Trabajo Colombia, UGPP, SENA. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"espana",     name:"España",      flag:"🇪🇸", sobrecosto:32.1,  complejidad:"Media",       cpxClass:"cpx-media",
+    desglose:[
+      { item:"Seguridad Social (cont. comunes)",  pct:23.6 },
+      { item:"Desempleo",                         pct:5.5 },
+      { item:"FOGASA (garantía salarial)",        pct:0.2 },
+      { item:"Formación profesional",             pct:0.6 },
+      { item:"Paga extra (prorrateada)",          pct:8.33, nota:"2 pagas extra/año" }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Único mercado europeo del listado. Deel, Remote, Oyster operan con entidad constituida en España." },
+      { tipo:"warn", msg:"Convenios colectivos pueden elevar el costo real. El % indicado es el mínimo legal sin convenio." },
+      { tipo:"info", msg:"Fuentes: TGSS, BOE. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"ecuador",    name:"Ecuador",     flag:"🇪🇨", sobrecosto:32.98, complejidad:"Media-Alta",  cpxClass:"cpx-media-alta",
+    desglose:[
+      { item:"IESS (seguro social)",              pct:11.15 },
+      { item:"Fondo de Reserva",                  pct:8.33, nota:"desde segundo año" },
+      { item:"IECE/SECAP (parafiscales)",         pct:1.00 },
+      { item:"Décima Tercera (aguinaldo)",        pct:8.33 },
+      { item:"Décima Cuarta (bono escolar)",      pct:3.85, nota:"equivalente a 1 SBU/año" },
+      { item:"Vacaciones (15 días/año)",          pct:4.17 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Economía dolarizada — sin riesgo cambiario." },
+      { tipo:"warn", msg:"Principio de 'primacía de la realidad': inspectores pueden reclasificar contractors si existe subordinación de hecho." },
+      { tipo:"bad",  msg:"Registro en SUT y afiliación al IESS obligatorios desde el primer día. No registrar genera multas retroactivas." },
+      { tipo:"info", msg:"Fuentes: IESS, Ministerio de Trabajo Ecuador, SUT. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"mexico",     name:"México",      flag:"🇲🇽", sobrecosto:29.9,  complejidad:"Media",       cpxClass:"cpx-media",
+    desglose:[
+      { item:"IMSS (seguro social)",              pct:12.0 },
+      { item:"INFONAVIT (vivienda)",              pct:5.0 },
+      { item:"SAR (retiro)",                      pct:2.0 },
+      { item:"Aguinaldo (15 días mínimo)",        pct:4.11 },
+      { item:"Prima vacacional",                  pct:1.37 },
+      { item:"Vacaciones (12+ días/año)",         pct:3.29 },
+      { item:"PTU (participación utilidades)",    pct:3.0,  nota:"10% utilidades fiscales — variable" }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"PTU variable — un año sin utilidades elimina este costo. Provisionarlo igualmente es recomendable." },
+      { tipo:"info", msg:"Ecosistema EOR maduro: Deel, Remote, Globalization Partners operan localmente." },
+      { tipo:"info", msg:"Fuentes: IMSS, SAT, INFONAVIT, LFT. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"panama",     name:"Panamá",      flag:"🇵🇦", sobrecosto:30.42, complejidad:"Media-Alta",  cpxClass:"cpx-media-alta",
+    desglose:[
+      { item:"CSS (seguro social)",               pct:12.25 },
+      { item:"Seguro educativo",                  pct:1.50 },
+      { item:"Riesgos profesionales",             pct:0,    nota:"0.56–4.08% según sector" },
+      { item:"Décimo Tercer Mes (3 cuotas)",      pct:8.33, nota:"abril / agosto / diciembre" },
+      { item:"Vacaciones (30 días/11 meses)",     pct:8.33 },
+      { item:"Prima de antigüedad",               pct:1.00, nota:"diferida — 1% del total histórico" }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Economía dolarizada — sin riesgo cambiario. Hub empresarial de LATAM." },
+      { tipo:"warn", msg:"Décimo Tercer Mes se paga en 3 cuotas durante el año — debe provisionarse mensualmente." },
+      { tipo:"bad",  msg:"Zonas Especiales (Panamá Pacífico) tienen restricciones migratorias para trabajadores remotos extranjeros." },
+      { tipo:"info", msg:"Fuentes: MITRADEL, CSS Panamá. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"uruguay",    name:"Uruguay",     flag:"🇺🇾", sobrecosto:28.6,  complejidad:"Media",       cpxClass:"cpx-media",
+    desglose:[
+      { item:"BPS (seguridad social)",            pct:7.5 },
+      { item:"FONASA (salud)",                    pct:5.0 },
+      { item:"FRL (fondo reconversión laboral)",  pct:0.5 },
+      { item:"Aguinaldo (2 pagas)",               pct:8.33, nota:"junio y noviembre" },
+      { item:"Licencia (20 días/año)",            pct:5.48 },
+      { item:"Salario vacacional",                pct:1.67 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Mercado laboral más estable y predecible de LATAM. Alta seguridad jurídica." },
+      { tipo:"warn", msg:"Consejos de salarios (negociación colectiva) pueden elevar el costo real sobre el mínimo legal." },
+      { tipo:"info", msg:"Fuentes: BPS, MTSS Uruguay. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"paraguay",   name:"Paraguay",    flag:"🇵🇾", sobrecosto:28.17, complejidad:"Media-Alta",  cpxClass:"cpx-media-alta",
+    desglose:[
+      { item:"IPS (seguro social)",               pct:14.00 },
+      { item:"SNPP/SENEPA/SINAFOCAL",            pct:2.50 },
+      { item:"Aguinaldo (1 mes, diciembre)",      pct:8.33, nota:"inembargable" },
+      { item:"Vacaciones (12–30 días)",           pct:4.11 },
+      { item:"Preaviso (prorrateado)",            pct:1.67 }
+    ],
+    alertas:[
+      { tipo:"warn", msg:"TC guaraní/USD volátil — el equivalente USD del salario mínimo puede variar entre revisiones." },
+      { tipo:"bad",  msg:"Fallos laborales retroactivos frecuentes. Art. 91 Ley 213/93 define indemnización por despido sin causa." },
+      { tipo:"info", msg:"Fuentes: MTESS Paraguay, IPS (REI), Ley 213/93. Verificado 15/05/2026." }
+    ]
+  },
+  { key:"chile",      name:"Chile",       flag:"🇨🇱", sobrecosto:22.4,  complejidad:"Media",       cpxClass:"cpx-media",
+    desglose:[
+      { item:"AFP (pensión)",                     pct:1.26, nota:"seguro invalidez/sobrevivencia" },
+      { item:"ISAPRE/FONASA (salud)",             pct:7.00 },
+      { item:"Seguro de cesantía (AFC)",          pct:2.40 },
+      { item:"Mutual de seguridad",               pct:0.90, nota:"varía según sector" },
+      { item:"Gratificación legal (25%)",         pct:10.00, nota:"máximo 4.75 IMM/año" },
+      { item:"Vacaciones (15 días hábiles)",      pct:6.25 }
+    ],
+    alertas:[
+      { tipo:"info", msg:"Menor sobrecosto patronal del listado — 22.4%. El mercado más fácil para contratar en LATAM." },
+      { tipo:"warn", msg:"Reforma previsional en discusión al 15/05/2026: AFP patronal podría aumentar." },
+      { tipo:"info", msg:"Fuentes: DT, Superintendencia de AFP, AFC Chile. Verificado 15/05/2026." }
+    ]
+  }
+];
+
+// Valor máximo para barra (brasil 62.2)
+const MAX_PCT = 65;
+let salarioRef = 1200;
+let cardAbierta = null;
+
+function buildCard(pais) {
+  const costoTotal = Math.round(salarioRef * (1 + pais.sobrecosto / 100));
+  const cargas = costoTotal - Math.round(salarioRef);
+
+  // Tabla de desglose
+  let tablaRows = `
+    <tr class="row-ref">
+      <td class="td-ref-label">Salario de referencia</td>
+      <td class="td-ref-value">$${Math.round(salarioRef).toLocaleString('es-AR')}</td>
+    </tr>`;
+
+  let hayVariables = [];
+
+  pais.desglose.forEach(item => {
+    const monto = item.pct > 0 ? Math.round(salarioRef * item.pct / 100) : 0;
+    const notaHtml = item.nota ? `<span class="td-item-nota">${item.nota}</span>` : '';
+    const badgeVar = item.variable ? `<span class="badge-variable">variable</span>` : '';
+    const montoStr = monto > 0 ? `+$${monto.toLocaleString('es-AR')}` : `variable`;
+    tablaRows += `<tr>
+      <td><span class="td-item-name">${item.item}${badgeVar}</span><span class="td-item-pct">${item.pct}%</span>${notaHtml}</td>
+      <td class="td-monto">${montoStr}</td>
+    </tr>`;
+    if (item.variable && item.notaVariable) hayVariables.push(item.notaVariable);
+  });
+
+  tablaRows += `<tr class="row-total">
+    <td class="td-total-label">Total mensual estimado</td>
+    <td class="td-total-value">$${costoTotal.toLocaleString('es-AR')}</td>
+  </tr>`;
+
+  const notasVarHtml = hayVariables.map(n => `<div class="nota-variable">⚠ ${n}</div>`).join('');
+
+  const alertasHtml = pais.alertas.map(a =>
+    `<div class="alerta ${a.tipo}">${a.msg}</div>`
+  ).join('');
+
+  const barWidth = Math.min((pais.sobrecosto / MAX_PCT) * 100, 100);
+
+  return `
+    <div class="pais-card reveal" id="card-${pais.key}">
+      <div class="pais-header" onclick="toggleCard('${pais.key}')">
+        <span class="pais-flag">${pais.flag}</span>
+        <div class="pais-header-info">
+          <div class="pais-name">${pais.name}</div>
+          <div class="pais-meta">
+            <div>
+              <span class="pais-pct">+${pais.sobrecosto}%</span>
+              <span class="pais-pct-label"> en cargas</span>
+            </div>
+            <span class="pais-complejidad ${pais.cpxClass}">${pais.complejidad}</span>
+          </div>
+        </div>
+        <div class="pais-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+
+      <div class="pais-bar-wrap">
+        <div class="pais-bar-track">
+          <div class="pais-bar-fill" style="width:${barWidth}%"></div>
+        </div>
+        <span class="pais-bar-label">vs. Brasil +62.2%</span>
+      </div>
+
+      <div class="pais-content" id="content-${pais.key}">
+        <div class="pais-content-inner">
+          <div class="gate-desglose" id="gate-${pais.key}">
+            <div class="gate-desglose-title">Ver desglose completo de cargas</div>
+            <div class="gate-desglose-sub">Ítem por ítem: ${pais.desglose.map(d=>d.nombre).slice(0,3).join(', ')} y más. Ingresá tu email para desbloquearlo.</div>
+            <div class="gate-desglose-inputs">
+              <input type="text" id="gnom-${pais.key}" placeholder="Tu nombre" />
+              <input type="email" id="geml-${pais.key}" placeholder="tu@empresa.com" />
+            </div>
+            <button class="btn-gate-desglose" onclick="unlockDesglose('${pais.key}')">Ver desglose completo →</button>
+            <div class="gate-desglose-ok" id="gok-${pais.key}">✓ Desglose desbloqueado</div>
+          </div>
+          <div class="desglose-locked" id="desglose-${pais.key}">
+            <div class="desglose-title" style="margin-top:16px;">Desglose de cargas patronales</div>
+            <table class="desglose-table">${tablaRows}</table>
+            ${notasVarHtml}
+            <div class="alertas" style="margin-top:12px;">${alertasHtml}</div>
+            <a href="comparador.html?pais=${pais.key}" class="pais-cta" style="margin-top:16px;">
+              Ver plataformas EOR para ${pais.name} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderGrid(lista) {
+  const grid = document.getElementById('paises-grid');
+  grid.innerHTML = lista.map(buildCard).join('');
+
+  // Re-observar los nuevos elementos
+  document.querySelectorAll('.pais-card.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // Restaurar card abierta si existe
+  if (cardAbierta) {
+    const card = document.getElementById(`card-${cardAbierta}`);
+    if (card) card.classList.add('open');
+  }
+}
+
+function toggleCard(key) {
+  const card = document.getElementById(`card-${key}`);
+  const isOpen = card.classList.contains('open');
+
+  // Cerrar todas
+  document.querySelectorAll('.pais-card.open').forEach(c => c.classList.remove('open'));
+
+  if (!isOpen) {
+    card.classList.add('open');
+    cardAbierta = key;
+    // Scroll suave a la card
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  } else {
+    cardAbierta = null;
+  }
+}
+
+function recalcularMontos() {
+  // Reconstruir todo el grid manteniendo filtro activo
+  const query = document.getElementById('search-paises').value.toLowerCase();
+  const filtrados = query
+    ? PAISES.filter(p => p.name.toLowerCase().includes(query))
+    : PAISES;
+  renderGrid(filtrados);
+}
+
+// Reveal observer
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderGrid(PAISES);
+
+  // Salario ref
+  const salInput = document.getElementById('salario-ref');
+  salInput.addEventListener('input', () => {
+    salarioRef = parseFloat(salInput.value) || 1200;
+    recalcularMontos();
+  });
+
+  // Búsqueda
+  document.getElementById('search-paises').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    const filtrados = q ? PAISES.filter(p => p.name.toLowerCase().includes(q)) : PAISES;
+    renderGrid(filtrados);
+  });
+
+  // URL hash para abrir card directa (links desde footer)
+  const hash = window.location.hash.replace('#', '');
+  if (hash && PAISES.find(p => p.key === hash)) {
+    setTimeout(() => toggleCard(hash), 300);
+  }
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+});
+
+function unlockDesglose(key) {
+  const nombre = document.getElementById('gnom-' + key).value.trim();
+  const email  = document.getElementById('geml-' + key).value.trim();
+  if (!nombre || !email || !email.includes('@')) {
+    alert('Por favor ingresá tu nombre y un email válido.');
+    return;
+  }
+  // Enviar a Make.com
+  fetch('https://hook.us2.make.com/vmilsqejfvv4niejrqs2lawyu382mhr3', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre, email, pais: key, fuente: 'guias', sitio: 'cocoeor', timestamp: new Date().toISOString() })
+  }).catch(() => {});
+  // Desbloquear
+  document.getElementById('gate-' + key).style.display = 'none';
+  const d = document.getElementById('desglose-' + key);
+  d.classList.add('unlocked');
+  document.getElementById('gok-' + key).style.display = 'block';
+}
+
+</script>
+</body>
+</html>
