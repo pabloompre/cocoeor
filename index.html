@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#fafbfc">
+<meta name="supported-color-schemes" content="light">
+<meta name="description" content="Compará 7 plataformas EOR y calculá cuánto cuesta contratar en 12 países de LATAM y España. Datos oficiales verificados.">
+<title>COCO EOR — Compará plataformas EOR y costo real en LATAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* EOR en azul — clase base */
+.eor-blue { color: #0099FF !important; font-style: normal; }
+
+/* ============================================================
+   1. BLOQUEO TOTAL DE DARK MODE
+   ============================================================ */
+:root { color-scheme: light only !important; }
+html, body { background: #fafbfc !important; color: #0a0a0a !important; }
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: light only !important; }
+  html, body { background: #fafbfc !important; color: #0a0a0a !important; }
+  .nav { background: rgba(250,251,252,.95) !important; }
+  .calc-box, .platform-card, .field select, .field input, .hero-eyebrow {
+    background: #ffffff !important; color: #0a0a0a !important;
+  }
+}
+
+/* ============================================================
+   2. DESIGN TOKENS
+   ============================================================ */
+:root {
+  --blue: #0099FF;
+  --blue-dark: #007ACC;
+  --blue-tint: #e8f4ff;
+  --bg: #fafbfc;
+  --bg-card: #ffffff;
+  --bg-soft: #f5f7fa;
+  --ink: #0a0a0a;
+  --ink-2: #4a5568;
+  --ink-3: #94a3b8;
+  --ink-4: #cbd5e0;
+  --border: #e4e8ee;
+  --border-soft: #f0f3f7;
+  --amber: #d97706;
+  --amber-bg: #fff7ed;
+  --green: #059669;
+  --green-bg: #ecfdf5;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ============================================================
+   3. RESET + BASE
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  line-height: 1.55;
+  font-feature-settings: 'ss01';
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* ============================================================
+   4. NAV
+   ============================================================ */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250,251,252,.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  display: flex; align-items: center;
+  height: 36px; flex-shrink: 0; min-width: 0;
+}
+.logo-svg { height: 36px; width: auto; max-width: 100%; display: block; }
+.nav-links { display: none; gap: 26px; font-size: 14px; color: var(--ink-2); font-weight: 500; }
+.nav-links a:hover { color: var(--blue); }
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .nav-inner { padding: 14px 28px; }
+}
+
+/* ============================================================
+   5. LAYOUT WRAPPER
+   ============================================================ */
+.stations-wrap {
+  max-width: 1080px; margin: 0 auto; padding: 0 28px; position: relative;
+}
+@media (min-width: 1100px) { .stations-wrap { padding-left: 80px; } }
+
+/* ============================================================
+   6. STICKY STATION INDICATOR
+   ============================================================ */
+.station-sticky { display: none; }
+@media (min-width: 1100px) {
+  .station-sticky {
+    display: block; position: fixed;
+    top: 50%; transform: translateY(-50%);
+    left: 18px; z-index: 10;
+    font-family: var(--display);
+  }
+  .station-sticky-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .station-sticky-item {
+    display: flex; align-items: flex-start; gap: 18px;
+    cursor: pointer; position: relative; padding-bottom: 32px;
+  }
+  .station-sticky-item:last-child { padding-bottom: 0; }
+  .station-sticky-item:not(:last-child)::after {
+    content: ""; position: absolute;
+    left: 9px; top: 22px; width: 2px; height: calc(100% - 22px);
+    background: var(--ink-4); transition: background .3s; z-index: -1;
+  }
+  .station-sticky-item.active:not(:last-child)::after { background: var(--blue-tint); }
+  .sticky-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--ink-4); background: white;
+    flex-shrink: 0; display: grid; place-items: center;
+    transition: border-color .3s, background .3s; margin-top: 1px;
+  }
+  .sticky-dot-inner {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: transparent; transition: background .3s;
+  }
+  .station-sticky-item.active .sticky-dot { border-color: var(--blue); background: var(--blue-tint); }
+  .station-sticky-item.active .sticky-dot-inner { background: var(--blue); }
+  .sticky-text { display: flex; flex-direction: column; gap: 1px; padding-top: 1px; }
+  .sticky-num { font-size: 10px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.04em; transition: color .3s; }
+  .sticky-label { font-size: 11px; font-weight: 600; color: var(--ink-3); transition: color .3s; white-space: nowrap; }
+  .station-sticky-item.active .sticky-num { color: var(--blue); }
+  .station-sticky-item.active .sticky-label { color: var(--ink); }
+}
+
+/* ============================================================
+   7. HERO
+   ============================================================ */
+.hero { padding: 72px 0 48px; border-bottom: none; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--ink-2); background: white;
+  border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px;
+  font-weight: 500; margin-bottom: 32px;
+}
+.dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 3px var(--green-bg); }
+.hero h1 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(34px, 6vw, 60px);
+  line-height: 1.03; letter-spacing: -0.03em;
+  color: var(--ink); max-width: 900px; margin-bottom: 24px;
+}
+.hero h1 em { font-style: normal; color: var(--blue); }
+.hero-sub { font-size: clamp(16px, 1.7vw, 19px); color: var(--ink-2); max-width: 620px; margin-bottom: 40px; line-height: 1.55; }
+.hero-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px; }
+
+/* ============================================================
+   8. BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px; border-radius: 10px;
+  font-family: var(--sans); font-size: 15px; font-weight: 600;
+  border: 1px solid transparent;
+  transition: transform .15s, box-shadow .15s, background .15s, border-color .15s;
+}
+.btn-primary { background: var(--ink); color: white; }
+.btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 12px 24px -8px rgba(0,153,255,.25); }
+.btn-secondary { background: white; color: var(--ink); border-color: var(--border); }
+.btn-secondary:hover { border-color: var(--ink-3); }
+.btn-blue { background: var(--blue); color: white; }
+.btn-blue:hover { background: var(--blue-dark); }
+
+/* ============================================================
+   9. ROADMAP
+   ============================================================ */
+.roadmap {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--border); padding-top: 32px;
+}
+.roadmap-step { padding-right: 16px; border-right: 1px solid var(--border); }
+.roadmap-step:last-child { border-right: none; }
+.roadmap-num { font-family: var(--display); font-weight: 800; font-size: 13px; color: var(--blue); letter-spacing: 0.04em; margin-bottom: 6px; }
+.roadmap-title { font-family: var(--display); font-weight: 600; font-size: 14px; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; }
+@media (max-width: 700px) {
+  .roadmap { grid-template-columns: repeat(2, 1fr); gap: 18px 0; }
+  .roadmap-step:nth-child(2) { border-right: none; }
+  .roadmap-step:nth-child(1), .roadmap-step:nth-child(2) { padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+}
+
+/* ============================================================
+   10. STATION
+   ============================================================ */
+.station { position: relative; padding: 72px 0; border-bottom: none; }
+.station:nth-child(even) { background: #f7fbff; }
+.station { border-top: 3px solid transparent; }
+.station:nth-child(even) { border-top-color: #e8f4ff; }
+.station:nth-child(odd):not(:first-child) { border-top-color: #f0f3f7; }
+.station-divider {
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--blue-tint) 30%, var(--blue-tint) 70%, transparent 100%);
+  margin: 0;
+}
+.station:last-of-type { border-bottom: none; }
+.station-head { display: flex; align-items: baseline; gap: 24px; margin-bottom: 12px; }
+.station-num {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 0.85; color: var(--ink);
+  letter-spacing: -0.04em; flex-shrink: 0;
+}
+.station-num .accent { color: var(--blue); }
+.station-meta { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; }
+.station-tag { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; }
+.station-title {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(26px, 4vw, 40px);
+  color: var(--ink); letter-spacing: -0.025em; line-height: 1.05;
+}
+.station-sub { font-size: 17px; color: var(--ink-2); max-width: 680px; line-height: 1.55; margin-top: 16px; margin-bottom: 40px; }
+
+/* ============================================================
+   11. FIELDS
+   ============================================================ */
+.field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+.field select, .field input {
+  width: 100%; padding: 14px 16px;
+  font-family: var(--sans); font-size: 16px; font-weight: 500;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  background: var(--bg-soft); color: var(--ink);
+  transition: border-color .15s, background .15s;
+}
+.field select:focus, .field input:focus { outline: none; border-color: var(--blue); background: white; }
+.field .with-prefix { position: relative; }
+.field .prefix { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--ink-3); font-weight: 500; pointer-events: none; }
+.field .with-prefix input { padding-left: 32px; }
+
+/* ============================================================
+   12. CALC BOX
+   ============================================================ */
+.calc-box { background: white; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(15,23,42,.04); }
+.calc-inputs { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 32px; border-bottom: 1px solid var(--border-soft); }
+@media (min-width: 640px) { .calc-inputs { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.calc-result-box { padding: 40px 32px 36px; background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%); }
+.result-label { font-size: 12px; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+.result-big {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(52px, 9vw, 84px);
+  letter-spacing: -0.035em; color: var(--ink); line-height: 1; margin-bottom: 8px;
+  font-feature-settings: 'tnum';
+}
+.result-meta { font-size: 14px; color: var(--ink-3); margin-bottom: 32px; }
+.result-breakdown { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border-soft); padding-top: 24px; }
+.bd-item { padding-right: 16px; }
+.bd-item + .bd-item { border-left: 1px solid var(--border-soft); padding-left: 20px; }
+.bd-label { font-size: 11px; color: var(--ink-3); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.bd-value { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--ink); letter-spacing: -0.01em; font-feature-settings: 'tnum'; }
+.bd-value.amber { color: var(--amber); }
+.bd-value.small { font-size: 13px; font-weight: 500; color: var(--ink-2); padding-top: 4px; line-height: 1.4; }
+.pill-amber { display: inline-flex; align-items: center; gap: 6px; background: var(--amber-bg); color: var(--amber); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; margin-top: 8px; }
+.pill-amber.variable-warning { background: var(--amber-bg); color: var(--amber); margin-top: 10px; font-size: 11px; padding: 6px 10px; }
+@media (max-width: 600px) {
+  .result-breakdown { grid-template-columns: 1fr; gap: 14px; }
+  .bd-item + .bd-item { border-left: none; padding-left: 0; padding-top: 14px; border-top: 1px solid var(--border-soft); }
+}
+
+/* ============================================================
+   13. BRIDGE
+   ============================================================ */
+.bridge { display: flex; align-items: center; gap: 16px; margin-top: 48px; padding-top: 24px; border-top: 1px dashed var(--border); color: var(--ink-2); font-size: 15px; font-weight: 500; }
+.bridge-arrow { font-family: var(--display); font-weight: 700; font-size: 28px; color: var(--blue); line-height: 1; }
+.bridge-text strong { color: var(--ink); font-weight: 700; }
+
+/* ============================================================
+   14. COMPARADOR
+   ============================================================ */
+.compare-controls { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 24px; background: white; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 28px; }
+@media (min-width: 640px) { .compare-controls { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.compare-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 760px) { .compare-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .compare-grid { grid-template-columns: repeat(3, 1fr); } }
+.platform-card {
+  position: relative; background: white; border: 1px solid var(--border);
+  border-radius: 16px; padding: 26px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.platform-card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -8px rgba(15,23,42,.08); border-color: var(--ink-3); }
+.platform-card.featured { border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-tint); }
+.platform-card.featured::before { content: "Tu mejor opción"; position: absolute; top: -10px; left: 22px; background: var(--blue); color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; }
+.platform-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.platform-name-block { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.platform-logo { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; color: white; font-family: var(--display); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.platform-name { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 2px; }
+.platform-tagline { font-size: 12px; color: var(--ink-3); }
+.badge { background: var(--blue); color: white; font-size: 10px; font-weight: 700; padding: 5px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; }
+.badge.amber { background: var(--amber); }
+.badge.gray { background: var(--ink-2); }
+.platform-pricing { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); padding: 14px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pricing-label { font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
+.pricing-value { font-family: var(--display); font-weight: 700; font-size: 19px; color: var(--ink); letter-spacing: -0.01em; font-feature-settings: 'tnum'; }
+.pricing-value.big { font-size: 24px; color: var(--blue); }
+.platform-points { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--ink-2); flex-grow: 1; }
+.platform-points li { display: flex; gap: 8px; line-height: 1.5; }
+.platform-points li::before { content: "—"; color: var(--ink-3); flex-shrink: 0; }
+.platform-cta { width: 100%; justify-content: center; }
+
+/* ============================================================
+   15. EOR VS ENTIDAD
+   ============================================================ */
+.equilibrio-box { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
+.equilibrio-headline { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+.equilibrio-headline .blue-num { color: var(--blue); }
+.equilibrio-meta { color: var(--ink-2); font-size: 15px; margin-bottom: 28px; line-height: 1.5; }
+.equilibrio-cols { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 700px) { .equilibrio-cols { grid-template-columns: 1fr 1fr; } }
+.equilibrio-card { padding: 22px; border-radius: 12px; background: var(--bg-soft); }
+.equilibrio-card.eor { background: var(--blue-tint); border: 1px solid #c8e4ff; }
+.equilibrio-card-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); margin-bottom: 8px; }
+.equilibrio-card.eor .equilibrio-card-tag { color: var(--blue-dark); }
+.equilibrio-card-title { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.equilibrio-card-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+.equilibrio-table { width: 100%; margin-top: 28px; border-top: 1px solid var(--border); }
+.equilibrio-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border-soft); font-size: 14px; align-items: center; }
+.equilibrio-row.head { font-size: 11px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.equilibrio-row .pais-name { font-weight: 600; color: var(--ink); }
+.equilibrio-row .val { font-feature-settings: 'tnum'; color: var(--ink-2); }
+.equilibrio-row .equi { font-family: var(--display); font-weight: 700; color: var(--blue); font-feature-settings: 'tnum'; }
+.equilibrio-row .pending { color: var(--ink-3); font-style: italic; font-size: 13px; }
+@media (max-width: 720px) {
+  .equilibrio-row { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+  .equilibrio-row.head { display: none; }
+  .equilibrio-row .pais-name { grid-column: 1 / -1; padding-bottom: 4px; font-size: 15px; }
+  .equilibrio-row .val::before { content: attr(data-label) " · "; color: var(--ink-3); font-size: 12px; }
+  .equilibrio-row .equi::before { content: "Equilibrio: "; color: var(--ink-3); font-size: 12px; font-weight: 500; }
+}
+
+/* ============================================================
+   16. LISTA FINAL
+   ============================================================ */
+.final-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: white; }
+.final-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--border-soft); transition: background .15s; }
+.final-row:last-child { border-bottom: none; }
+.final-row:hover { background: var(--bg-soft); }
+.final-row-platform { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.final-row-logo { width: 38px; height: 38px; border-radius: 8px; display: grid; place-items: center; color: white; font-family: var(--display); font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.final-row-info { min-width: 0; }
+.final-row-name { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 2px; }
+.final-row-tag { font-size: 12px; color: var(--ink-3); }
+.final-row-price { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--blue); font-feature-settings: 'tnum'; white-space: nowrap; }
+.final-row-cta { padding: 10px 16px; font-size: 13px; flex-shrink: 0; }
+@media (max-width: 640px) {
+  .final-row { grid-template-columns: 1fr auto; gap: 10px; padding: 16px 18px; }
+  .final-row-cta { grid-column: 1 / -1; justify-self: stretch; justify-content: center; }
+}
+
+/* ============================================================
+   17. GUÍAS POR PAÍS
+   ============================================================ */
+.guides-list { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.guide-item { border-bottom: 1px solid var(--border-soft); }
+.guide-item:last-child { border-bottom: none; }
+.guide-trigger { width: 100%; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 14px; padding: 18px 22px; background: transparent; border: none; text-align: left; cursor: pointer; transition: background .15s; }
+.guide-trigger:hover { background: var(--bg-soft); }
+.guide-flag { font-size: 22px; line-height: 1; }
+.guide-name { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
+.guide-pct { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--amber); font-feature-settings: 'tnum'; }
+.guide-chevron { width: 12px; height: 12px; border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3); transform: rotate(45deg); transition: transform .2s; margin-bottom: 4px; }
+.guide-item.open .guide-chevron { transform: rotate(-135deg); margin-bottom: -4px; }
+.guide-content { display: none; padding: 0 22px 24px; }
+.guide-item.open .guide-content { display: block; }
+.guide-block { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); }
+.guide-block:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.guide-block-label { font-size: 11px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.guide-block-text { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+.guide-block-text strong { color: var(--ink); font-weight: 600; }
+.guide-warning { background: var(--amber-bg); color: var(--amber); font-size: 13px; padding: 10px 14px; border-radius: 8px; margin-top: 10px; display: flex; gap: 8px; align-items: flex-start; }
+
+/* ============================================================
+   18. METODOLOGÍA
+   ============================================================ */
+.method-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 760px) { .method-grid { grid-template-columns: repeat(3, 1fr); } }
+.method-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 26px; }
+.method-num { font-family: var(--display); font-weight: 800; font-size: 22px; color: var(--blue); letter-spacing: -0.02em; margin-bottom: 12px; }
+.method-title { font-family: var(--display); font-weight: 700; font-size: 17px; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 8px; }
+.method-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+.method-desc a { color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* ============================================================
+   19. FAQ
+   ============================================================ */
+.faq-list { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.faq-item { border-bottom: 1px solid var(--border-soft); }
+.faq-item:last-child { border-bottom: none; }
+.faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: transparent; border: none; text-align: left; cursor: pointer; transition: background .15s; }
+.faq-trigger:hover { background: var(--bg-soft); }
+.faq-question { font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--blue) !important; letter-spacing: -0.01em; line-height: 1.4; }
+.faq-trigger:hover .faq-question { color: var(--blue-dark) !important; }
+.faq-plus { width: 20px; height: 20px; flex-shrink: 0; position: relative; }
+.faq-plus::before, .faq-plus::after { content: ""; position: absolute; background: var(--ink-2); transition: transform .2s; }
+.faq-plus::before { left: 0; top: 50%; width: 100%; height: 2px; transform: translateY(-50%); }
+.faq-plus::after  { top: 0; left: 50%; height: 100%; width: 2px; transform: translateX(-50%); }
+.faq-item.open .faq-plus::after { transform: translateX(-50%) scaleY(0); }
+.faq-answer { display: none; padding: 0 24px 22px; font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+.faq-item.open .faq-answer { display: block; }
+.faq-answer strong { color: var(--ink); font-weight: 600; }
+.faq-answer a { color: var(--blue); text-decoration: underline; }
+
+/* ============================================================
+   20. NEWSLETTER
+   ============================================================ */
+.newsletter-box { background: var(--ink); color: white; border-radius: 18px; padding: 40px 32px; text-align: center; }
+.newsletter-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+.newsletter-headline { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.newsletter-sub { font-size: 15px; color: #cbd5e0; margin-bottom: 24px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+.newsletter-form { display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 520px; margin: 0 auto; }
+@media (min-width: 560px) { .newsletter-form { grid-template-columns: 1fr auto; } }
+.newsletter-form input, .newsletter-form select { width: 100%; padding: 14px 16px; font-family: var(--sans); font-size: 15px; border: 1px solid #2a3441; border-radius: 10px; background: #1a2330; color: white; }
+.newsletter-form input::placeholder { color: #6b7990; }
+.newsletter-form input:focus, .newsletter-form select:focus { outline: none; border-color: var(--blue); }
+.newsletter-form select { color: white; }
+.newsletter-form select option { background: #1a2330; }
+.newsletter-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .newsletter-form-row { grid-template-columns: 1fr; } }
+.newsletter-cta { padding: 14px 22px; }
+.btn-blue:hover { background: var(--blue-dark) !important; }
+#nl-submit, #ct-submit, #pdf-btn { transition: background .2s, transform .15s, box-shadow .15s; }
+.newsletter-success { display: none; background: var(--green-bg); color: var(--green); padding: 12px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; margin-top: 14px; }
+.newsletter-success.show { display: block; }
+.newsletter-mini { font-size: 12px; color: #6b7990; margin-top: 16px; }
+
+/* ============================================================
+   21. FOOTER
+   ============================================================ */
+.footer { background: var(--ink); color: white; padding: 56px 0 40px; margin-top: 64px; }
+.footer .footer-tagline { color: #94a3b8; }
+.footer .footer-col-title { color: #e2e8f0; }
+.footer .footer-col a { color: #94a3b8; transition: color .15s; }
+.footer .footer-col a:hover { color: var(--blue) !important; }
+.footer .footer-legal { color: #64748b; }
+.footer .footer-legal strong { color: #94a3b8; }
+.footer .footer-legal p { border-top: none; }
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.footer-top { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border-soft); margin-bottom: 24px; }
+@media (min-width: 760px) { .footer-top { grid-template-columns: 2fr 1fr 1fr; gap: 48px; } }
+.footer-brand .logo { margin-bottom: 14px; }
+.footer-tagline { font-size: 14px; color: var(--ink-2); line-height: 1.5; max-width: 360px; }
+.footer-col-title { font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 14px; color: var(--ink-2); transition: color .15s; }
+.footer-col a:hover { color: var(--ink); }
+.footer-legal { font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+.footer-legal p { margin-bottom: 8px; }
+.footer-legal p:last-child { margin-bottom: 0; }
+.footer-legal strong { color: var(--ink-2); }
+
+/* ============================================================
+   22. PLATFORM MODEL TAGS + PROFILE
+   ============================================================ */
+.platform-model { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; }
+.platform-model.owned { background: var(--green-bg); color: var(--green); }
+.platform-model.hybrid { background: var(--blue-tint); color: var(--blue-dark); }
+.platform-model.aggregator { background: var(--amber-bg); color: var(--amber); }
+.platform-profile { font-size: 13px; color: var(--ink-2); background: var(--bg-soft); border-radius: 8px; padding: 10px 12px; line-height: 1.5; }
+.platform-profile strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+   23. CONTACTO
+   ============================================================ */
+.contact-box { background: var(--ink); border-radius: 18px; padding: 36px 36px 32px; max-width: 680px; margin: 0 auto; }
+.contact-box label { color: #cbd5e0; font-size: 13px; font-weight: 600; }
+.contact-box input, .contact-box select, .contact-box textarea { background: #1a2330 !important; border-color: #2a3441 !important; color: white !important; font-weight: 500; }
+.contact-box input::placeholder, .contact-box textarea::placeholder { color: #6b7990 !important; }
+.contact-box input:focus, .contact-box select:focus, .contact-box textarea:focus { border-color: var(--blue) !important; }
+.contact-box select option { background: #1a2330; color: white; }
+.contact-box p { color: #64748b !important; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-grid .field-full { grid-column: 1 / -1; }
+.contact-box textarea { width: 100%; padding: 14px 16px; font-family: var(--sans); font-size: 15px; font-weight: 500; border: 1.5px solid var(--border); border-radius: 10px; background: var(--bg-soft); color: var(--ink); resize: vertical; min-height: 120px; transition: border-color .15s, background .15s; }
+.contact-box textarea:focus { outline: none; border-color: var(--blue); background: white; }
+.contact-success { display: none; padding: 16px; background: var(--green-bg); color: var(--green); border-radius: 10px; font-weight: 600; margin-top: 16px; }
+.contact-success.show { display: block; }
+
+/* ============================================================
+   PDF CTA
+   ============================================================ */
+.pdf-cta-box { margin-top: 28px; padding: 24px 28px; background: var(--ink); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pdf-cta-text { color: white; font-size: 15px; line-height: 1.5; }
+.pdf-cta-text strong { font-family: var(--display); font-size: 17px; display: block; margin-bottom: 4px; }
+.pdf-cta-text span { color: var(--ink-3); font-size: 13px; }
+.pdf-gate { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.pdf-gate input { padding: 11px 14px; font-family: var(--sans); font-size: 14px; font-weight: 500; border: 1.5px solid #2a3441; border-radius: 8px; background: #1a2330; color: white; width: 220px; }
+.pdf-gate input::placeholder { color: #6b7990; }
+.pdf-gate input:focus { outline: none; border-color: var(--blue); }
+.btn-pdf { padding: 11px 18px; font-size: 14px; background: var(--blue); color: white; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; }
+.btn-pdf:hover { background: var(--blue-dark); }
+@media (max-width: 640px) { .pdf-gate input { width: 100%; } }
+
+/* ============================================================
+   PLATFORM TAGS
+   ============================================================ */
+.platform-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.ptag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+.ptag-price   { background: #ecfdf5; color: #059669; }
+.ptag-speed   { background: #eff6ff; color: #2563eb; }
+.ptag-latam   { background: #faf5ff; color: #7c3aed; }
+.ptag-legal   { background: #f0fdf4; color: #15803d; }
+.ptag-brand   { background: #f0f9ff; color: #0369a1; }
+.ptag-bcorp   { background: #fdf4ff; color: #86198f; }
+.ptag-esop    { background: #fff7ed; color: #c2410c; }
+.ptag-fx      { background: #f0fdfa; color: #0f766e; }
+.ptag-multi   { background: #f8fafc; color: #475569; }
+
+/* ============================================================
+   24. BLOG (sección + cards + modal)
+   ============================================================ */
+.blog-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px)  { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+.blog-card {
+  background: white; border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px; cursor: pointer; display: flex; flex-direction: column;
+  gap: 12px; transition: transform .2s, box-shadow .2s, border-color .2s;
+  text-align: left; font-family: var(--sans); width: 100%;
+}
+.blog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -8px rgba(15,23,42,.10); border-color: var(--blue); }
+.blog-card-cat { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; }
+.blog-card-title { font-family: var(--display); font-weight: 700; font-size: 17px; color: var(--ink); line-height: 1.25; letter-spacing: -0.015em; }
+.blog-card-excerpt { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; flex-grow: 1; }
+.blog-card-meta { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); padding-top: 10px; border-top: 1px solid var(--border-soft); }
+.blog-card-meta span { white-space: nowrap; }
+.blog-card-meta .dot-sep { color: var(--ink-4); }
+
+/* Modal blog */
+.blog-modal {
+  position: fixed; inset: 0; z-index: 8500;
+  background: rgba(10,10,10,.6); backdrop-filter: blur(4px);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 24px 16px; overflow-y: auto;
+}
+.blog-modal.open { display: flex; }
+.blog-modal-inner {
+  background: white; border-radius: 18px; max-width: 760px; width: 100%;
+  overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.30);
+  margin: auto;
+}
+.blog-modal-head {
+  padding: 24px 28px 20px; border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.blog-modal-head-text { flex: 1; min-width: 0; }
+.blog-modal-cat { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.blog-modal-title { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3vw, 30px); color: var(--ink); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px; }
+.blog-modal-meta { font-size: 13px; color: var(--ink-3); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.blog-modal-meta .dot-sep { color: var(--ink-4); }
+.blog-modal-close {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--bg-soft);
+  border: none; cursor: pointer; display: grid; place-items: center;
+  color: var(--ink-2); flex-shrink: 0; transition: background .15s, color .15s;
+}
+.blog-modal-close:hover { background: var(--ink); color: white; }
+.blog-modal-body { padding: 28px; max-height: calc(85vh - 140px); overflow-y: auto; }
+.blog-modal-body h2 { font-family: var(--display); font-weight: 700; font-size: 19px; color: var(--ink); letter-spacing: -0.015em; margin: 28px 0 12px; line-height: 1.3; }
+.blog-modal-body h2:first-child { margin-top: 0; }
+.blog-modal-body h3 { font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ink); margin: 18px 0 8px; }
+.blog-modal-body p { font-size: 15px; color: var(--ink-2); line-height: 1.65; margin-bottom: 14px; }
+.blog-modal-body strong { color: var(--ink); font-weight: 600; }
+.blog-modal-body ul { margin: 10px 0 18px 4px; padding-left: 16px; }
+.blog-modal-body li { font-size: 15px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
+.blog-modal-body .info-box { background: var(--blue-tint); border-left: 3px solid var(--blue); padding: 14px 16px; border-radius: 8px; margin: 18px 0; font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+.blog-modal-body .info-box strong { color: var(--blue-dark); }
+.blog-modal-body .data-box { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin: 18px 0; font-size: 14px; }
+.blog-modal-body .data-box .data-label { font-size: 11px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.blog-modal-body .blog-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 12px 18px; background: var(--blue); color: white; border-radius: 10px; font-weight: 600; font-size: 14px; }
+.blog-modal-body .blog-cta:hover { background: var(--blue-dark); }
+@media (max-width: 640px) {
+  .blog-modal { padding: 12px 8px; }
+  .blog-modal-head { padding: 18px 18px 14px; }
+  .blog-modal-body { padding: 18px; max-height: calc(90vh - 130px); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="COCO EOR">
+      <svg class="logo-svg" viewBox="30 24 162 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(30, 24)">
+          <rect x="0" y="0" width="42" height="42" rx="9" fill="#ddeaf8" stroke="#b0cce8" stroke-width="1.5"/>
+          <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#a8c4e0"/>
+          <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#0a0a0a"/>
+          <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+          <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+        </g>
+      </svg>
+    </a>
+    <div class="nav-links">
+      <a href="#s01">Calculadora</a>
+      <a href="#s02">Comparador</a>
+      <a href="#s03"><span class="eor-blue">EOR</span> vs entidad</a>
+      <a href="#s04">Elegir</a>
+    </div>
+  </div>
+</nav>
+
+<!-- STICKY INDICATOR -->
+<aside class="station-sticky" aria-hidden="true">
+  <ul class="station-sticky-list">
+    <li class="station-sticky-item active" data-target="s01">
+      <span class="sticky-dot"><span class="sticky-dot-inner"></span></span>
+      <span class="sticky-text"><span class="sticky-num">01</span><span class="sticky-label">Costo</span></span>
+    </li>
+    <li class="station-sticky-item" data-target="s02">
+      <span class="sticky-dot"><span class="sticky-dot-inner"></span></span>
+      <span class="sticky-text"><span class="sticky-num">02</span><span class="sticky-label">Plataformas</span></span>
+    </li>
+    <li class="station-sticky-item" data-target="s03">
+      <span class="sticky-dot"><span class="sticky-dot-inner"></span></span>
+      <span class="sticky-text"><span class="sticky-num">03</span><span class="sticky-label">Decidir</span></span>
+    </li>
+    <li class="station-sticky-item" data-target="s04">
+      <span class="sticky-dot"><span class="sticky-dot-inner"></span></span>
+      <span class="sticky-text"><span class="sticky-num">04</span><span class="sticky-label">Elegir</span></span>
+    </li>
+  </ul>
+</aside>
+
+<div class="stations-wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow"><span class="dot"></span>Datos verificados · 15/05/2026</span>
+    <h1>Compará 7 plataformas <span class="eor-blue">EOR</span> y calculá cuánto cuesta contratar en <em>LATAM</em>.</h1>
+    <p class="hero-sub">Cargas patronales, aguinaldo y costo total real por país. Datos oficiales, no estimaciones de marketing.</p>
+    <div class="hero-cta-row">
+      <a href="#s01" class="btn btn-primary">Empezar por mi país →</a>
+      <a href="#s02" class="btn btn-secondary">Saltar al comparador</a>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-step"><div class="roadmap-num">01</div><div class="roadmap-title">Calculá el costo<br>en tu país</div></div>
+      <div class="roadmap-step"><div class="roadmap-num">02</div><div class="roadmap-title">Mirá qué plataforma<br>te conviene</div></div>
+      <div class="roadmap-step"><div class="roadmap-num">03</div><div class="roadmap-title">¿<span class="eor-blue">EOR</span> o abrir<br>entidad propia?</div></div>
+      <div class="roadmap-step"><div class="roadmap-num">04</div><div class="roadmap-title">Elegí tu plataforma<br>y contratá</div></div>
+    </div>
+  </section>
+
+  <!-- ESTACIÓN 01 — CALCULADORA -->
+  <section class="station" id="s01">
+    <div class="station-head">
+      <span class="station-num">0<span class="accent">1</span></span>
+      <div class="station-meta">
+        <span class="station-tag">Estación 01 · Calcular</span>
+        <h2 class="station-title">¿Cuánto te cuesta realmente contratar?</h2>
+      </div>
+    </div>
+    <p class="station-sub">El salario acordado es solo una parte. Las cargas patronales, aguinaldo y vacaciones pueden sumar hasta un 62% más. Probalo con tu país y salario.</p>
+    <div class="calc-box">
+      <div class="calc-inputs">
+        <div class="field">
+          <label for="calc-pais">País del empleado</label>
+          <select id="calc-pais"></select>
+        </div>
+        <div class="field">
+          <label for="calc-salario">Salario mensual (USD)</label>
+          <div class="with-prefix">
+            <span class="prefix">$</span>
+            <input id="calc-salario" type="text" value="1.200" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+      <div class="calc-result-box">
+        <div class="result-label">Costo total mensual estimado</div>
+        <div class="result-big" id="calc-total">—</div>
+        <div class="result-meta" id="calc-meta">—</div>
+        <div class="result-breakdown">
+          <div class="bd-item">
+            <div class="bd-label">Salario base</div>
+            <div class="bd-value" id="calc-bd-base">—</div>
+          </div>
+          <div class="bd-item">
+            <div class="bd-label">Cargas patronales</div>
+            <div class="bd-value amber" id="calc-bd-cargas">—</div>
+            <span class="pill-amber" id="calc-bd-pct">—</span>
+          </div>
+          <div class="bd-item">
+            <div class="bd-label">Incluye</div>
+            <div class="bd-value small" id="calc-bd-incluye">—</div>
+          </div>
+        </div>
+        <div class="pill-amber variable-warning" id="calc-variable" style="display:none;"></div>
+      </div>
+    </div>
+    <div class="pdf-cta-box" id="pdf-cta">
+      <div class="pdf-cta-text">
+        <strong>📄 Descargá tu análisis personalizado en PDF</strong>
+        <span>Tu país, tu salario, ranking de 7 plataformas + guía de costos ocultos</span>
+      </div>
+      <div class="pdf-gate">
+        <input type="email" id="pdf-email" placeholder="tu@empresa.com">
+        <button class="btn-pdf" id="pdf-btn">Descargar PDF →</button>
+      </div>
+    </div>
+    <div class="bridge">
+      <span class="bridge-arrow">↓</span>
+      <div class="bridge-text">Ya sabés cuánto cuesta. <strong>Ahora veamos qué plataforma <span class="eor-blue">EOR</span> te conviene para <span id="bridge-country">Brasil</span>.</strong></div>
+    </div>
+  </section>
+
+  <!-- ESTACIÓN 02 — COMPARAR -->
+  <section class="station" id="s02">
+    <div class="station-head">
+      <span class="station-num">0<span class="accent">2</span></span>
+      <div class="station-meta">
+        <span class="station-tag">Estación 02 · Comparar</span>
+        <h2 class="station-title">Tu mejor opción para <span id="comp-country-title">Brasil</span></h2>
+      </div>
+    </div>
+    <p class="station-sub">Salario + cargas del país + fee de la plataforma. 7 plataformas <span class="eor-blue">EOR</span>, ordenadas por costo total real. La primera es la más barata para tu caso.</p>
+    <div class="compare-controls">
+      <div class="field">
+        <label for="comp-pais">País</label>
+        <select id="comp-pais"></select>
+      </div>
+      <div class="field">
+        <label for="comp-salario">Salario mensual (USD)</label>
+        <div class="with-prefix">
+          <span class="prefix">$</span>
+          <input id="comp-salario" type="text" value="1.200" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+    <div class="compare-grid" id="compare-grid"></div>
+    <div class="bridge">
+      <span class="bridge-arrow">↓</span>
+      <div class="bridge-text">¿Vas a contratar a varios? <strong>Vale la pena ver si te conviene abrir entidad propia.</strong></div>
+    </div>
+  </section>
+
+  <!-- ESTACIÓN 03 — EOR VS ENTIDAD -->
+  <section class="station" id="s03">
+    <div class="station-head">
+      <span class="station-num">0<span class="accent">3</span></span>
+      <div class="station-meta">
+        <span class="station-tag">Estación 03 · Decidir</span>
+        <h2 class="station-title">¿<span class="eor-blue">EOR</span> o abrir entidad propia?</h2>
+      </div>
+    </div>
+    <p class="station-sub">Abrir una empresa en otro país cuesta entre $1.500 y $9.000 USD según el lugar, más mantenimiento mensual. El <span class="eor-blue">EOR</span> conviene hasta cierto número de empleados. Después, no.</p>
+    <div class="equilibrio-box">
+      <div class="equilibrio-headline">
+        En <span id="equi-pais">Brasil</span>, conviene <span class="eor-blue">EOR</span> hasta <span class="blue-num" id="equi-num">10–15 empleados</span>.
+      </div>
+      <div class="equilibrio-meta" id="equi-meta">Constitución de LTDA: $4.000–$9.000 USD · Mantenimiento: $1.200–$2.500 USD/mes. Más allá del punto de equilibrio, conviene entidad propia.</div>
+      <div class="equilibrio-cols">
+        <div class="equilibrio-card eor">
+          <div class="equilibrio-card-tag">Hasta el punto de equilibrio</div>
+          <div class="equilibrio-card-title"><span class="eor-blue">EOR</span> es tu mejor opción</div>
+          <div class="equilibrio-card-desc">Costo predecible ($89–$649/mes por empleado), sin trámites, contrato en pocos días. Si recién empezás o tu equipo todavía es chico, no abras entidad.</div>
+        </div>
+        <div class="equilibrio-card">
+          <div class="equilibrio-card-tag">Más allá del punto de equilibrio</div>
+          <div class="equilibrio-card-title">Conviene entidad propia</div>
+          <div class="equilibrio-card-desc">Si vas a contratar muchas personas en el mismo país de forma sostenida, el costo fijo de una entidad termina siendo menor. Si dudás, empezá con <span class="eor-blue">EOR</span> y migrá después.</div>
+        </div>
+      </div>
+      <div class="equilibrio-table" id="equi-table"></div>
+      <div style="margin-top: 24px; padding: 18px 20px; background: var(--amber-bg); border: 1px solid #fde68a; border-radius: 12px; font-size: 14px; color: var(--ink-2); line-height: 1.6;">
+        <strong style="color: var(--amber); font-family: var(--display);">⚠ Esta tabla no incluye impuestos corporativos.</strong>
+        Una entidad local además de los gastos operativos paga <strong>impuesto a las ganancias (~25–35% según el país)</strong>, IVA o equivalente sobre ciertas operaciones, e impuestos municipales o provinciales (IIBB en Argentina, ICA en Colombia, entre otros). Esos costos <strong>aumentan el punto de equilibrio real</strong> y hacen que el <span class="eor-blue">EOR</span> sea conveniente para un mayor número de empleados del que indica esta tabla. Consultá con un contador especializado en el país de expansión antes de decidir.
+      </div>
+    </div>
+    <div class="bridge">
+      <span class="bridge-arrow">↓</span>
+      <div class="bridge-text"><span class="eor-blue">EOR</span> es lo tuyo. <strong>Elegí ahora con cuál plataforma te queda mejor el costo total.</strong></div>
+    </div>
+  </section>
+
+  <!-- ESTACIÓN 04 — ELEGIR -->
+  <section class="station" id="s04">
+    <div class="station-head">
+      <span class="station-num">0<span class="accent">4</span></span>
+      <div class="station-meta">
+        <span class="station-tag">Estación 04 · Elegir</span>
+        <h2 class="station-title">Las 7 plataformas, ordenadas por costo</h2>
+      </div>
+    </div>
+    <p class="station-sub">Costo total mensual = salario + cargas del país + fee. La que elijas paga a COCO <span class="eor-blue">EOR</span> una comisión por la derivación, sin costo adicional para vos.</p>
+    <div class="final-list" id="final-list"></div>
+  </section>
+
+  <!-- GUÍAS POR PAÍS -->
+  <section class="station" id="guias">
+    <div class="station-head">
+      <span class="station-num" style="color:var(--ink-3);">—</span>
+      <div class="station-meta">
+        <span class="station-tag">Guías por país</span>
+        <h2 class="station-title">¿Qué hay que saber de cada país?</h2>
+      </div>
+    </div>
+    <p class="station-sub">Cargas patronales, riesgo legal y particularidades de los 12 países cubiertos. Tocá un país para ver el detalle.</p>
+    <div class="guides-list" id="guides-list"></div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section class="station" id="metodologia">
+    <div class="station-head">
+      <span class="station-num" style="color:var(--ink-3);">—</span>
+      <div class="station-meta">
+        <span class="station-tag">Metodología</span>
+        <h2 class="station-title">Cómo calculamos los costos</h2>
+      </div>
+    </div>
+    <p class="station-sub">No inventamos números ni copiamos a otros comparadores. Cada porcentaje viene del organismo oficial del país. Si un dato no se puede verificar, no se publica.</p>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-num">01</div>
+        <div class="method-title">Cargas verificadas en fuente oficial</div>
+        <div class="method-desc">Cada % se extrae del organismo oficial: CCSS en Costa Rica, IESS en Ecuador, IPS en Paraguay, AFIP/SS en Argentina, INSS en Brasil, IMSS en México y equivalentes en cada país.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">02</div>
+        <div class="method-title">Beneficios obligatorios incluidos</div>
+        <div class="method-desc">Aguinaldo, vacaciones pagadas, décimos y cualquier otro beneficio mandatorio legal se suman al costo real mensual. Lo que la mayoría de comparadores omite.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">03</div>
+        <div class="method-title">Revisión cada 60 días</div>
+        <div class="method-desc">Los datos se actualizan ante cualquier cambio normativo relevante. <strong>Última verificación: 15/05/2026. Próxima revisión: 14/07/2026.</strong></div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; padding: 22px; background: var(--blue-tint); border: 1px solid #c8e4ff; border-radius: 12px; font-size: 14px; color: var(--ink-2); line-height: 1.6;">
+      <strong style="color: var(--ink); font-family: var(--display);">Transparencia de afiliados:</strong> COCO <span class="eor-blue">EOR</span> recibe una comisión si contratás una plataforma <span class="eor-blue">EOR</span> a través de los botones de este sitio. Esa comisión no afecta el precio que vos pagás, ni el orden en que aparecen las plataformas — el ranking lo hace el costo total real, no la comisión que paga cada una.
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="station" id="faq">
+    <div class="station-head">
+      <span class="station-num" style="color:var(--ink-3);">—</span>
+      <div class="station-meta">
+        <span class="station-tag">Preguntas frecuentes</span>
+        <h2 class="station-title">Lo que la gente nos pregunta</h2>
+      </div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Qué es un <span class="eor-blue">EOR</span> (Employer of Record)?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Un <span class="eor-blue">EOR</span> es una empresa que <strong>contrata legalmente a tu empleado en su nombre</strong>, en el país donde esa persona vive. Vos seguís dirigiendo el trabajo, pero el <span class="eor-blue">EOR</span> figura como empleador legal: paga las cargas, gestiona los beneficios y asume la responsabilidad de cumplimiento laboral. Así podés contratar en 12 países sin abrir una entidad en cada uno.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Por qué no puedo contratar como contractor y listo?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Podés, pero tiene un riesgo legal concreto: si hay <strong>subordinación de hecho</strong> (horarios fijos, dirección cotidiana, exclusividad), los inspectores laborales de Brasil, Ecuador, Argentina y la mayoría de países de LATAM pueden reclasificar esa relación como relación de dependencia. El resultado es deuda retroactiva de hasta 5 años de cargas no pagadas, más intereses y multas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Los porcentajes de sobrecosto son exactos?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Son los porcentajes <strong>legales verificados en fuentes oficiales</strong>. En la práctica, el costo real puede ser mayor en sectores con convenios colectivos, actividades de alto riesgo laboral o países con alta volatilidad regulatoria. Los valores que mostramos son el piso legal, no el máximo posible.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Qué diferencia a las 7 plataformas <span class="eor-blue">EOR</span>?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Precio (de $89 a $649/mes por empleado), cobertura geográfica, calidad del soporte y velocidad de onboarding. <strong>Native Teams y Remofirst</strong> son las más económicas. <strong>Deel y Remote</strong> son las más reconocidas. <strong>Multiplier</strong> tiene el mejor soporte en español para equipos latinoamericanos. La comparativa completa está en la <a href="#s04">Estación 04</a>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Qué pasa si el empleado renuncia o lo desvinculo?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">El <span class="eor-blue">EOR</span> gestiona la desvinculación según la legislación local. <strong>Las indemnizaciones por despido sin causa, vacaciones no gozadas y demás obligaciones laborales corren por cuenta tuya</strong> (vos sos el "cliente final"), pero el <span class="eor-blue">EOR</span> las liquida según la ley del país. Antes de contratar, pedile al <span class="eor-blue">EOR</span> un detalle de costos potenciales de desvinculación en cada país.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Mi empresa queda expuesta legalmente con un <span class="eor-blue">EOR</span>?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">En general no, porque el <span class="eor-blue">EOR</span> figura como empleador legal en el país del empleado. <strong>La responsabilidad laboral local recae sobre el <span class="eor-blue">EOR</span></strong>, no sobre tu empresa. Para evitar problemas: tratá al <span class="eor-blue">EOR</span> como un proveedor real, no como un disfraz.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Puedo cambiar de plataforma <span class="eor-blue">EOR</span> sin perder al empleado?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Sí, pero requiere coordinación. <strong>El empleado debe terminar el contrato con el <span class="eor-blue">EOR</span> actual y firmar uno nuevo con el <span class="eor-blue">EOR</span> siguiente</strong>. Lo más prolijo es hacerlo a fin de mes, liquidando vacaciones pendientes. Algumas plataformas (como Deel y Remote) tienen procesos asistidos de migración.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Cómo se pagan los impuestos en mi país de origen?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">El servicio del <span class="eor-blue">EOR</span> se factura desde la jurisdicción de la plataforma (Estados Unidos, Reino Unido, Singapur, etc.). Para tu empresa, <strong>es un gasto de "servicios profesionales del exterior"</strong> deducible en la mayoría de los países. Consultá con tu contador la situación específica de tu país y régimen.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿COCO <span class="eor-blue">EOR</span> tiene afiliación con las plataformas que compara?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">Sí, y lo decimos explícitamente. Si hacés clic en una plataforma y contratás su servicio, COCO <span class="eor-blue">EOR</span> recibe una comisión de afiliado. <strong>Eso no cambia los datos que mostramos</strong> — los costos de cargas patronales vienen de fuentes oficiales, no de las plataformas. El comparador ordena por precio total real, no por comisión.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button"><span class="faq-question">¿Qué pasa si el país donde quiero contratar no está en la lista?</span><span class="faq-plus"></span></button>
+        <div class="faq-answer">La primera versión cubre 12 países de LATAM + España. Estamos trabajando en expandir la cobertura. Si necesitás un país específico, <strong>escribinos y priorizamos esa investigación</strong> para la próxima actualización.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="station" id="blog">
+    <div class="station-head">
+      <span class="station-num" style="color:var(--ink-3);">—</span>
+      <div class="station-meta">
+        <span class="station-tag">Blog</span>
+        <h2 class="station-title">Notas y análisis</h2>
+      </div>
+    </div>
+    <p class="station-sub">Casos, comparativas y guías cortas sobre contratación remota en LATAM. Sin humo, con datos verificados.</p>
+    <div class="blog-grid" id="blog-grid"></div>
+  </section>
+
+  <!-- Modal Blog -->
+  <div class="blog-modal" id="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+    <div class="blog-modal-inner">
+      <div class="blog-modal-head">
+        <div class="blog-modal-head-text">
+          <div class="blog-modal-cat" id="blog-modal-cat"></div>
+          <h3 class="blog-modal-title" id="blog-modal-title"></h3>
+          <div class="blog-modal-meta" id="blog-modal-meta"></div>
+        </div>
+        <button class="blog-modal-close" id="blog-modal-close" aria-label="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="blog-modal-body" id="blog-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <section class="station" id="contacto" style="padding-bottom: 56px;">
+    <div class="station-head">
+      <span class="station-num" style="color:var(--ink-3);">—</span>
+      <div class="station-meta">
+        <span class="station-tag">Contacto</span>
+        <h2 class="station-title">¿Tenés una consulta puntual?</h2>
+      </div>
+    </div>
+    <p class="station-sub">Si tenés dudas sobre un caso específico, querés que agreguemos un país o plataforma, o necesitás orientación antes de contratar, escribinos. Respondemos en 24–48 horas.</p>
+    <div class="contact-box">
+      <div style="display:flex;align-items:center;gap:12px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid #2a3441;">
+        <div style="width:36px;height:36px;background:rgba(0,153,255,.15);border-radius:8px;display:grid;place-items:center;font-size:16px;">✉️</div>
+        <div>
+          <div style="font-family:var(--display);font-weight:700;font-size:17px;color:white;letter-spacing:-0.01em;">Escribinos directamente</div>
+          <div style="font-size:13px;color:#94a3b8;">Respondemos en 24–48 horas hábiles</div>
+        </div>
+      </div>
+      <form id="contact-form" onsubmit="return false;">
+        <div class="contact-grid">
+          <div class="field"><label for="ct-nombre">Nombre</label><input id="ct-nombre" type="text" placeholder="Tu nombre" required></div>
+          <div class="field"><label for="ct-email">Email</label><input id="ct-email" type="email" placeholder="tu@empresa.com" required></div>
+          <div class="field">
+            <label for="ct-pais">País de interés</label>
+            <select id="ct-pais" required onchange="document.getElementById('ct-pais-otro-wrap').style.display=this.value==='otro'?'block':'none'">
+              <option value="">Seleccioná un país</option>
+            </select>
+          </div>
+          <div class="field" id="ct-pais-otro-wrap" style="display:none;"><label for="ct-pais-otro">Especificá el país</label><input id="ct-pais-otro" type="text" placeholder="Escribí tu país"></div>
+          <div class="field">
+            <label for="ct-tipo">Tipo de consulta</label>
+            <select id="ct-tipo" onchange="document.getElementById('ct-otro-wrap').style.display=this.value==='otro'?'block':'none'">
+              <option value="contratacion">Quiero contratar en un país</option>
+              <option value="comparar">Comparar plataformas EOR</option>
+              <option value="entidad">EOR vs abrir entidad propia</option>
+              <option value="dato">Reportar un dato incorrecto</option>
+              <option value="sugerir">Sugerir país o plataforma</option>
+              <option value="otro">Otro (especificá)</option>
+            </select>
+          </div>
+          <div class="field field-full" id="ct-otro-wrap" style="display:none; margin-top:-8px;"><label for="ct-otro">¿Cuál es tu consulta?</label><input id="ct-otro" type="text" placeholder="Escribí tu tipo de consulta"></div>
+          <div class="field field-full"><label for="ct-mensaje">Consulta</label><textarea id="ct-mensaje" placeholder="Contanos tu situación. Cuanto más detalle, mejor podemos orientarte." required></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-blue" id="ct-submit">Enviar consulta →</button>
+      </form>
+      <div class="contact-success" id="ct-success">✓ Consulta recibida. Respondemos en 24–48 horas hábiles.</div>
+      <p style="margin-top: 14px; font-size: 12px; color: var(--ink-3);">COCO Labs · Tu email no se comparte con terceros.</p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="station" id="newsletter" style="border-bottom: none; padding-bottom: 48px;">
+    <div class="newsletter-box">
+      <span class="newsletter-tag">Newsletter</span>
+      <div class="newsletter-headline">Te avisamos cuando cambien las cargas en tu país</div>
+      <div class="newsletter-sub">Sin spam. Solo cuando un país actualiza sus cargas patronales o un <span class="eor-blue">EOR</span> cambia su precio. Una vez cada 2 meses, máximo.</div>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+        <div class="newsletter-form-row" style="grid-column: 1 / -1;">
+          <input type="email" id="nl-email" placeholder="Tu email" required>
+          <select id="nl-pais" onchange="document.getElementById('nl-otro-wrap').style.display=this.value==='otro'?'flex':'none'">
+            <option value="">País de interés (opcional)</option>
+          </select>
+          <div id="nl-otro-wrap" style="display:none;">
+            <input type="text" id="nl-otro-pais" placeholder="Escribí tu país" style="width:100%;padding:14px 16px;font-family:var(--sans);font-size:15px;font-weight:500;border:1px solid #2a3441;border-radius:10px;background:#1a2330;color:white;">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-blue newsletter-cta" id="nl-submit" style="grid-column: 1 / -1;">Suscribirme →</button>
+      </form>
+      <div class="newsletter-success" id="nl-success">✓ Listo. Te vamos a avisar cuando haya novedades.</div>
+      <div class="newsletter-mini">COCO Labs · No vendemos ni compartimos tu email. Te podés desuscribir cuando quieras.</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="COCO EOR">
+          <svg class="logo-svg" viewBox="30 24 162 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g transform="translate(30, 24)">
+              <rect x="0" y="0" width="42" height="42" rx="9" fill="#2a2a2a" stroke="#3a3a3a" stroke-width="1.5"/>
+              <rect x="7"  y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="7"  width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="7"  y="24" width="11" height="11" rx="2.5" fill="#505050"/>
+              <rect x="24" y="24" width="11" height="11" rx="2.5" fill="#0099FF"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(49.000, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(63.168, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z" transform="translate(78.040, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(92.208, 29) scale(0.022, -0.022)" fill="#ffffff"/>
+              <path d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z" transform="translate(112.080, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z" transform="translate(127.268, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+              <path d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z" transform="translate(145.140, 29) scale(0.022, -0.022)" fill="#0099FF"/>
+            </g>
+          </svg>
+        </a>
+        <p class="footer-tagline">Comparador honesto de plataformas <span class="eor-blue">EOR</span> para contratar en LATAM y España. Datos oficiales, sin estimaciones de marketing.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Herramientas</div>
+        <ul>
+          <li><a href="#s01">Calculadora</a></li>
+          <li><a href="#s02">Comparador</a></li>
+          <li><a href="#s03">EOR vs entidad</a></li>
+          <li><a href="#s04">Elegir plataforma</a></li>
+          <li><a href="#guias">Guías por país</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Información</div>
+        <ul>
+          <li><a href="#metodologia">Metodología</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p><strong>Sobre los datos:</strong> Los porcentajes de cargas patronales son estables (cambian raramente, generalmente por decreto anual). Los cálculos de costo total son modelos de referencia sobre una base de $1.200 USD/mes de salario bruto y no incluyen costos de onboarding ni fees de plataformas EOR salvo cuando se indica.</p>
+      <p><strong>Aviso legal:</strong> COCO EOR no es asesor legal ni contable. Para decisiones de contratación, consultá a un especialista en derecho laboral local. La información aquí publicada tiene fines informativos y orientativos.</p>
+      <p><strong>Afiliados:</strong> Cuando contratás una plataforma a través de los botones de este sitio, COCO EOR puede recibir una comisión. Esa comisión no afecta el precio que vos pagás ni el orden en que aparecen las plataformas.</p>
+      <p>© 2026 COCO Labs · Datos al 15/05/2026 · Próxima revisión: 14/07/2026 · Simple y claro. — COCO <span class="eor-blue">EOR</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     DATA + LÓGICA
+     ============================================================ -->
+<script>
+function highlightEOR(root) {
+  root = root || document.body;
+  var SKIP = {SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,CODE:1,PRE:1};
+  function getClass(el) { var c = el.className; return (typeof c === 'string') ? c : (c && c.baseVal ? c.baseVal : ''); }
+  function walk(node) {
+    if (node.nodeType === 3) {
+      if (node.textContent.indexOf('EOR') === -1) return;
+      var parent = node.parentElement;
+      if (!parent || SKIP[parent.tagName]) return;
+      if (getClass(parent).indexOf('eor-blue') > -1) return;
+      var parts = node.textContent.split(/\b(EOR)\b/);
+      if (parts.length <= 1) return;
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i] === 'EOR') {
+          var s = document.createElement('span');
+          s.className = 'eor-blue'; s.textContent = 'EOR';
+          frag.appendChild(s);
+        } else if (parts[i]) {
+          frag.appendChild(document.createTextNode(parts[i]));
+        }
+      }
+      parent.replaceChild(frag, node);
+    } else if (node.nodeType === 1) {
+      if (SKIP[node.tagName]) return;
+      if (getClass(node).indexOf('eor-blue') > -1) return;
+      var children = Array.prototype.slice.call(node.childNodes);
+      for (var j = 0; j < children.length; j++) walk(children[j]);
+    }
+  }
+  walk(root);
+}
+
+const PAISES = [
+  { code: 'BR', flag: '🇧🇷', name: 'Brasil',     cargas: 62.2,  incluye: 'INSS · FGTS · aguinaldo · vacaciones' },
+  { code: 'CR', flag: '🇨🇷', name: 'Costa Rica', cargas: 39.05, incluye: 'CCSS · INA · aguinaldo · vacaciones' },
+  { code: 'PE', flag: '🇵🇪', name: 'Perú',       cargas: 36.8,  incluye: 'ESSALUD · CTS · gratificaciones · vacaciones' },
+  { code: 'AR', flag: '🇦🇷', name: 'Argentina',  cargas: 36.5,  incluye: 'SS · obra social · ART · SAC · vacaciones', variable: 'En Argentina, las asignaciones familiares (~7.5%) varían según composición del grupo familiar.' },
+  { code: 'CO', flag: '🇨🇴', name: 'Colombia',   cargas: 34.2,  incluye: 'EPS · pensión · ARL · prima · cesantías · vacaciones', variable: 'En Colombia, la Caja de Compensación Familiar (~4%) puede variar según convenio sectorial.' },
+  { code: 'EC', flag: '🇪🇨', name: 'Ecuador',    cargas: 32.98, incluye: 'IESS · décimos · vacaciones · fondos de reserva' },
+  { code: 'ES', flag: '🇪🇸', name: 'España',     cargas: 32.1,  incluye: 'SS · paga extra · vacaciones · desempleo' },
+  { code: 'MX', flag: '🇲🇽', name: 'México',     cargas: 29.9,  incluye: 'IMSS · INFONAVIT · aguinaldo · prima vacacional' },
+  { code: 'PA', flag: '🇵🇦', name: 'Panamá',     cargas: 30.42, incluye: 'CSS · décimo · vacaciones · riesgos' },
+  { code: 'UY', flag: '🇺🇾', name: 'Uruguay',    cargas: 28.6,  incluye: 'BPS · aguinaldo · vacaciones · salario vacacional' },
+  { code: 'PY', flag: '🇵🇾', name: 'Paraguay',   cargas: 28.17, incluye: 'IPS · aguinaldo · vacaciones' },
+  { code: 'CL', flag: '🇨🇱', name: 'Chile',      cargas: 22.4,  incluye: 'AFP · salud · cesantía · gratificación · vacaciones' }
+];
+
+const PLATAFORMAS = [
+  { id: 'native-teams', name: 'Native Teams', tag: 'EOR · Macedonia del Norte', fee: 89,  logoText: 'NT', logoBg: '#0a1929', badge: 'Más económica', badgeStyle: '', model: 'aggregator', modelLabel: 'Modelo agregador', tags: [{cls:'ptag-price',txt:'Más económica'},{cls:'ptag-speed',txt:'IBAN propio'}], profile: '<strong>Ideal para:</strong> freelancers y equipos pequeños en Europa. Cobertura LATAM limitada (65–85 países). Menor reconocimiento de marca.', points: ['Precio más bajo del mercado ($89/mes)', 'IBAN propio + tarjeta de gastos por empleado', 'Sin costos de setup ni offboarding'] },
+  { id: 'remofirst',    name: 'Remofirst',    tag: 'EOR · Estados Unidos',       fee: 199, logoText: 'RF', logoBg: '#1a3a52', badge: 'Mayor cobertura', badgeStyle: 'gray', model: 'aggregator', modelLabel: 'Modelo agregador', tags: [{cls:'ptag-price',txt:'Bajo costo'},{cls:'ptag-speed',txt:'24-72h onboarding'},{cls:'ptag-brand',txt:'185+ países'}], profile: '<strong>Ideal para:</strong> startups con presupuesto ajustado que necesitan cubrir muchos países. 185+ países, todo vía socios locales.', points: ['$199/mes — segunda opción más económica', 'Onboarding en 24–72 horas (muy rápido)', 'Chat 24/7 pero sin app móvil nativa'] },
+  { id: 'multiplier',   name: 'Multiplier',   tag: 'EOR · Singapur',             fee: 400, logoText: 'M',  logoBg: '#1a1a2e', badge: 'Mejor para APAC', badgeStyle: 'amber', model: 'hybrid', modelLabel: 'Modelo híbrido', tags: [{cls:'ptag-esop',txt:'ESOP integrado'},{cls:'ptag-legal',txt:'ISO + SOC'},{cls:'ptag-speed',txt:'APAC'}], profile: '<strong>Ideal para:</strong> equipos con empleados en Asia-Pacífico y LATAM. Gestión de acciones ESOP integrada.', points: ['40+ entidades propias en mercados prioritarios', 'Soporte ESOP para startups con equity', 'Soporte limitado fines de semana (24/5)'] },
+  { id: 'lano',         name: 'Lano',         tag: 'EOR · Alemania',             fee: 594, logoText: 'L',  logoBg: '#2d3748', badge: 'Para multi-entidad', badgeStyle: 'gray', model: 'aggregator', modelLabel: 'Modelo agregador', tags: [{cls:'ptag-fx',txt:'Ahorro en FX'},{cls:'ptag-multi',txt:'Multi-entidad'},{cls:'ptag-brand',txt:'Workday + NetSuite'}], profile: '<strong>Ideal para:</strong> empresas que ya tienen entidades propias en varios países y buscan consolidar nómina en un panel único.', points: ['Especialista en consolidación de nómina multi-país', 'Ahorro de hasta 3% en conversiones FX', 'Integraciones con Workday, NetSuite, HiBob'] },
+  { id: 'deel',         name: 'Deel',         tag: 'EOR · Estados Unidos',       fee: 599, logoText: 'D',  logoBg: '#0a4d3a', badge: 'Más reconocida', badgeStyle: '', model: 'owned', modelLabel: '150+ entidades propias', tags: [{cls:'ptag-latam',txt:'LATAM nativo'},{cls:'ptag-brand',txt:'Más reconocida'},{cls:'ptag-speed',txt:'70+ integraciones'}], profile: '<strong>Ideal para:</strong> empresas que escalan globalmente. Entidades propias en AR, BR, CO, MX, CL y 145+ países más.', points: ['150+ entidades propias — cobertura más amplia', '70+ integraciones (Slack, Workday, QuickBooks)', 'Deel Advance: anticipo de salario hasta 30 días'] },
+  { id: 'oyster',       name: 'Oyster',       tag: 'EOR · Reino Unido',          fee: 649, logoText: 'O',  logoBg: '#4a3a52', badge: 'B-Corp certificada', badgeStyle: '', model: 'aggregator', modelLabel: 'Modelo agregador', tags: [{cls:'ptag-bcorp',txt:'B-Corp'},{cls:'ptag-speed',txt:'Mejor UX'},{cls:'ptag-legal',txt:'Asesor dedicado'}], profile: '<strong>Ideal para:</strong> empresas que priorizan cultura, bienestar del empleado y trato consultivo.', points: ['Única EOR con certificación B-Corp del mercado', 'UX y onboarding más cuidados de la industria', 'Asesores legales y migratorios dedicados'] },
+  { id: 'remote',       name: 'Remote',       tag: 'EOR · Estados Unidos',       fee: 649, logoText: 'Rm', logoBg: '#2d2d4d', badge: 'Mayor seguridad legal', badgeStyle: '', model: 'owned', modelLabel: '82+ entidades propias', tags: [{cls:'ptag-legal',txt:'100% propias'},{cls:'ptag-brand',txt:'Watchtower'},{cls:'ptag-price',txt:'Contratistas $29/mes'}], profile: '<strong>Ideal para:</strong> empresas en sectores regulados (fintech, salud, IP sensible). 100% entidades propias — sin socios externos.', points: ['100% entidades propias — sin terceros en ningún país', 'Remote Watchtower: alertas proactivas de reclasificación', 'Contratistas a $29/mes — más barato que Deel'] }
+];
+
+const IMPUESTOS_PAIS = {
+  BR:'IRPJ 15% + CSLL 9% = ~34% sobre utilidades + PIS/COFINS sobre ingresos',
+  CR:'Impuesto sobre la Renta 30% sobre utilidades',
+  PE:'Impuesto a la Renta 29.5% sobre utilidades',
+  AR:'Imp. a las Ganancias 35% + IIBB provincial (3–5%) + tasas municipales',
+  CO:'Impuesto de Renta 35% + ICA municipal (0.4–1.4% sobre ingresos brutos)',
+  EC:'Impuesto a la Renta 25% sobre utilidades',
+  ES:'Impuesto sobre Sociedades 25% (23% para pymes)',
+  MX:'ISR 30% sobre utilidades',
+  PA:'Impuesto sobre la Renta 25% sobre utilidades',
+  UY:'IRAE 25% sobre utilidades',
+  PY:'IRACIS 10% — la tasa más baja de la región',
+  CL:'Impuesto de Primera Categoría 27% sobre utilidades',
+};
+
+const DATOS_EXTRA = {
+  BR: { entidad: { tipo:'LTDA', constMin:4000, constMax:9000, mantMin:1200, mantMax:2500, equi:'10–15' }, riesgo:'Alto. Fiscalización agresiva del INSS y Justicia del Trabajo en casos de reclasificación de contractor.', minimo:'R$ 1.412/mes (aprox. USD 280)', nota:'' },
+  CR: { entidad: { tipo:'S.A.', constMin:1500, constMax:3500, mantMin:400, mantMax:900, equi:'6–10' }, riesgo:'Medio. La CCSS audita relaciones laborales y puede reclasificar contratos de servicios.', minimo:'₡358.609/mes (aprox. USD 670)', nota:'' },
+  PE: { entidad: { tipo:'SAC', constMin:1500, constMax:3000, mantMin:350, mantMax:800, equi:'5–8' }, riesgo:'Medio. SUNAFIL y SUNAT pueden cruzar información para detectar empleo encubierto.', minimo:'S/ 1.025/mes (aprox. USD 270)', nota:'' },
+  AR: { entidad: { tipo:'SAS / SRL', constMin:1500, constMax:4000, mantMin:400, mantMax:1000, equi:'6–10' }, riesgo:'Alto. Ministerio de Trabajo y AFIP coordinan inspecciones. Reclasificaciones retroactivas hasta 5 años.', minimo:'$ARS 322.200/mes (aprox. USD 230)', nota:'Las asignaciones familiares (~7.5%) varían según composición del grupo familiar.' },
+  CO: { entidad: { tipo:'SAS', constMin:1500, constMax:3500, mantMin:350, mantMax:800, equi:'6–10' }, riesgo:'Alto. UGPP fiscaliza pagos al Sistema de Seguridad Social. Sanciones por evasión severas.', minimo:'$1.423.500 COP/mes (aprox. USD 360)', nota:'La Caja de Compensación Familiar (~4%) puede variar según convenio sectorial.' },
+  EC: { entidad: { tipo:'Compañía Ltda.', constMin:1800, constMax:4500, mantMin:350, mantMax:700, equi:'5–8' }, riesgo:'Medio. IESS y Ministerio del Trabajo pueden detectar relaciones laborales encubiertas.', minimo:'USD 470/mes (Salario Básico Unificado 2026)', nota:'' },
+  ES: { entidad: { tipo:'S.L.', constMin:3500, constMax:6000, mantMin:800, mantMax:1800, equi:'8–12' }, riesgo:'Alto. Inspección de Trabajo y TGSS muy activas. "Falsos autónomos" es figura legal sancionada.', minimo:'€1.184/mes (aprox. USD 1.270)', nota:'' },
+  MX: { entidad: { tipo:'S.A. de C.V.', constMin:2500, constMax:5000, mantMin:600, mantMax:1200, equi:'8–12' }, riesgo:'Medio-Alto. Reforma laboral 2021 endureció controles sobre outsourcing y simulación.', minimo:'$248/día en zona libre fronteriza, $207/día resto (aprox. USD 360–430/mes)', nota:'' },
+  PA: { entidad: { tipo:'S.A.', constMin:1500, constMax:3500, mantMin:400, mantMax:800, equi:'5–8' }, riesgo:'Bajo-Medio. La CSS audita pero menos agresivamente que vecinos.', minimo:'B/ 326–671/quincena según sector (aprox. USD 650–1.340/mes)', nota:'' },
+  UY: { entidad: { tipo:'S.A. / S.R.L.', constMin:2000, constMax:4500, mantMin:500, mantMax:1000, equi:'6–10' }, riesgo:'Medio. BPS audita seriamente. Las multas por evasión son significativas.', minimo:'$22.268 UYU/mes (aprox. USD 580)', nota:'' },
+  PY: { entidad: { tipo:'S.R.L.', constMin:1500, constMax:3000, mantMin:300, mantMax:700, equi:'4–7' }, riesgo:'Medio. Ministerio de Trabajo e IPS pueden auditar relaciones laborales.', minimo:'Gs. 2.798.309/mes (aprox. USD 380)', nota:'' },
+  CL: { entidad: { tipo:'SpA / Ltda.', constMin:1500, constMax:4000, mantMin:400, mantMax:900, equi:'6–10' }, riesgo:'Medio-Alto. Dirección del Trabajo activa en fiscalización. Multas crecientes desde 2023.', minimo:'$510.636 CLP/mes (aprox. USD 540)', nota:'' }
+};
+
+const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
+const parseSalario = str => parseInt(String(str).replace(/[^\d]/g,'') || '0', 10);
+const formatInput  = n => n.toLocaleString('es-AR');
+
+// Poblar dropdowns
+const calcPais = document.getElementById('calc-pais');
+const compPais = document.getElementById('comp-pais');
+PAISES.forEach(p => {
+  const o1 = document.createElement('option'); o1.value = p.code; o1.textContent = `${p.flag} ${p.name}`; if(p.code==='BR') o1.selected=true; calcPais.appendChild(o1);
+  const o2 = o1.cloneNode(true); if(p.code==='BR') o2.selected=true; compPais.appendChild(o2);
+});
+
+const calcSalarioInput = document.getElementById('calc-salario');
+const calcTotal        = document.getElementById('calc-total');
+const calcMeta         = document.getElementById('calc-meta');
+const calcBdBase       = document.getElementById('calc-bd-base');
+const calcBdCargas     = document.getElementById('calc-bd-cargas');
+const calcBdPct        = document.getElementById('calc-bd-pct');
+const calcBdIncluye    = document.getElementById('calc-bd-incluye');
+const calcVariable     = document.getElementById('calc-variable');
+const bridgeCountry    = document.getElementById('bridge-country');
+
+function renderCalc() {
+  const pais    = PAISES.find(p => p.code === calcPais.value) || PAISES[0];
+  const salario = parseSalario(calcSalarioInput.value);
+  const cargas  = salario * (pais.cargas / 100);
+  const total   = salario + cargas;
+  calcTotal.textContent    = fmt(total);
+  calcMeta.textContent     = `Contratar a alguien en ${pais.name} con ${fmt(salario)} USD de salario acordado`;
+  calcBdBase.textContent   = fmt(salario);
+  calcBdCargas.textContent = '+ ' + fmt(cargas);
+  calcBdPct.textContent    = `${pais.cargas}% sobre salario`;
+  calcBdIncluye.textContent = pais.incluye;
+  if (pais.variable) { calcVariable.textContent = '⚠ ' + pais.variable; calcVariable.style.display = 'inline-flex'; }
+  else { calcVariable.style.display = 'none'; }
+  bridgeCountry.textContent = pais.name;
+  compPais.value = pais.code;
+  if (parseSalario(compSalarioInput.value) !== salario) compSalarioInput.value = formatInput(salario);
+  renderCompare();
+  renderEquilibrio();
+  renderFinal();
+}
+
+const compSalarioInput = document.getElementById('comp-salario');
+const compCountryTitle = document.getElementById('comp-country-title');
+const compareGrid      = document.getElementById('compare-grid');
+
+function badgeHtml(badge, style) {
+  if (!badge) return '';
+  return `<span class="${style ? 'badge '+style : 'badge'}">${badge}</span>`;
+}
+
+function renderCompare() {
+  const pais    = PAISES.find(p => p.code === compPais.value) || PAISES[0];
+  const salario = parseSalario(compSalarioInput.value);
+  const cargas  = salario * (pais.cargas / 100);
+  const base    = salario + cargas;
+  compCountryTitle.textContent = pais.name;
+  const platCalc = PLATAFORMAS.map(pl => ({...pl, totalReal: base + pl.fee})).sort((a,b) => a.totalReal - b.totalReal);
+  compareGrid.innerHTML = platCalc.map((pl, idx) => `
+    <div class="platform-card${idx===0?' featured':''}">
+      <div class="platform-head">
+        <div class="platform-name-block">
+          <div class="platform-logo" style="background:${pl.logoBg};">${pl.logoText}</div>
+          <div><div class="platform-name">${pl.name}</div><div class="platform-tagline">${pl.tag}</div></div>
+        </div>
+        ${badgeHtml(pl.badge, pl.badgeStyle)}
+      </div>
+      <span class="platform-model ${pl.model}">${pl.modelLabel}</span>
+      <div class="platform-pricing">
+        <div><div class="pricing-label">Fee mensual</div><div class="pricing-value">$${pl.fee}</div></div>
+        <div><div class="pricing-label">Total con tu salario</div><div class="pricing-value big">${fmt(pl.totalReal)}</div></div>
+      </div>
+      <div class="platform-profile">${pl.profile}</div>
+      ${pl.tags ? `<div class="platform-tags">${pl.tags.map(t=>`<span class="ptag ${t.cls}">${t.txt}</span>`).join('')}</div>` : ''}
+      <ul class="platform-points">${pl.points.map(pt=>`<li>${pt}</li>`).join('')}</ul>
+      <a href="#pending" class="btn btn-blue platform-cta" data-affiliate="${pl.id}">Ir a ${pl.name} →</a>
+    </div>`).join('');
+  requestAnimationFrame(() => highlightEOR(compareGrid));
+}
+
+const equiPais  = document.getElementById('equi-pais');
+const equiNum   = document.getElementById('equi-num');
+const equiMeta  = document.getElementById('equi-meta');
+const equiTable = document.getElementById('equi-table');
+
+function renderEquilibrio() {
+  const pais  = PAISES.find(p => p.code === compPais.value) || PAISES[0];
+  const datos = DATOS_EXTRA[pais.code];
+  equiPais.textContent = pais.name;
+  if (datos && datos.entidad.equi) {
+    equiNum.textContent  = `${datos.entidad.equi} empleados`;
+    equiMeta.textContent = `Constitución de ${datos.entidad.tipo}: $${datos.entidad.constMin.toLocaleString('es-AR')}–$${datos.entidad.constMax.toLocaleString('es-AR')} USD · Mantenimiento mensual: $${datos.entidad.mantMin.toLocaleString('es-AR')}–$${datos.entidad.mantMax.toLocaleString('es-AR')} USD. Más allá del punto de equilibrio, conviene entidad propia.`;
+  }
+  let rows = '<div class="equilibrio-row head"><div>País</div><div>Constitución (USD)</div><div>Mantenimiento /mes</div><div>Equilibrio</div></div>';
+  PAISES.forEach(p => {
+    const d = DATOS_EXTRA[p.code];
+    if (!d) { rows += `<div class="equilibrio-row"><div class="pais-name">${p.flag} ${p.name}</div><div class="pending" colspan="3">consultar</div></div>`; }
+    else { rows += `<div class="equilibrio-row"><div class="pais-name">${p.flag} ${p.name}</div><div class="val" data-label="Const">$${d.entidad.constMin.toLocaleString('es-AR')}–$${d.entidad.constMax.toLocaleString('es-AR')}</div><div class="val" data-label="Mant">$${d.entidad.mantMin.toLocaleString('es-AR')}–$${d.entidad.mantMax.toLocaleString('es-AR')}</div><div class="equi">${d.entidad.equi ? ((['PE','EC','PA','PY'].includes(p.code)?'~':'')+d.entidad.equi+' emp.') : '–'}</div></div>`; }
+  });
+  equiTable.innerHTML = rows;
+}
+
+const finalList = document.getElementById('final-list');
+function renderFinal() {
+  const pais    = PAISES.find(p => p.code === compPais.value) || PAISES[0];
+  const salario = parseSalario(compSalarioInput.value);
+  const cargas  = salario * (pais.cargas / 100);
+  const base    = salario + cargas;
+  const platCalc = PLATAFORMAS.map(pl => ({...pl, totalReal: base + pl.fee})).sort((a,b) => a.totalReal - b.totalReal);
+  finalList.innerHTML = platCalc.map(pl => {
+    const tagsHtml = pl.tags ? pl.tags.map(t=>`<span class="ptag ${t.cls}" style="font-size:10px;padding:2px 7px;">${t.txt}</span>`).join(' ') : '';
+    return `<div class="final-row">
+      <div class="final-row-platform">
+        <div class="final-row-logo" style="background:${pl.logoBg};">${pl.logoText}</div>
+        <div class="final-row-info">
+          <div class="final-row-name">${pl.name}</div>
+          <div class="final-row-tag" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">Fee $${pl.fee}/mes ${tagsHtml}</div>
+        </div>
+      </div>
+      <div class="final-row-price">${fmt(pl.totalReal)}</div>
+      <a href="#pending" class="btn btn-blue final-row-cta" data-affiliate="${pl.id}">Ir →</a>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(() => highlightEOR(finalList));
+}
+
+const guidesList = document.getElementById('guides-list');
+function renderGuias() {
+  guidesList.innerHTML = PAISES.map((p, idx) => {
+    const d = DATOS_EXTRA[p.code] || {};
+    const warning = d.nota ? `<div class="guide-warning">⚠ ${d.nota}</div>` : '';
+    return `<div class="guide-item" data-guide="${idx}">
+      <button class="guide-trigger" type="button">
+        <span class="guide-flag">${p.flag}</span>
+        <span class="guide-name">${p.name}</span>
+        <span class="guide-pct">+${p.cargas}%</span>
+        <span class="guide-chevron"></span>
+      </button>
+      <div class="guide-content">
+        <div class="guide-block">
+          <div class="guide-block-label">Sobrecosto patronal</div>
+          <div class="guide-block-text"><strong>+${p.cargas}%</strong> sobre salario bruto. Incluye: ${p.incluye}.</div>
+          ${warning}
+        </div>
+        <div class="guide-block">
+          <div class="guide-block-label">Riesgo de reclasificación laboral</div>
+          <div class="guide-block-text">${d.riesgo || 'Consultar fuente oficial del país.'}</div>
+        </div>
+        <div class="guide-block">
+          <div class="guide-block-label">Salario mínimo legal</div>
+          <div class="guide-block-text">${d.minimo || 'Consultar fuente oficial.'}</div>
+        </div>
+        <div class="guide-block">
+          <div class="guide-block-label">Constitución de entidad propia</div>
+          <div class="guide-block-text">${d.entidad ? `<strong>${d.entidad.tipo}:</strong> $${d.entidad.constMin.toLocaleString('es-AR')}–$${d.entidad.constMax.toLocaleString('es-AR')} USD setup · $${d.entidad.mantMin.toLocaleString('es-AR')}–$${d.entidad.mantMax.toLocaleString('es-AR')} USD/mes mantenimiento.` : 'Consultar especialista local.'}</div>
+          <div class="guide-warning" style="margin-top:12px;display:block;line-height:1.6;">
+            <div style="font-size:12px;font-weight:700;">⚠ No incluye impuestos corporativos en ${p.name}:</div>
+            <div style="font-size:12px;margin-top:4px;font-weight:600;">${IMPUESTOS_PAIS[p.code] || '~25–35% sobre utilidades + impuestos municipales'}</div>
+            <div style="font-size:11px;margin-top:4px;color:#92400e;">Sumados al costo operativo, el punto de equilibrio real es mayor. Consultá con un contador antes de decidir.</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  guidesList.querySelectorAll('.guide-trigger').forEach(btn => btn.addEventListener('click', () => btn.closest('.guide-item').classList.toggle('open')));
+}
+
+document.querySelectorAll('.faq-trigger').forEach(btn => btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open')));
+
+// Newsletter / Newsletter paises
+const nlPais = document.getElementById('nl-pais');
+PAISES.forEach(p => { const o = document.createElement('option'); o.value = p.code; o.textContent = `${p.flag} ${p.name}`; nlPais.appendChild(o); });
+const oOtroNl = document.createElement('option'); oOtroNl.value='otro'; oOtroNl.textContent='🌐 Otro país'; nlPais.appendChild(oOtroNl);
+
+const NEWSLETTER_WEBHOOK = 'https://hook.us2.make.com/vmilsqejfvv4niejrqs2lawyu382mhr3';
+
+document.getElementById('nl-submit').addEventListener('click', async e => {
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value.trim();
+  if (!email || !email.includes('@')) { document.getElementById('nl-email').style.borderColor='#dc2626'; setTimeout(()=>document.getElementById('nl-email').style.borderColor='',1800); return; }
+  const btn = document.getElementById('nl-submit'); btn.textContent = 'Enviando...'; btn.disabled = true;
+  try { await fetch(NEWSLETTER_WEBHOOK, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, pais: nlPais.value||'', origen:'cocoeor-landing', ts: new Date().toISOString() }) }); } catch(e) {}
+  document.getElementById('nl-success').classList.add('show');
+  document.getElementById('newsletter-form').style.display='none';
+});
+
+// Contacto
+const ctPais = document.getElementById('ct-pais');
+PAISES.forEach(p => { const o = document.createElement('option'); o.value=p.code; o.textContent=`${p.flag} ${p.name}`; ctPais.appendChild(o); });
+const oOtroCt = document.createElement('option'); oOtroCt.value='otro'; oOtroCt.textContent='🌐 Otro país'; ctPais.appendChild(oOtroCt);
+
+document.getElementById('ct-submit').addEventListener('click', async e => {
+  e.preventDefault();
+  const email = document.getElementById('ct-email').value.trim();
+  if (!email || !email.includes('@')) { document.getElementById('ct-email').style.borderColor='#dc2626'; setTimeout(()=>document.getElementById('ct-email').style.borderColor='',1800); return; }
+  const btn = document.getElementById('ct-submit'); btn.textContent='Enviando...'; btn.disabled=true;
+  try { await fetch(NEWSLETTER_WEBHOOK, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ tipo:'contacto', nombre:document.getElementById('ct-nombre')?.value||'', email, pais: ctPais?.value==='otro'?(document.getElementById('ct-pais-otro')?.value||'Otro'):(PAISES.find(p=>p.code===ctPais?.value)?.name||ctPais?.value||''), consulta_tipo: document.getElementById('ct-tipo')?.value==='otro'?document.getElementById('ct-otro')?.value:document.getElementById('ct-tipo')?.value||'', mensaje:document.getElementById('ct-mensaje')?.value||'', origen:'cocoeor-contacto', ts:new Date().toISOString() }) }); } catch(e) {}
+  document.getElementById('contact-form').style.display='none';
+  document.getElementById('ct-success').classList.add('show');
+});
+
+// Eventos calc ↔ comparador
+calcPais.addEventListener('change', () => { compPais.value = calcPais.value; renderCalc(); });
+calcSalarioInput.addEventListener('input', e => { const n = parseSalario(e.target.value); e.target.value = n ? formatInput(n) : ''; renderCalc(); });
+compPais.addEventListener('change', () => { calcPais.value = compPais.value; renderCalc(); });
+compSalarioInput.addEventListener('input', e => { const n = parseSalario(e.target.value); e.target.value = n ? formatInput(n) : ''; calcSalarioInput.value = n ? formatInput(n) : ''; renderCalc(); });
+
+// Scroll spy
+const stations   = document.querySelectorAll('.station[id]');
+const indicators = document.querySelectorAll('.station-sticky-item');
+function updateSpy() { let a=0; stations.forEach((s,i)=>{ if(s.getBoundingClientRect().top < window.innerHeight/2) a=i; }); indicators.forEach((el,i)=>el.classList.toggle('active',i===a)); }
+window.addEventListener('scroll', updateSpy, { passive: true });
+indicators.forEach(el => el.addEventListener('click', () => { const t = document.getElementById(el.dataset.target); if(t) t.scrollIntoView({behavior:'smooth'}); }));
+
+// PDF principal (sección 01)
+document.getElementById('pdf-btn').addEventListener('click', async () => {
+  const emailEl = document.getElementById('pdf-email');
+  const email = emailEl?.value.trim() || '';
+  if (!email || !email.includes('@')) { if(emailEl){emailEl.style.borderColor='#dc2626';setTimeout(()=>emailEl.style.borderColor='',1800);} return; }
+  try { await fetch(NEWSLETTER_WEBHOOK, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ tipo:'pdf-lead', email, pais:PAISES.find(p=>p.code===compPais.value)?.name||'', salario:parseSalario(calcSalarioInput.value), origen:'cocoeor-pdf', ts:new Date().toISOString() }) }); } catch(e){}
+  generarPDF();
+});
+
+function generarPDF() {
+  const pais    = PAISES.find(p => p.code === compPais.value) || PAISES[0];
+  const salario = parseSalario(calcSalarioInput.value);
+  const cargas  = salario * (pais.cargas / 100);
+  const totalPais = salario + cargas;
+  const platCalc = PLATAFORMAS.map(pl=>({...pl,totalReal:totalPais+pl.fee})).sort((a,b)=>a.totalReal-b.totalReal);
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation:'p', unit:'mm', format:'a4' });
+    const m = 20; let y = m;
+    doc.setFillColor(10,10,10); doc.rect(0,0,210,28,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.text('COCO EOR',m,17);
+    doc.setTextColor(0,153,255); doc.text('EOR', m + doc.getTextWidth('COCO '), 17);
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(148,163,184);
+    doc.text('cocoeor.com · Datos al 15/05/2026', 210-m, 17, {align:'right'});
+    y=44;
+    doc.setTextColor(10,10,10); doc.setFontSize(18); doc.setFont('helvetica','bold');
+    doc.text(`Costo real de contratar en ${pais.name}`,m,y); y+=8;
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(74,85,104);
+    doc.text(`Salario acordado: $${salario.toLocaleString('es-AR')} USD/mes`,m,y); y+=14;
+    doc.setFillColor(10,10,10); doc.roundedRect(m,y,170,26,3,3,'F');
+    doc.setTextColor(148,163,184); doc.setFontSize(8); doc.text('COSTO TOTAL MENSUAL ESTIMADO',m+8,y+8);
+    doc.setTextColor(255,255,255); doc.setFontSize(20); doc.setFont('helvetica','bold');
+    doc.text(`$${Math.round(totalPais).toLocaleString('es-AR')} USD`,m+8,y+20);
+    doc.setTextColor(215,119,6); doc.setFontSize(10); doc.text(`+${pais.cargas}% cargas patronales`,210-m-6,y+15,{align:'right'}); y+=36;
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(74,85,104);
+    doc.text(`Incluye: ${pais.incluye}`,m,y); y+=14;
+    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(10,10,10);
+    doc.text('Ranking de plataformas EOR (costo total con tu salario)',m,y); y+=8;
+    platCalc.forEach((pl,i) => {
+      if(y>255){doc.addPage();y=m;}
+      if(i===0){doc.setFillColor(232,244,255);doc.roundedRect(m,y-4,170,14,2,2,'F');}
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(10,10,10); doc.text(`${i+1}. ${pl.name}`,m+4,y+4);
+      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(74,85,104); doc.text(`Fee: $${pl.fee}/mes`,m+60,y+4);
+      doc.setFont('helvetica','bold'); doc.setTextColor(0,153,255); doc.text(`$${Math.round(pl.totalReal).toLocaleString('es-AR')} total`,210-m-4,y+4,{align:'right'});
+      if(i===0){doc.setTextColor(0,122,204);doc.setFontSize(8);doc.text('← MEJOR OPCIÓN PARA TU CASO',m+95,y+4);}
+      y+=12;
+    });
+    y+=8;
+    if(y>255){doc.addPage();y=m;}
+    doc.setFillColor(255,247,237); doc.roundedRect(m,y,170,18,2,2,'F');
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(215,119,6); doc.text('⚠ IMPORTANTE:',m+4,y+6);
+    doc.setFont('helvetica','normal'); doc.setTextColor(74,85,104);
+    doc.text(doc.splitTextToSize('Esta tabla no incluye impuestos corporativos que se aplican si abrís entidad propia. Los puntos de equilibrio marcados con ~ son estimaciones.',155),m+4,y+12); y+=26;
+    const totalPages = doc.getNumberOfPages();
+    for(let i=1;i<=totalPages;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(148,163,184);doc.text('COCO EOR · cocoeor.com · Simple y claro. — COCO Labs · Datos al 15/05/2026',105,291,{align:'center'});}
+    doc.save(`coco-eor-analisis-${pais.code.toLowerCase()}-${salario}.pdf`);
+    const pdfBtn = document.getElementById('pdf-btn'); pdfBtn.textContent='✓ PDF descargado'; pdfBtn.style.background='#059669'; setTimeout(()=>{pdfBtn.textContent='Descargar PDF →';pdfBtn.style.background='';},3000);
+  } catch(err){ console.error('PDF error:',err); }
+}
+
+// ============================================================
+// BLOG — Datos i18n (ES base, PT y EN para sumar en futuras sesiones)
+// ============================================================
+const LANG = 'es'; // Toggle futuro: 'es' | 'pt' | 'en'
+
+const BLOG_ENTRIES = [
+  {
+    id: 'arg-2026-dev',
+    es: {
+      cat: 'CASOS · ARGENTINA',
+      title: 'Argentina 2026: cuánto cuesta realmente contratar a un desarrollador',
+      excerpt: 'Las cargas patronales suman 36.5% sobre el salario bruto. Si acordás USD 1.200, el costo real para tu empresa es de USD 1.638. Y eso es solo el principio.',
+      author: 'COCO EOR', date: '15 may 2026', read: '6 min',
+      body: `
+<p>Contratar a un desarrollador en Argentina parece simple: acordás un salario y pagás. Pero el salario bruto es solo el 60–65% del costo real para tu empresa. El resto se reparte entre cargas patronales, aguinaldo, vacaciones y ART.</p>
+
+<h2>El cálculo real</h2>
+<p>Argentina tiene un <strong>sobrecosto patronal del 36.5%</strong> sobre el salario bruto. Eso incluye:</p>
+<ul>
+  <li>Aportes patronales a la seguridad social (~18%)</li>
+  <li>Obra social (~6%)</li>
+  <li>ART (alícuota variable según riesgo, ~3%)</li>
+  <li>SAC mensualizado (~8.3%)</li>
+  <li>Asignaciones familiares (~7.5%, varía según composición familiar)</li>
+</ul>
+
+<div class="data-box">
+  <div class="data-label">Ejemplo concreto sobre la base del sitio</div>
+  Salario bruto acordado: USD 1.200/mes<br>
+  + Cargas patronales 36.5%: USD 438<br>
+  <strong style="color:var(--blue);">Costo total empresa: USD 1.638/mes</strong>
+</div>
+
+<h2>Lo que la mayoría no calcula</h2>
+<p>Más allá del 36.5% legal, hay costos ocultos según el convenio colectivo aplicable. La UOM, UOCRA o el convenio de comercio pueden agregar adicionales no contemplados en el cálculo base. Si tu empleado está bajo convenio de Software (CCT 1023/06), no aplican adicionales especiales — pero igual estás obligado a cumplir el resto.</p>
+
+<h2>El error caro: contractor "para evitar las cargas"</h2>
+<p>Si contratás como monotributista o contractor pero hay subordinación de hecho (horarios, dirección cotidiana, exclusividad), AFIP y el Ministerio de Trabajo pueden reclasificar la relación. <strong>Las multas y deuda retroactiva pueden alcanzar hasta 5 años</strong> de aportes no pagados, más intereses. Para un developer de USD 1.200/mes, eso es una deuda potencial de USD 26.000+.</p>
+
+<h2>La salida limpia: EOR</h2>
+<p>Un Employer of Record contrata legalmente al empleado en Argentina, paga todas las cargas y vos pagás un fee mensual fijo. Para el mismo developer:</p>
+
+<div class="info-box">
+  <strong>Con Native Teams ($89/mes):</strong> USD 1.727/mes total (USD 1.638 cargas + USD 89 fee)<br>
+  <strong>Con Deel ($599/mes):</strong> USD 2.237/mes total<br>
+  <strong>Con Remofirst ($199/mes):</strong> USD 1.837/mes total<br><br>
+  Sin abrir SAS, sin contador, sin riesgo de reclasificación, onboarding en 3–7 días.
+</div>
+
+<h2>Cuándo conviene EOR vs entidad propia en Argentina</h2>
+<p>Hasta 6–10 empleados en Argentina, un EOR es más barato que abrir una SAS. Más allá de ese número, la entidad local sale a cuenta. La excepción: si tu prioridad es velocidad de contratación, el EOR te onboardea en 24–72 horas. Una SAS lleva 30–60 días entre constitución y CUIT operativo.</p>
+
+<a href="#s02" class="blog-cta" data-close-modal="1">Compará los 7 EORs disponibles para Argentina →</a>`
+    }
+  },
+  {
+    id: 'deel-vs-remote-vs-remofirst',
+    es: {
+      cat: 'COMPARATIVAS',
+      title: 'Deel vs Remote vs Remofirst: la comparativa honesta que nadie te da',
+      excerpt: 'Las tres son las EOR más conocidas, pero juegan en ligas distintas. Una tiene 150+ entidades propias, otra 82+, la tercera funciona como agregador. La diferencia te puede costar caro.',
+      author: 'COCO EOR', date: '12 may 2026', read: '8 min',
+      body: `
+<p>Si buscás "mejor EOR" en Google, las tres primeras opciones son siempre Deel, Remote y Remofirst. Pero detrás del marketing, son productos muy distintos. Lo que diferencia una de otra no es el precio, es la <strong>arquitectura legal</strong>.</p>
+
+<h2>Los tres modelos en una línea</h2>
+<ul>
+  <li><strong>Deel:</strong> 150+ entidades propias, modelo híbrido con partners en países menores. USD 599/mes.</li>
+  <li><strong>Remote:</strong> 82+ entidades propias, 100% sin terceros. USD 649/mes.</li>
+  <li><strong>Remofirst:</strong> 0 entidades propias, agregador puro de socios locales en 185+ países. USD 199/mes.</li>
+</ul>
+
+<h2>Cobertura LATAM real</h2>
+<p>Deel tiene entidades propias en <strong>Argentina, Brasil, Colombia, México y Chile</strong>. Esto significa que cuando contratás un brasileño con Deel, Deel es el empleador legal directo, no un socio. Remote tiene entidades propias en menos países de LATAM, pero las que tiene son sólidas. Remofirst no tiene entidad propia en ningún país de la región — opera 100% vía partners locales.</p>
+
+<div class="info-box">
+  <strong>¿Por qué importa?</strong> Si hay una disputa laboral, un retraso en un pago, una inspección de AFIP o IRPJ, con Deel o Remote el reclamo va directo al EOR. Con Remofirst, el EOR escala al partner local, que escala al cliente. Más intermediarios = más lentitud.
+</div>
+
+<h2>Soporte e integraciones</h2>
+<p>Deel tiene 70+ integraciones nativas (Slack, Workday, QuickBooks, BambooHR). Remote tiene menos integraciones pero su API es más limpia. Remofirst tiene chat 24/7 pero no tiene app móvil ni catálogo amplio de integraciones plug-and-play — para conectarlo con tu HRIS necesitás desarrollar contra su API.</p>
+
+<h2>Diferenciales únicos</h2>
+<div class="data-box">
+  <div class="data-label">Lo que solo tiene cada una</div>
+  <strong>Deel:</strong> Deel Advance — anticipo de salario hasta 30 días para el empleado.<br><br>
+  <strong>Remote:</strong> Remote Watchtower — alertas proactivas de reclasificación laboral por país. Único en el mercado.<br><br>
+  <strong>Remofirst:</strong> Onboarding en 24–72 horas. El más rápido del segmento.
+</div>
+
+<h2>El número que importa: costo total con tu salario</h2>
+<p>Sobre la base de USD 1.200/mes de salario, el costo final cambia según el país y la plataforma. Ejemplo Argentina (cargas 36.5%, salario base + cargas = USD 1.638):</p>
+<ul>
+  <li>Deel: USD 1.638 + USD 599 = <strong>USD 2.237/mes</strong></li>
+  <li>Remote: USD 1.638 + USD 649 = <strong>USD 2.287/mes</strong></li>
+  <li>Remofirst: USD 1.638 + USD 199 = <strong>USD 1.837/mes</strong></li>
+</ul>
+<p>Diferencia anual entre Remofirst y Remote: <strong>USD 5.400 por empleado</strong>. Si tenés 5 empleados, son USD 27.000/año. Pero el ahorro no siempre vale el riesgo.</p>
+
+<h2>Contratistas</h2>
+<p>Para gestionar contratistas (no empleados), los precios cambian. Deel cobra USD 49/mes, Remote USD 29/mes, Remofirst USD 25/mes. Remote es la más barata para equipos mixtos (empleados + contratistas).</p>
+
+<h2>¿Cuál elegir?</h2>
+<ul>
+  <li><strong>Empresa con IP sensible</strong> (fintech, salud, software regulado): Remote. Cero terceros.</li>
+  <li><strong>Equipo grande con sistemas IT establecidos:</strong> Deel. Mejor integración.</li>
+  <li><strong>Startup con presupuesto ajustado:</strong> Remofirst. Lo más barato funcional.</li>
+</ul>
+
+<a href="#s02" class="blog-cta" data-close-modal="1">Ver el ranking completo de 7 plataformas con tu país →</a>`
+    }
+  },
+  {
+    id: 'contractor-vs-eor-brasil',
+    es: {
+      cat: 'CASOS · BRASIL',
+      title: 'Contractor vs EOR en Brasil: por qué la CLT te puede salir muy caro',
+      excerpt: 'Brasil tiene la fiscalización laboral más agresiva de LATAM. Si tu contractor parece empleado, el INSS y la Justiça do Trabalho lo van a reclasificar. Y la deuda es retroactiva.',
+      author: 'COCO EOR', date: '08 may 2026', read: '7 min',
+      body: `
+<p>Brasil es el país con el sobrecosto patronal más alto de LATAM: <strong>62.2% sobre el salario bruto</strong>. Por eso muchas empresas tratan de evitar la CLT (Consolidação das Leis do Trabalho) contratando como contractor PJ. Es la decisión más cara que pueden tomar.</p>
+
+<h2>Por qué Brasil es distinto al resto</h2>
+<p>La Justiça do Trabalho brasileña es uno de los sistemas judiciales laborales más activos del mundo. Tiene una doctrina consolidada llamada "Princípio da Primazia da Realidade" — la realidad fáctica prevalece sobre lo que dice un contrato.</p>
+
+<p>Eso significa que si tu "contractor PJ" tiene horarios fijos, recibe órdenes diarias, usa herramientas tuyas y trabaja con exclusividad, la justicia te puede reclasificar la relación a CLT. Y cuando lo hace, te obliga a pagar <strong>todo lo que deberías haber pagado en los últimos 5 años</strong>.</p>
+
+<div class="data-box">
+  <div class="data-label">Qué cubre la CLT (62.2%)</div>
+  INSS patronal (20%) · FGTS (8%) · Sistema S (5.8%) · Décimo terceiro (8.33%) · Férias + 1/3 (11.11%) · Verbas rescisórias proporcionales · Outros (~9%)
+</div>
+
+<h2>El costo real con la base del sitio</h2>
+<p>Sobre USD 1.200/mes de salario bruto en Brasil:</p>
+<ul>
+  <li>Salario base: USD 1.200</li>
+  <li>+ Cargas CLT 62.2%: USD 746</li>
+  <li><strong>Costo total empresa con CLT: USD 1.946/mes</strong></li>
+</ul>
+
+<h2>El costo de equivocarse con contractor</h2>
+<p>Si tu contractor cobra USD 1.200/mes hace 3 años, una reclasificación a CLT puede generar una deuda retroactiva de USD 30.000–USD 50.000 (cargas + multas + intereses + indemnización). Multiplicalo por cada contractor en esa situación.</p>
+
+<h2>El EOR como solución limpia</h2>
+<p>Un EOR en Brasil te contrata bajo CLT desde el día uno. Te cobra el fee mensual más todas las cargas, pero te protege de reclasificación. <strong>El EOR es el empleador legal</strong>, no vos.</p>
+
+<div class="info-box">
+  <strong>Comparativa real para USD 1.200/mes en Brasil:</strong><br>
+  • Contractor PJ: USD 1.200/mes (riesgo USD 30.000+ retroactivo)<br>
+  • EOR Native Teams: USD 2.035/mes ($1.946 + $89 fee)<br>
+  • EOR Deel: USD 2.545/mes ($1.946 + $599 fee)<br>
+  • EOR Remote: USD 2.595/mes ($1.946 + $649 fee)<br><br>
+  La diferencia entre contractor "informal" y EOR Native Teams es USD 835/mes. La diferencia entre tener problemas con la Justiça do Trabalho y no tenerlos: invaluable.
+</div>
+
+<h2>Cuándo conviene abrir LTDA en Brasil</h2>
+<p>Si vas a contratar 10–15 empleados sostenidos en Brasil, abrir una LTDA puede convenir. Costo de constitución: USD 4.000–9.000. Mantenimiento mensual: USD 1.200–2.500 (contador + representante legal + impostos). Por debajo de ese número, EOR es más eficiente.</p>
+
+<h2>Lo que recomendamos</h2>
+<ul>
+  <li>Si tu empleado va a ser permanente, usá EOR desde el día uno.</li>
+  <li>Si necesitás "probarlo" 1–2 meses, hay EORs con contratos cortos (Deel, Remote).</li>
+  <li>Si vas a contratar 10+ permanentes: empezá con EOR, abrí LTDA en paralelo, migrá cuando esté lista.</li>
+  <li><strong>Nunca</strong> uses contractor PJ para reemplazar empleo en Brasil.</li>
+</ul>
+
+<a href="#s02" class="blog-cta" data-close-modal="1">Ver qué EOR te conviene para Brasil →</a>`
+    }
+  },
+  {
+    id: 'colombia-sin-entidad',
+    es: {
+      cat: 'GUÍAS · COLOMBIA',
+      title: 'Contratar legalmente en Colombia sin abrir empresa: 4 opciones reales',
+      excerpt: 'No querés abrir SAS pero necesitás contratar talento colombiano. Te explicamos las 4 vías legales que existen y cuándo conviene cada una.',
+      author: 'COCO EOR', date: '05 may 2026', read: '7 min',
+      body: `
+<p>Colombia tiene cargas patronales del 34.2% más impuestos parafiscales. Abrir una SAS cuesta USD 1.500–3.500 con USD 350–800/mes de mantenimiento. Si tu equipo en Colombia va a ser chico, abrir empresa no tiene sentido. Estas son las 4 alternativas legales.</p>
+
+<h2>Opción 1: EOR (Employer of Record)</h2>
+<p>La opción más limpia. Un EOR como Deel, Remote o Multiplier contrata a tu empleado bajo legislación colombiana, gestiona EPS, pensión, ARL, primas, cesantías y vacaciones. Vos pagás un fee mensual (USD 89–649) y el costo total del empleado.</p>
+<ul>
+  <li><strong>Conviene si:</strong> tenés 1–10 empleados en Colombia</li>
+  <li><strong>Limitación:</strong> el EOR cobra fee mensual permanente</li>
+  <li><strong>Tiempo de onboarding:</strong> 3–7 días</li>
+</ul>
+
+<h2>Opción 2: Contractor independiente con cuenta de cobros</h2>
+<p>El profesional colombiano factura desde su RUT como prestador de servicios. Pago directo en USD a su cuenta. <strong>Es legal solo si no hay subordinación</strong> (horarios fijos, exclusividad, dirección cotidiana). Si la hay, la UGPP te puede reclasificar y exigir cargas retroactivas.</p>
+
+<div class="info-box">
+  <strong>Riesgo real:</strong> La UGPP (Unidad de Gestión Pensional y Parafiscales) fiscaliza intensamente desde 2022. Las multas por evasión pueden ser severas. Solo usá esta vía para colaboraciones genuinamente independientes (proyectos puntuales, freelancers múltiples clientes).
+</div>
+
+<h2>Opción 3: Sucursal de sociedad extranjera</h2>
+<p>Tu empresa de origen abre una sucursal en Colombia. Más simple que constituir SAS pero requiere representante legal local, RUT, contabilidad. Costos similares a SAS. <strong>Solo conviene si</strong> tu casa matriz quiere operación física en Colombia, no solo contratar.</p>
+
+<h2>Opción 4: Multiplier para equity en startups</h2>
+<p>Si tu startup ofrece stock options o ESOPs a empleados colombianos, Multiplier tiene gestión nativa de planes de equity dentro del EOR. Es el único que lo hace sin armado manual.</p>
+
+<h2>Comparativa con la base del sitio</h2>
+<div class="data-box">
+  <div class="data-label">Para un empleado de USD 1.200/mes en Colombia (cargas 34.2%)</div>
+  <strong>Salario + cargas:</strong> USD 1.610/mes (sin fee)<br><br>
+  <strong>EOR Native Teams:</strong> USD 1.699/mes ($1.610 + $89)<br>
+  <strong>EOR Deel:</strong> USD 2.209/mes ($1.610 + $599)<br>
+  <strong>Contractor:</strong> USD 1.200/mes (con riesgo de reclasificación)<br>
+  <strong>SAS propia:</strong> USD 1.610 + USD 350–800/mes mantenimiento + impuesto de renta 35% sobre utilidades
+</div>
+
+<h2>Recomendación</h2>
+<ul>
+  <li><strong>1–5 empleados permanentes en Colombia:</strong> EOR. Más simple, menos riesgo.</li>
+  <li><strong>Freelancers ocasionales, múltiples clientes:</strong> Contractor con cuenta de cobros.</li>
+  <li><strong>6+ empleados permanentes:</strong> SAS o sucursal, según fiscalidad.</li>
+  <li><strong>Startup con equity:</strong> Multiplier.</li>
+</ul>
+
+<a href="#s02" class="blog-cta" data-close-modal="1">Calculá tu EOR para Colombia ahora →</a>`
+    }
+  },
+  {
+    id: 'paises-mas-baratos-latam',
+    es: {
+      cat: 'RANKING · LATAM',
+      title: 'Los 5 países más baratos de LATAM para contratar talento remoto en 2026',
+      excerpt: 'Chile, Paraguay, Uruguay, México y Panamá tienen las cargas patronales más bajas de la región. Pero "barato" no es solo cargas: hay que mirar salarios, talento y riesgo legal.',
+      author: 'COCO EOR', date: '02 may 2026', read: '6 min',
+      body: `
+<p>Cuando una empresa empieza a contratar talento remoto en LATAM, la primera pregunta es: ¿dónde sale más barato? La respuesta tiene dos capas: las cargas patronales y los salarios reales del mercado local.</p>
+
+<h2>Ranking por cargas patronales (más bajas)</h2>
+<ol>
+  <li><strong>Chile — 22.4%:</strong> AFP, salud, cesantía, gratificación, vacaciones.</li>
+  <li><strong>Paraguay — 28.17%:</strong> IPS, aguinaldo, vacaciones. El más bajo después de Chile.</li>
+  <li><strong>Uruguay — 28.6%:</strong> BPS, aguinaldo, vacaciones, salario vacacional.</li>
+  <li><strong>México — 29.9%:</strong> IMSS, INFONAVIT, aguinaldo, prima vacacional.</li>
+  <li><strong>Panamá — 30.42%:</strong> CSS, décimo, vacaciones, riesgos.</li>
+</ol>
+
+<p>Para comparar: Brasil tiene 62.2%, Costa Rica 39.05%, Argentina 36.5%. La diferencia entre contratar en Chile vs Brasil es de casi 40 puntos porcentuales.</p>
+
+<h2>El cálculo sobre USD 1.200 (base del sitio)</h2>
+<div class="data-box">
+  <div class="data-label">Costo total empresa para USD 1.200/mes de salario</div>
+  Chile (22.4%): <strong>USD 1.469/mes</strong> + fee EOR<br>
+  Paraguay (28.17%): <strong>USD 1.538/mes</strong> + fee EOR<br>
+  Uruguay (28.6%): <strong>USD 1.543/mes</strong> + fee EOR<br>
+  México (29.9%): <strong>USD 1.559/mes</strong> + fee EOR<br>
+  Panamá (30.42%): <strong>USD 1.565/mes</strong> + fee EOR<br><br>
+  Vs Brasil (62.2%): USD 1.946/mes — USD 477 más caro que Chile.
+</div>
+
+<h2>Pero cargas no es todo</h2>
+<p>Un salario bajo + cargas bajas no siempre es buena combinación. Hay que mirar también:</p>
+<ul>
+  <li><strong>Salario mínimo legal</strong> — en Chile USD 540/mes, en Paraguay USD 380/mes</li>
+  <li><strong>Salarios reales del mercado tech</strong> — pueden ser muy distintos al mínimo</li>
+  <li><strong>Disponibilidad de talento</strong> — Paraguay tiene menos universidades tech que México</li>
+  <li><strong>Riesgo de reclasificación laboral</strong> — Chile y México lo tienen alto</li>
+</ul>
+
+<h2>El caso de Paraguay</h2>
+<p>Paraguay tiene <strong>la tasa de impuesto corporativo más baja de LATAM</strong> (IRACIS 10%) y cargas patronales bajas (28.17%). Para empresas tech con presencia regional, contratar paraguayos sale 30–40% más barato que contratar argentinos o brasileños. La limitación es el tamaño del mercado: hay menos developers seniors disponibles.</p>
+
+<h2>El caso de Chile</h2>
+<p>Chile tiene cargas bajas (22.4%) pero salarios altos. Es el país con más talento tech senior de la región, después de Argentina. <strong>Si tu prioridad es calidad, Chile</strong>. Si es precio, Paraguay.</p>
+
+<div class="info-box">
+  <strong>Tip operativo:</strong> Combinar países es válido. Algunas empresas contratan seniors en Chile/Argentina y juniors/mid en Paraguay/Bolivia. Un EOR te permite esto sin abrir 4 entidades — un solo proveedor, un solo fee mensual por persona, países distintos.
+</div>
+
+<a href="#s01" class="blog-cta" data-close-modal="1">Calculá el costo exacto en tu país en 30 segundos →</a>`
+    }
+  },
+  {
+    id: 'eor-startups-cuando',
+    es: {
+      cat: 'STARTUPS',
+      title: 'EOR para startups: cuándo vale la pena y cuándo es perder plata',
+      excerpt: 'No todas las startups necesitan EOR. Depende del tamaño del equipo, los países donde contrata y la velocidad de crecimiento. Te explicamos cuándo sí y cuándo no.',
+      author: 'COCO EOR', date: '28 abr 2026', read: '8 min',
+      body: `
+<p>Las startups son el segmento que más rápido adopta EOR, pero también el que más caro lo paga cuando lo usa mal. Un EOR cobra USD 89–649 por empleado por mes — multiplicalo por 30 empleados durante 24 meses y son USD 60.000–470.000. Esto se trata de cuándo conviene y cuándo no.</p>
+
+<h2>Cuándo SÍ conviene EOR</h2>
+
+<h3>1. Equipo distribuido en 3+ países</h3>
+<p>Si tu startup tiene gente en Argentina, México y España, abrir entidad en cada país cuesta USD 10.000–20.000 de setup + mantenimiento mensual. EOR te resuelve los 3 países con un solo proveedor y un solo fee.</p>
+
+<h3>2. Velocidad de hire crítica</h3>
+<p>EOR te onboardea en 3–7 días. Una SAS o LTDA tarda 30–60 días. Si estás en ronda de crecimiento, no podés esperar 2 meses por developer.</p>
+
+<h3>3. Equipos chicos por país (1–5 personas)</h3>
+<p>Hasta 5–10 empleados en un mismo país, EOR sale más barato que abrir entidad propia (en la mayoría de países LATAM). Te ahorrás contador local, representante legal, contabilidad, impuestos de mantenimiento mínimo.</p>
+
+<h3>4. Stock options / equity</h3>
+<p>Multiplier tiene gestión nativa de ESOPs para empleados internacionales. Si tu startup ofrece equity, esto te evita armar planes manualmente país por país.</p>
+
+<h2>Cuándo NO conviene EOR</h2>
+
+<h3>1. Cuando ya tenés 10+ empleados en un país</h3>
+<p>En la mayoría de países LATAM, abrir entidad propia es más eficiente a partir de 6–15 empleados. Pagar USD 6.000/mes de fees EOR para 10 empleados durante años es tirar plata. Una entidad local cuesta USD 400–2.500/mes de mantenimiento.</p>
+
+<h3>2. Cuando podés contratar como contractor genuino</h3>
+<p>Si tu colaborador es realmente independiente (múltiples clientes, sin horarios, sin subordinación), un contractor puede ser legal y más barato. <strong>Cuidado:</strong> esto es cada vez más fiscalizado en LATAM. Solo aplica a freelancers reales, no a empleados disfrazados.</p>
+
+<h3>3. Cuando el EOR cobra más que las cargas locales</h3>
+<p>Hacé el cálculo: salario + cargas + fee EOR vs salario + cargas + costo entidad. En países con baja carga (Chile 22.4%, Paraguay 28.17%), un EOR de USD 649/mes puede salir más caro que una SpA bien gestionada.</p>
+
+<h2>El cálculo en números (base USD 1.200 del sitio)</h2>
+<div class="data-box">
+  <div class="data-label">Startup con 5 empleados, distribuidos en LATAM</div>
+  <strong>Con EOR Native Teams ($89/persona):</strong><br>
+  5 × (USD 1.200 base + cargas promedio + USD 89 fee) ≈ <strong>USD 9.500/mes total</strong><br><br>
+  <strong>Con 5 entidades propias:</strong><br>
+  USD 7.500–12.500 setup inicial + USD 2.000–4.000/mes mantenimiento + cargas<br>
+  → <strong>USD 12.000+/mes promedio</strong> después del setup<br><br>
+  Conclusión: hasta 5 empleados distribuidos, EOR gana claro.
+</div>
+
+<div class="info-box">
+  <strong>Regla operativa:</strong> EOR es para escalar rápido sin compromiso. Entidad propia es para sostener un equipo grande de forma eficiente. La mayoría de startups en growth deberían empezar con EOR y migrar a entidad cuando un país supera 8–10 empleados.
+</div>
+
+<h2>El error más común</h2>
+<p>Quedarse con EOR demasiado tiempo. Una startup que llega a Serie A suele tener 30–50 empleados distribuidos. Si todos están en EOR pagando USD 599 cada uno, son USD 18.000–30.000/mes solo en fees. Con esa plata pagás 2–3 entidades propias completas con su contabilidad.</p>
+
+<h2>Plan recomendado para startups en crecimiento</h2>
+<ul>
+  <li><strong>Pre-seed / seed:</strong> 100% EOR. Foco en producto, no en burocracia.</li>
+  <li><strong>Serie A:</strong> Identificar los 2–3 países con más empleados. Empezar a evaluar entidad en el #1.</li>
+  <li><strong>Serie B+:</strong> Migrar países con 10+ empleados a entidad propia. Mantener EOR para países con pocos.</li>
+</ul>
+
+<a href="#s03" class="blog-cta" data-close-modal="1">Ver el punto de equilibrio EOR vs entidad por país →</a>`
+    }
+  }
+];
+
+const blogGrid       = document.getElementById('blog-grid');
+const blogModal      = document.getElementById('blog-modal');
+const blogModalCat   = document.getElementById('blog-modal-cat');
+const blogModalTitle = document.getElementById('blog-modal-title');
+const blogModalMeta  = document.getElementById('blog-modal-meta');
+const blogModalBody  = document.getElementById('blog-modal-body');
+const blogModalClose = document.getElementById('blog-modal-close');
+
+function renderBlog() {
+  blogGrid.innerHTML = BLOG_ENTRIES.map(e => {
+    const t = e[LANG];
+    return `<button class="blog-card" data-blog-id="${e.id}" type="button">
+      <span class="blog-card-cat">${t.cat}</span>
+      <h3 class="blog-card-title">${t.title}</h3>
+      <p class="blog-card-excerpt">${t.excerpt}</p>
+      <div class="blog-card-meta">
+        <span>${t.author}</span><span class="dot-sep">·</span><span>${t.date}</span><span class="dot-sep">·</span><span>${t.read}</span>
+      </div>
+    </button>`;
+  }).join('');
+  blogGrid.querySelectorAll('.blog-card').forEach(card => {
+    card.addEventListener('click', () => openBlog(card.dataset.blogId));
+  });
+  requestAnimationFrame(() => highlightEOR(blogGrid));
+}
+
+function openBlog(id) {
+  const entry = BLOG_ENTRIES.find(e => e.id === id);
+  if (!entry) return;
+  const t = entry[LANG];
+  blogModalCat.textContent = t.cat;
+  blogModalTitle.textContent = t.title;
+  blogModalMeta.innerHTML = `<span>${t.author}</span><span class="dot-sep">·</span><span>${t.date}</span><span class="dot-sep">·</span><span>${t.read} de lectura</span>`;
+  blogModalBody.innerHTML = t.body;
+  blogModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  blogModalBody.scrollTop = 0;
+  requestAnimationFrame(() => highlightEOR(blogModalBody));
+  // CTAs dentro del modal cierran el modal antes de hacer scroll
+  blogModalBody.querySelectorAll('[data-close-modal]').forEach(el => {
+    el.addEventListener('click', () => closeBlog());
+  });
+}
+
+function closeBlog() {
+  blogModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+blogModalClose.addEventListener('click', closeBlog);
+blogModal.addEventListener('click', e => { if (e.target === blogModal) closeBlog(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && blogModal.classList.contains('open')) closeBlog(); });
+
+// INIT
+renderCalc();
+renderGuias();
+renderBlog();
+updateSpy();
+requestAnimationFrame(() => { highlightEOR(); });
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ASISTENTE EOR — Chat IA Flotante
+     Backend: /api/chat.js (Vercel Serverless + Anthropic API)
+═══════════════════════════════════════════════════════════════ -->
+<style>
+/* ── Contenedor trigger (chip + botón) ─────────────────────────── */
+#coco-trigger {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color-scheme: light;
+}
+
+/* ── Chip "Asistente EOR" ──────────────────────────────────────── */
+#coco-chip {
+  background: #ffffff;
+  border: 1.5px solid #e4e8ee;
+  border-radius: 100px;
+  padding: 9px 15px 9px 11px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #0a0a0a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 7px;
+  animation: chipIn .45s cubic-bezier(.22,1,.36,1) forwards;
+  cursor: pointer;
+}
+#coco-chip.fade-out {
+  animation: chipOut .35s ease forwards;
+  pointer-events: none;
+}
+@keyframes chipIn  { from { opacity:0; transform: translateX(10px) scale(.95); } to { opacity:1; transform: translateX(0) scale(1); } }
+@keyframes chipOut { from { opacity:1; transform: translateX(0); } to { opacity:0; transform: translateX(6px); } }
+
+/* ── Botón círculo ─────────────────────────────────────────────── */
+#coco-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #0099FF;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,153,255,.40);
+  transition: transform .2s, box-shadow .2s, background .2s;
+  flex-shrink: 0; color-scheme: light;
+}
+#coco-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,153,255,.52); background: #007ACC; }
+#coco-btn.is-open { background: #0a0a0a; box-shadow: 0 4px 16px rgba(0,0,0,.30); }
+
+/* ── Ventana de chat ───────────────────────────────────────────── */
+#coco-win {
+  position: fixed;
+  bottom: 92px; right: 24px;
+  z-index: 9000;
+  width: 380px; height: 520px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 56px rgba(0,0,0,.18);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0; transform: translateY(14px) scale(.96);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  color-scheme: light;
+}
+#coco-win.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+/* ── Header ────────────────────────────────────────────────────── */
+#coco-hdr {
+  background: #0a0a0a;
+  padding: 13px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.ch-left  { display: flex; align-items: center; gap: 10px; }
+.ch-avatar {
+  width: 32px; height: 32px;
+  background: #0099FF; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ch-info  { display: flex; flex-direction: column; }
+.ch-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2; }
+.ch-sub   { font-size: 11px; color: #6b7990; margin-top: 1px; line-height: 1.2; }
+.ch-actions { display: flex; align-items: center; gap: 4px; }
+.ch-btn {
+  background: none; border: none; cursor: pointer;
+  color: #6b7990; padding: 5px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s, background .15s;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+.ch-btn:hover { color: #fff; background: rgba(255,255,255,.08); }
+#coco-pdf-btn {
+  font-size: 11px; font-weight: 700;
+  padding: 5px 9px;
+  border: 1px solid #2a3441; border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+#coco-pdf-btn:hover { color: #0099FF !important; border-color: #0099FF; background: rgba(0,153,255,.08) !important; }
+
+/* ── Mensajes ──────────────────────────────────────────────────── */
+#coco-msgs {
+  flex: 1; overflow-y: auto;
+  padding: 14px; display: flex; flex-direction: column; gap: 9px;
+  background: #f5f7fa;
+  scrollbar-width: thin; scrollbar-color: #c8d8ea #f5f7fa;
+}
+#coco-msgs::-webkit-scrollbar { width: 4px; }
+#coco-msgs::-webkit-scrollbar-track { background: #f5f7fa; }
+#coco-msgs::-webkit-scrollbar-thumb { background: #c8d8ea; border-radius: 2px; }
+
+.co-msg {
+  max-width: 84%; padding: 10px 13px;
+  border-radius: 12px;
+  font-size: 13.5px; line-height: 1.55;
+  word-wrap: break-word; white-space: pre-wrap;
+}
+.co-msg.bot {
+  align-self: flex-start;
+  background: #fff; color: #0a0a0a;
+  border: 1px solid #e2e8f0;
+  border-bottom-left-radius: 4px;
+}
+.co-msg.user {
+  align-self: flex-end;
+  background: #0099FF; color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* ── Typing indicator ─────────────────────────────────────────── */
+.co-typing {
+  align-self: flex-start;
+  background: #fff; border: 1px solid #e2e8f0;
+  padding: 10px 14px; border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  display: flex; gap: 5px; align-items: center;
+}
+.co-typing span {
+  width: 7px; height: 7px;
+  background: #0099FF; border-radius: 50%;
+  animation: coBounce .9s infinite;
+}
+.co-typing span:nth-child(2) { animation-delay: .15s; }
+.co-typing span:nth-child(3) { animation-delay: .30s; }
+@keyframes coBounce {
+  0%,60%,100% { transform: translateY(0); opacity: .45; }
+  30%          { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ── Input ─────────────────────────────────────────────────────── */
+#coco-foot {
+  padding: 11px 12px;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+#coco-input {
+  flex: 1;
+  border: 1.5px solid #e2e8f0; border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 13px; font-family: 'Space Grotesk', system-ui, sans-serif;
+  color: #0a0a0a; background: #f8f9fb;
+  resize: none; outline: none;
+  transition: border-color .15s, background .15s;
+  line-height: 1.4; max-height: 80px; overflow-y: auto;
+}
+#coco-input:focus { border-color: #0099FF; background: #fff; }
+#coco-input::placeholder { color: #9aa5b0; }
+#coco-send {
+  width: 36px; height: 36px; flex-shrink: 0; align-self: flex-end;
+  background: #0099FF; border: none; border-radius: 10px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, transform .15s;
+}
+#coco-send:hover   { background: #007ACC; transform: scale(1.06); }
+#coco-send:disabled { background: #c8d8ea; cursor: not-allowed; transform: none; }
+
+/* ── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  #coco-win { right: 0; bottom: 0; width: 100%; height: 92dvh; border-radius: 16px 16px 0 0; }
+  #coco-trigger { bottom: 16px; right: 16px; }
+}
+</style>
+
+<!-- Trigger: chip + botón -->
+<div id="coco-trigger">
+  <div id="coco-chip" role="button" aria-label="Abrir Asistente EOR">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Asistente EOR
+  </div>
+  <button id="coco-btn" aria-label="Asistente EOR — chat de consulta">
+    <!-- ícono chat (estado cerrado) -->
+    <svg id="coco-ico-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <!-- ícono X (estado abierto) -->
+    <svg id="coco-ico-close" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none;">
+      <path d="M18 6 6 18M6 6l12 12" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Ventana de chat -->
+<div id="coco-win" role="dialog" aria-modal="true" aria-label="Asistente EOR">
+  <div id="coco-hdr">
+    <div class="ch-left">
+      <div class="ch-avatar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ch-info">
+        <span class="ch-title">Asistente EOR</span>
+        <span class="ch-sub">Simple y claro. — COCO EOR</span>
+      </div>
+    </div>
+    <div class="ch-actions">
+      <button class="ch-btn" id="coco-pdf-btn" title="Exportar PDF" aria-label="Exportar conversación a PDF">↓ PDF</button>
+      <button class="ch-btn" id="coco-close-btn" aria-label="Cerrar chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="coco-msgs" aria-live="polite" aria-label="Conversación"></div>
+
+  <div id="coco-foot">
+    <textarea
+      id="coco-input" rows="1"
+      placeholder="Preguntá sobre costos, países, plataformas…"
+      aria-label="Escribí tu pregunta"
+    ></textarea>
+    <button id="coco-send" aria-label="Enviar mensaje" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+        <path d="M22 2 11 13M22 2 15 22 11 13 2 9 22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Config ─────────────────────────────────────────────── */
+  const API_ENDPOINT = '/api/chat';
+  const NEWSLETTER_WEBHOOK = 'https://hook.us2.make.com/vmilsqejfvv4niejrqs2lawyu382mhr3';
+  const WELCOME_MSG  =
+    '¡Hola! Soy el Asistente EOR de COCO 👋\n\n' +
+    'Puedo ayudarte a calcular el costo real de contratar en Brasil, Argentina, Colombia y 9 países más. ' +
+    'También te explico cuándo conviene un EOR y cuándo vale la pena abrir entidad propia.\n\n' +
+    '¿Por dónde arrancamos?';
+
+  /* ── Estado ─────────────────────────────────────────────── */
+  let isOpen   = false;
+  let busy     = false;
+  let history  = [];   // [{role, content}]
+  let welcomed = false;
+
+  /* ── DOM ────────────────────────────────────────────────── */
+  const trigger   = document.getElementById('coco-trigger');
+  const chip      = document.getElementById('coco-chip');
+  const btn       = document.getElementById('coco-btn');
+  const icoChat   = document.getElementById('coco-ico-chat');
+  const icoClose  = document.getElementById('coco-ico-close');
+  const win       = document.getElementById('coco-win');
+  const closeBtn  = document.getElementById('coco-close-btn');
+  const msgs      = document.getElementById('coco-msgs');
+  const input     = document.getElementById('coco-input');
+  const sendBtn   = document.getElementById('coco-send');
+  const pdfBtn    = document.getElementById('coco-pdf-btn');
+
+  /* ── Chip: desaparecer a los 5s ─────────────────────────── */
+  let chipGone = false;
+  const chipTimer = setTimeout(fadeChip, 5000);
+
+  function fadeChip() {
+    if (chipGone) return;
+    chipGone = true;
+    chip.classList.add('fade-out');
+    setTimeout(() => { chip.style.display = 'none'; }, 360);
+  }
+
+  /* ── Abrir / cerrar ─────────────────────────────────────── */
+  trigger.addEventListener('click', toggle);
+  closeBtn.addEventListener('click', closeChat);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeChat(); });
+
+  function toggle() {
+    clearTimeout(chipTimer);
+    fadeChip();
+    isOpen ? closeChat() : openChat();
+  }
+
+  function openChat() {
+    isOpen = true;
+    win.classList.add('open');
+    btn.classList.add('is-open');
+    icoChat.style.display  = 'none';
+    icoClose.style.display = 'block';
+    if (!welcomed) {
+      welcomed = true;
+      setTimeout(() => addMsg('bot', WELCOME_MSG), 180);
+    }
+    setTimeout(() => input.focus(), 220);
+  }
+
+  function closeChat() {
+    isOpen = false;
+    win.classList.remove('open');
+    btn.classList.remove('is-open');
+    icoChat.style.display  = 'block';
+    icoClose.style.display = 'none';
+  }
+
+  /* ── Input: auto-resize + enable send ───────────────────── */
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    sendBtn.disabled = !input.value.trim() || busy;
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!sendBtn.disabled) sendMsg(); }
+  });
+  sendBtn.addEventListener('click', sendMsg);
+
+  /* ── Helpers de mensajes ────────────────────────────────── */
+  function addMsg(role, text) {
+    const d = document.createElement('div');
+    d.className = 'co-msg ' + (role === 'user' ? 'user' : 'bot');
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
+
+  function showTyping() {
+    const el = document.createElement('div');
+    el.className = 'co-typing'; el.id = 'co-typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(el);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('co-typing');
+    if (el) el.remove();
+  }
+
+  /* ── Enviar mensaje ─────────────────────────────────────── */
+  async function sendMsg() {
+    const text = input.value.trim();
+    if (!text || busy) return;
+
+    addMsg('user', text);
+    history.push({ role: 'user', content: text });
+
+    input.value = ''; input.style.height = 'auto';
+    busy = true; sendBtn.disabled = true; input.disabled = true;
+    showTyping();
+
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history })
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data  = await res.json();
+      const reply = data.reply || 'No pude procesar la respuesta. Intentá de nuevo.';
+      removeTyping();
+      addMsg('bot', reply);
+      history.push({ role: 'assistant', content: reply });
+
+    } catch (err) {
+      removeTyping();
+      addMsg('bot', 'Hubo un problema al conectarme. Verificá tu conexión e intentá de nuevo.');
+      console.error('COCO EOR Chat error:', err);
+    } finally {
+      busy = false;
+      input.disabled = false;
+      sendBtn.disabled = !input.value.trim();
+      input.focus();
+    }
+  }
+
+  /* ── Gate PDF del chat ──────────────────────────────────── */
+  let pdfGateData = null;   // { nombre, email, pais } — se guarda al completar el gate
+
+  pdfBtn.addEventListener('click', () => {
+    if (!isOpen) openChat();
+    if (history.length === 0) {
+      addMsg('bot', 'Primero hacé una consulta y después podés exportar la conversación 😊');
+      return;
+    }
+    if (pdfGateData) { exportPDF(); return; }
+    showPDFGate();
+  });
+
+  function showPDFGate() {
+    /* Eliminar gate previo si existe */
+    const old = document.getElementById('coco-pdf-gate');
+    if (old) old.remove();
+
+    const wrap = document.createElement('div');
+    wrap.id = 'coco-pdf-gate';
+    wrap.style.cssText = [
+      'background:#fff','border:1.5px solid #0099FF','border-radius:12px',
+      'padding:14px 13px','margin:4px 0','display:flex','flex-direction:column',
+      'gap:9px','font-family:Space Grotesk,system-ui,sans-serif'
+    ].join(';');
+
+    const paisOpts = PAISES.map(p =>
+      `<option value="${p.code}">${p.flag} ${p.name}</option>`
+    ).join('');
+
+    wrap.innerHTML = `
+      <div style="font-size:12px;font-weight:700;color:#0099FF;letter-spacing:.03em;">↓ EXPORTAR CONVERSACIÓN EN PDF</div>
+      <div style="font-size:12px;color:#4a5568;line-height:1.45;">Completá estos datos para descargar el PDF:</div>
+      <input id="cpg-nombre" type="text"     placeholder="Tu nombre"       style="${fieldStyle()}">
+      <input id="cpg-email"  type="email"    placeholder="tu@empresa.com"  style="${fieldStyle()}">
+      <select id="cpg-pais"  style="${fieldStyle()}">
+        <option value="">País de interés (opcional)</option>
+        ${paisOpts}
+      </select>
+      <button id="cpg-submit" style="background:#0099FF;color:#fff;border:none;border-radius:8px;padding:9px 14px;font-family:Space Grotesk,system-ui,sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Descargar PDF →</button>
+      <div style="font-size:10px;color:#94a3b8;">COCO Labs · Tu email no se comparte con terceros.</div>`;
+
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    /* Focus primer campo */
+    setTimeout(() => document.getElementById('cpg-nombre')?.focus(), 80);
+
+    document.getElementById('cpg-submit').addEventListener('click', async () => {
+      const nombre = (document.getElementById('cpg-nombre')?.value || '').trim();
+      const email  = (document.getElementById('cpg-email')?.value  || '').trim();
+      const pais   = document.getElementById('cpg-pais')?.value || '';
+
+      if (!nombre) { highlight('cpg-nombre'); return; }
+      if (!email || !email.includes('@')) { highlight('cpg-email'); return; }
+
+      pdfGateData = { nombre, email, pais };
+
+      /* Enviar al webhook */
+      try {
+        await fetch(NEWSLETTER_WEBHOOK, {
+          method:'POST', mode:'no-cors',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ tipo:'chat-pdf-lead', nombre, email, pais, origen:'cocoeor-chat-pdf', ts: new Date().toISOString() })
+        });
+      } catch(_) {}
+
+      wrap.remove();
+      exportPDF();
+    });
+  }
+
+  function fieldStyle() {
+    return [
+      'width:100%','padding:8px 10px','font-family:Space Grotesk,system-ui,sans-serif',
+      'font-size:13px','border:1.5px solid #e2e8f0','border-radius:8px',
+      'background:#f8f9fb','color:#0a0a0a','outline:none','box-sizing:border-box'
+    ].join(';');
+  }
+
+  function highlight(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.borderColor = '#dc2626';
+    el.focus();
+    setTimeout(() => { el.style.borderColor = '#e2e8f0'; }, 1800);
+  }
+
+  /* ── Exportar PDF de la conversación ────────────────────── */
+  function exportPDF() {
+    if (history.length === 0) return;
+
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+      const mg = 20;
+      let y = mg;
+      const now = new Date();
+      const fecha = now.toLocaleDateString('es-AR', { day:'2-digit', month:'2-digit', year:'numeric' })
+                  + ' · ' + now.toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' });
+
+      /* ─ Header ─ */
+      doc.setFillColor(10, 10, 10);
+      doc.rect(0, 0, 210, 30, 'F');
+
+      doc.setFontSize(15); doc.setFont('helvetica', 'bold');
+      doc.setTextColor(255, 255, 255);
+      doc.text('COCO ', mg, 15);
+      doc.setTextColor(0, 153, 255);
+      doc.text('EOR', mg + doc.getTextWidth('COCO '), 15);
+
+      doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+      doc.setTextColor(107, 121, 144);
+      doc.text('Asistente IA · cocoeor.com', mg, 22);
+      doc.text(fecha, 210 - mg, 22, { align: 'right' });
+
+      y = 44;
+
+      /* ─ Título ─ */
+      doc.setTextColor(10, 10, 10);
+      doc.setFontSize(14); doc.setFont('helvetica', 'bold');
+      doc.text('Resumen de consulta con Asistente EOR', mg, y);
+      y += 5;
+      doc.setDrawColor(228, 232, 238);
+      doc.line(mg, y, 210 - mg, y);
+      y += 10;
+
+      /* ─ Mensajes ─ */
+      history.forEach(msg => {
+        if (y > 262) { doc.addPage(); y = mg; }
+
+        const isUser = msg.role === 'user';
+        const lines  = doc.splitTextToSize(msg.content, 154);
+        const blockH = lines.length * 5.5 + 14;
+
+        if (y + blockH > 272) { doc.addPage(); y = mg; }
+
+        if (isUser) {
+          /* Bloque consulta — fondo azul muy suave */
+          doc.setFillColor(235, 244, 255);
+          doc.roundedRect(mg, y, 170, blockH, 2, 2, 'F');
+          doc.setFontSize(8); doc.setFont('helvetica', 'bold');
+          doc.setTextColor(74, 85, 104);
+          doc.text('▶  Tu consulta', mg + 4, y + 7);
+          doc.setFontSize(9.5); doc.setFont('helvetica', 'normal');
+          doc.setTextColor(10, 10, 10);
+          doc.text(lines, mg + 4, y + 13);
+
+        } else {
+          /* Bloque respuesta — barra azul izquierda + CIQUI ✓ */
+          doc.setFillColor(0, 153, 255);
+          doc.rect(mg, y, 2.5, blockH, 'F');
+
+          /* Ciqui (✓) + "Asistente EOR" */
+          doc.setFontSize(10); doc.setFont('helvetica', 'bold');
+          doc.setTextColor(0, 153, 255);
+          doc.text('✓', mg + 6, y + 8);
+
+          doc.setFontSize(8);
+          doc.text('Asistente EOR', mg + 14, y + 8);
+
+          /* Texto de la respuesta */
+          doc.setFontSize(9.5); doc.setFont('helvetica', 'normal');
+          doc.setTextColor(20, 20, 20);
+          doc.text(lines, mg + 6, y + 14);
+        }
+
+        y += blockH + 5;
+      });
+
+      /* ─ Nota metodológica ─ */
+      y += 4;
+      if (y > 255) { doc.addPage(); y = mg; }
+      doc.setFillColor(248, 249, 251);
+      doc.roundedRect(mg, y, 170, 18, 2, 2, 'F');
+      doc.setFontSize(8); doc.setFont('helvetica', 'normal');
+      doc.setTextColor(107, 121, 144);
+      const nota = 'Datos verificados en fuentes oficiales al 15/05/2026. Esta consulta es orientativa — para decisiones de contratación, consultá con un especialista en derecho laboral local.';
+      doc.text(doc.splitTextToSize(nota, 162), mg + 4, y + 5.5);
+
+      /* ─ Footer en todas las páginas ─ */
+      const nPages = doc.getNumberOfPages();
+      for (let i = 1; i <= nPages; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8); doc.setTextColor(148, 163, 184);
+        doc.text('Simple y claro. — COCO EOR · cocoeor.com · COCO Labs 2026', 105, 289, { align: 'center' });
+        doc.text(`Página ${i} de ${nPages}`, 105, 294, { align: 'center' });
+      }
+
+      const ts = now.toISOString().slice(0, 10);
+      doc.save(`coco-eor-consulta-${ts}.pdf`);
+
+      /* Feedback en chat */
+      addMsg('bot', '✅ PDF exportado con tu consulta. Lo encontrás en tu carpeta de descargas.');
+
+    } catch (err) {
+      console.error('COCO EOR PDF error:', err);
+      addMsg('bot', 'Hubo un error al generar el PDF. Intentá de nuevo o actualizá la página.');
+    }
+  }
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>
